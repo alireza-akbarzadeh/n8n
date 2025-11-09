@@ -1,7 +1,7 @@
 import {HydrateClient, prefetch, trpc} from '@/trpc/server';
 import {Suspense} from "react";
 import {ErrorBoundary} from "react-error-boundary";
-import {ClientGreeting} from "@/modules";
+import {ClientGreeting} from "@/modules/home";
 
 export default async function Home() {
 

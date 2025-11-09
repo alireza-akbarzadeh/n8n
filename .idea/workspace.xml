@@ -4,20 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d665199-6eb4-449f-9288-2ec8ffcd3c58" name="Changes" comment="fix: ignore generated files">
-      <change afterPath="$PROJECT_DIR$/app/api/trpc/[trpc]/route.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/home/home-modules.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trpc/client.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trpc/init.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trpc/query-client.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trpc/routers/_app.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trpc/server.tsx" afterDir="false" />
+    <list default="true" id="8d665199-6eb4-449f-9288-2ec8ffcd3c58" name="Changes" comment="feat: setup trpc with prisma and react query">
+      <change afterPath="$PROJECT_DIR$/app/(auth)/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/(auth)/login/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/(auth)/signup/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/auth/[...all]/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/auth-client.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/auth.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/auth/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/auth/ui/login-form.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/auth/ui/register-form.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/home/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/icons/apple.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/icons/github.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/icons/google.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/32714d47-30a8-4400-8c93-fe3db4c7dcb9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/32714d47-30a8-4400-8c93-fe3db4c7dcb9/storage_v2/_src_/database/neondb.1Hh4wQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/32714d47-30a8-4400-8c93-fe3db4c7dcb9/storage_v2/_src_/database/neondb.1Hh4wQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/32714d47-30a8-4400-8c93-fe3db4c7dcb9/storage_v2/_src_/database/neondb.1Hh4wQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/32714d47-30a8-4400-8c93-fe3db4c7dcb9/storage_v2/_src_/database/neondb.1Hh4wQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/data_source_mapping.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/data_source_mapping.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/index.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trpc/routers/_app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/trpc/routers/_app.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,50 +50,14 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;alireza-akbarzadeh&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/alireza-akbarzadeh/n8n.git",
+    "accountId": "05b91f10-e5cd-45c7-9b2d-ad206c207f61"
   }
-}</component>
-  <component name="GitToolBoxStore">
-    <option name="recentBranches">
-      <RecentBranches>
-        <option name="branchesForRepo">
-          <list>
-            <RecentBranchesForRepo>
-              <option name="branches">
-                <list>
-                  <RecentBranch>
-                    <option name="branchName" value="prisma-setup" />
-                    <option name="lastUsedInstant" value="1762683525" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1762683524" />
-                  </RecentBranch>
-                </list>
-              </option>
-              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
-            </RecentBranchesForRepo>
-          </list>
-        </option>
-      </RecentBranches>
-    </option>
-  </component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/alireza-akbarzadeh/n8n.git&quot;,
-    &quot;accountId&quot;: &quot;05b91f10-e5cd-45c7-9b2d-ad206c207f61&quot;
-  }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -87,15 +68,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "js.debugger.nextJs.config.created.client": "true",
     "js.debugger.nextJs.config.created.server": "true",
-    "last_opened_file_path": "/Users/alirezaakbarzadeh/workshop/n8n",
+    "last_opened_file_path": "/Users/alirezaakbarzadeh/workshop/n8n/modules/auth/ui",
     "llm.McpServerEditPanel.switcher": "1",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -113,7 +93,14 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/modules/auth/ui" />
+      <recent name="$PROJECT_DIR$/app/(auth)" />
+      <recent name="$PROJECT_DIR$/app/(auth)/login" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/icons" />
+      <recent name="$PROJECT_DIR$/modules/home" />
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -148,26 +135,12 @@
       <option name="presentableId" value="Default" />
       <updated>1762675516327</updated>
       <workItem from="1762675517534" duration="1417000" />
-      <workItem from="1762677118642" duration="5624000" />
+      <workItem from="1762677118642" duration="2834000" />
     </task>
-    <task id="LOCAL-00001" summary="fix: ignore generated files">
-      <option name="closed" value="true" />
-      <created>1762687494991</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1762687494991</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="feet: setup prisma with none db" />
-    <MESSAGE value="fix: ignore generated files" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: ignore generated files" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

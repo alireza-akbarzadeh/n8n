@@ -4,8 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d665199-6eb4-449f-9288-2ec8ffcd3c58" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="8d665199-6eb4-449f-9288-2ec8ffcd3c58" name="Changes" comment="fix: ignore generated files">
+      <change afterPath="$PROJECT_DIR$/app/api/trpc/[trpc]/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/home/home-modules.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trpc/client.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trpc/init.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trpc/query-client.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trpc/routers/_app.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trpc/server.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +27,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
       </list>
     </option>
@@ -74,11 +87,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "js.debugger.nextJs.config.created.client": "true",
     "js.debugger.nextJs.config.created.server": "true",
@@ -137,6 +150,15 @@
       <workItem from="1762675517534" duration="1417000" />
       <workItem from="1762677118642" duration="5624000" />
     </task>
+    <task id="LOCAL-00001" summary="fix: ignore generated files">
+      <option name="closed" value="true" />
+      <created>1762687494991</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1762687494991</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

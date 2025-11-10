@@ -8,9 +8,11 @@ import React from 'react'
 import {Input} from "@/components/ui/input"
 import {useRouter} from "next/navigation";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import Image from "next/image";
-import {authClient} from "@/lib/auth-client";
+import {signIn} from "@/lib/auth-client";
 import Link from "next/link";
+import {toast} from "sonner";
+import {SocialLogin} from "@/modules/auth/ui/social-login";
+import {PasswordInput} from "@/modules/auth/ui/password-input";
 
 const loginSchema = z.object({
     email: z.email('Please enter a valid email address'),
@@ -30,8 +32,19 @@ export function LoginForm() {
     });
 
     async function onSubmit(values: LoginFormValues) {
-        console.log(values);
-        const {error, data} = await authClient.signIn.email({email: values.email, password: values.password});
+        await signIn.email({
+            email: values.email,
+            password: values.password,
+            callbackURL: '/'
+        }, {
+            onSuccess: () => {
+                toast.success('successfully logged in. Welcome back!');
+                router.push('/');
+            },
+            onError: (context) => {
+                toast.error(context.error.message);
+            }
+        });
     }
 
     const isPending = form.formState.isSubmitting;
@@ -41,7 +54,6 @@ export function LoginForm() {
             <Card>
                 <CardHeader>
                     <CardTitle>
-
                         Welcome Back!
                     </CardTitle>
                     <CardDescription>
@@ -51,6 +63,14 @@ export function LoginForm() {
                 <CardContent>
                     <Form {...form}>
                         <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
+                            <SocialLogin/>
+                            <div className="relative flex items-center my-4">
+                                <div className="flex-grow border-t"/>
+                                <span className="mx-3 text-xs text-muted-foreground capitalize tracking-wider">
+    or continue with email
+  </span>
+                                <div className="flex-grow border-t"/>
+                            </div>
                             <FormField
                                 control={form.control}
                                 render={({field}) => (
@@ -75,10 +95,9 @@ export function LoginForm() {
                                     <FormItem>
                                         <FormLabel className="text-sm">Password</FormLabel>
                                         <FormControl>
-                                            <Input
+                                            <PasswordInput
                                                 className="h-9 bg-background"
                                                 placeholder="********"
-                                                type="password"
                                                 {...field}
                                             />
                                         </FormControl>
@@ -86,19 +105,6 @@ export function LoginForm() {
                                     </FormItem>
                                 )}
                             />
-                            <div className="grid  gap-4">
-                                <Button variant='outline' disabled={isPending}>
-                                    <Image src="/icons/github.svg" alt='github' width={19} height={19}
-                                           className="mr-2"/>
-                                    Continue with Github</Button>
-                                <Button variant='outline' disabled={isPending}>
-                                    <Image src="/icons/google.svg" alt='google' width={19} height={19}
-                                           className="mr-2"/>
-                                    Continue with Google</Button>
-                                <Button variant='outline' disabled={isPending}>
-                                    <Image src="/icons/apple.svg" alt='github' width={19} height={19} className="mr-2"/>
-                                    Continue with Apple</Button>
-                            </div>
                             <Button isLoading={isPending} className="h-9 w-full text-sm" type="submit">
                                 Sign In
                             </Button>

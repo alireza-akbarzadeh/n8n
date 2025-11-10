@@ -7,12 +7,13 @@ export const auth = betterAuth({
         provider: "postgresql",
     }),
     emailAndPassword: {
-        enabled: true
+        enabled: true,
+        autoSignIn: true,
     },
-    // socialProviders: {
-    //     github: {
-    //         clientId: process.env.GITHUB_CLIENT_ID as string,
-    //         clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-    //     },
-    // },
+    socialProviders: {
+        github: {
+            clientId: process.env.GITHUB_CLIENT_ID as string,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+        },
+    },
 });

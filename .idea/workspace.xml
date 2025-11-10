@@ -4,37 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d665199-6eb4-449f-9288-2ec8ffcd3c58" name="Changes" comment="feat: setup trpc with prisma and react query">
-      <change afterPath="$PROJECT_DIR$/app/(auth)/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/(auth)/login/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/(auth)/signup/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api/auth/[...all]/route.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/auth-client.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/auth.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/auth/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/auth/ui/login-form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/auth/ui/register-form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/home/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/apple.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/github.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/icons/google.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/32714d47-30a8-4400-8c93-fe3db4c7dcb9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/32714d47-30a8-4400-8c93-fe3db4c7dcb9/storage_v2/_src_/database/neondb.1Hh4wQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/32714d47-30a8-4400-8c93-fe3db4c7dcb9/storage_v2/_src_/database/neondb.1Hh4wQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/32714d47-30a8-4400-8c93-fe3db4c7dcb9/storage_v2/_src_/database/neondb.1Hh4wQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/32714d47-30a8-4400-8c93-fe3db4c7dcb9/storage_v2/_src_/database/neondb.1Hh4wQ/schema/public.abK9xQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/data_source_mapping.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/data_source_mapping.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="8d665199-6eb4-449f-9288-2ec8ffcd3c58" name="Changes" comment="refactor: remove IntelliJ Data Source configuration files">
+      <change afterPath="$PROJECT_DIR$/actions/auth.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/(auth)/verify-email/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/auth/ui/auth-provider-button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/auth/ui/password-input.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/auth/ui/sign-out-button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/auth/ui/social-login.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth)/signup/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/signup/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trpc/routers/_app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/trpc/routers/_app.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/auth-client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/auth-client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/auth/ui/login-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/ui/login-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/auth/ui/register-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/ui/register-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/icons/Capture-1404-06-15-201412.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +30,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -99,10 +85,10 @@
       <recent name="$PROJECT_DIR$/app/(auth)/login" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public/icons" />
       <recent name="$PROJECT_DIR$/modules/home" />
       <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.Next.js: debug client-side">
@@ -137,10 +123,23 @@
       <workItem from="1762675517534" duration="1417000" />
       <workItem from="1762677118642" duration="2834000" />
     </task>
+    <task id="LOCAL-00001" summary="refactor: remove IntelliJ Data Source configuration files">
+      <option name="closed" value="true" />
+      <created>1762695229245</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1762695229245</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="refactor: remove IntelliJ Data Source configuration files" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: remove IntelliJ Data Source configuration files" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

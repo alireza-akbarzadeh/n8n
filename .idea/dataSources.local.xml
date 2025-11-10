@@ -8,6 +8,19 @@
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>neondb_owner</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="database" qname="neondb" />
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
+    <data-source name="n8n" uuid="6e1fe8c6-00bc-44c9-b89c-535d193046dd">
+      <database-info product="PostgreSQL" version="17.5 (6bc9ef8)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.7.3" dbms="POSTGRES" exact-version="17.5" exact-driver-version="42.7">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>neondb_owner</user-name>
       <schema-mapping />
     </data-source>
   </component>

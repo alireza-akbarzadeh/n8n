@@ -1,75 +1,61 @@
-import { initTRPC, TRPCError } from "@trpc/server";
+import {initTRPC, TRPCError} from "@trpc/server";
 import superjson from "superjson";
-import { ZodError } from "zod";
+import {z, ZodError} from "zod";
 
 import prisma from "@/lib/db";
-// import { auth } from "@/lib/auth";
+import {auth} from "@/lib/auth";
+import {headers} from "next/headers";
 
-/**
- * ✅ Define TRPC context type (IMPORTANT!)
- */
+
 export type TRPCContext = {
     db: typeof prisma;
-    // session: Awaited<ReturnType<typeof auth.api.getSession>>;
 };
 
-/**
- * ✅ Create context for each request
- */
+
 export const createTRPCContext = async (): Promise<TRPCContext> => {
-    // const cookieStore = await cookies();
-
-    // const session = await auth.api.getSession({
-    //     headers: { cookie: cookieStore.toString() },
-    // });
-
     return {
         db: prisma,
-        // session,
     };
 };
 
-/**
- */
+
 const t = initTRPC.context<TRPCContext>().create({
     transformer: superjson,
-    errorFormatter({ shape, error }) {
+    errorFormatter({shape, error}) {
         return {
             ...shape,
             data: {
                 ...shape.data,
                 zodError:
-                    error.cause instanceof ZodError ? error.cause.flatten() : null,
+                    error.cause instanceof ZodError ? z.flattenError(error.cause): null,
             },
         };
     },
 });
 
-/**
- * Routers & Procedures
- */
+export const createCallerFactory = t.createCallerFactory;
+
 export const createTRPCRouter = t.router;
+
 export const publicProcedure = t.procedure;
 
-/**
- * ✅ Protected procedure middleware
- * Injects ctx.userId and ensures the user is logged in
- */
-export const protectedProcedure = t.procedure.use(async ({ ctx, next }) => {
-    // const userId = ctx?.session?.session?.userId;
 
-    const userId = "1";
+export const protectedProcedure = publicProcedure.use(async ({ctx, next}) => {
+    const session = await auth.api.getSession({
+        headers: await headers()
+    })
+    const userId = session?.session?.userId;
 
     if (!userId) {
-        throw new TRPCError({ code: "UNAUTHORIZED" });
+        throw new TRPCError({code: "UNAUTHORIZED", message: "Unauthorized"});
     }
 
     return next({
         ctx: {
             ...ctx,
             userId,
+            auth: session,
         },
     });
 });
 
-export const createCallerFactory = t.createCallerFactory;

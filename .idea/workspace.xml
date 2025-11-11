@@ -4,15 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d665199-6eb4-449f-9288-2ec8ffcd3c58" name="Changes" comment="feat: add authentication UI components and integration&#10;&#10;- Added `SignOutButton`, `SocialLogin`, and `PasswordInput` components.&#10;- Updated `LoginForm` and `RegisterForm` to utilize the new components.&#10;- Added email verification functionality.&#10;- Integrated `toast` notifications for improved user feedback.&#10;- Adjusted layout styles for login and signup pages.">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ae16c6b4-3d11-44b1-ab67-89d2d8546818.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ae16c6b4-3d11-44b1-ab67-89d2d8546818.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/data_source_mapping.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/data_source_mapping.xml" afterDir="false" />
+    <list default="true" id="8d665199-6eb4-449f-9288-2ec8ffcd3c58" name="Changes" comment="feat: secure `getUsers` procedure and improve TRPC context initialization&#10;&#10;- Added user authentication to `getUsers` using `protectedProcedure`.&#10;- Enhanced `createTRPCContext` to include session retrieval via headers.&#10;- Updated Home page to dynamically display user data.&#10;- Modified IntelliJ data source configurations.">
+      <change afterPath="$PROJECT_DIR$/app/api/inngest/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inngest/client.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inngest/functions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mprocs.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/login/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(auth)/signup/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/signup/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/auth/ui/auth-provider-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/ui/auth-provider-button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/auth/ui/login-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/ui/login-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/auth/ui/register-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/ui/register-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/auth/ui/social-login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/ui/social-login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trpc/init.ts" beforeDir="false" afterPath="$PROJECT_DIR$/trpc/init.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trpc/routers/_app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/trpc/routers/_app.ts" afterDir="false" />
     </list>
@@ -24,14 +33,20 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;alireza-akbarzadeh&quot;
+  }
+}</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/alireza-akbarzadeh/n8n.git&quot;,
@@ -46,32 +61,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
-    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/alirezaakbarzadeh/workshop/n8n/modules/auth/ui&quot;,
-    &quot;llm.McpServerEditPanel.switcher&quot;: &quot;1&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.mcp&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/alirezaakbarzadeh/workshop/n8n/node_modules/typescript/lib&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "JavaScript Debug.Next.js: debug client-side.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "/Users/alirezaakbarzadeh/workshop/n8n/modules/auth/ui",
+    "llm.McpServerEditPanel.switcher": "1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "/Users/alirezaakbarzadeh/workshop/n8n/node_modules/eslint",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.Next.js: server-side.executor": "Run",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/modules/auth/ui" />
@@ -116,6 +135,9 @@
       <updated>1762675516327</updated>
       <workItem from="1762675517534" duration="1417000" />
       <workItem from="1762677118642" duration="2834000" />
+      <workItem from="1762778511142" duration="1899000" />
+      <workItem from="1762780538899" duration="2620000" />
+      <workItem from="1762844733334" duration="3626000" />
     </task>
     <task id="LOCAL-00001" summary="refactor: remove IntelliJ Data Source configuration files">
       <option name="closed" value="true" />
@@ -133,7 +155,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762758936205</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: secure `getUsers` procedure and improve TRPC context initialization&#10;&#10;- Added user authentication to `getUsers` using `protectedProcedure`.&#10;- Enhanced `createTRPCContext` to include session retrieval via headers.&#10;- Updated Home page to dynamically display user data.&#10;- Modified IntelliJ data source configurations.">
+      <option name="closed" value="true" />
+      <created>1762778737135</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1762778737135</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,7 +172,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="refactor: remove IntelliJ Data Source configuration files" />
     <MESSAGE value="feat: add authentication UI components and integration&#10;&#10;- Added `SignOutButton`, `SocialLogin`, and `PasswordInput` components.&#10;- Updated `LoginForm` and `RegisterForm` to utilize the new components.&#10;- Added email verification functionality.&#10;- Integrated `toast` notifications for improved user feedback.&#10;- Adjusted layout styles for login and signup pages." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add authentication UI components and integration&#10;&#10;- Added `SignOutButton`, `SocialLogin`, and `PasswordInput` components.&#10;- Updated `LoginForm` and `RegisterForm` to utilize the new components.&#10;- Added email verification functionality.&#10;- Integrated `toast` notifications for improved user feedback.&#10;- Adjusted layout styles for login and signup pages." />
+    <MESSAGE value="feat: secure `getUsers` procedure and improve TRPC context initialization&#10;&#10;- Added user authentication to `getUsers` using `protectedProcedure`.&#10;- Enhanced `createTRPCContext` to include session retrieval via headers.&#10;- Updated Home page to dynamically display user data.&#10;- Modified IntelliJ data source configurations." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: secure `getUsers` procedure and improve TRPC context initialization&#10;&#10;- Added user authentication to `getUsers` using `protectedProcedure`.&#10;- Enhanced `createTRPCContext` to include session retrieval via headers.&#10;- Updated Home page to dynamically display user data.&#10;- Modified IntelliJ data source configurations." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

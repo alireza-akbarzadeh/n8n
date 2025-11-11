@@ -13,6 +13,7 @@ import Link from "next/link";
 import {toast} from "sonner";
 import {SocialLogin} from "@/modules/auth/ui/social-login";
 import {PasswordInput} from "@/modules/auth/ui/password-input";
+import Image from "next/image";
 
 const registerSchema = z
     .object({
@@ -50,7 +51,7 @@ export function RegisterForm() {
             email: values.email.trim(),
             password: values.password.trim(),
             name: values.name.trim(),
-            callbackURL: "/verify-email" // ✅ recommended
+            callbackURL: "/"
         };
 
         await signUp.email(payload, {
@@ -70,6 +71,10 @@ export function RegisterForm() {
         <div className="flex flex-col gap-6">
             <Card>
                 <CardHeader>
+                    <Link href='/' className='flex gap-1 items-center justify-center py-3'>
+                        <Image src='/images/logo.svg' alt='logo' width={30} height={30}/>
+                        <span className='text-base'>Node Base</span>
+                    </Link>
                     <CardTitle>Create an account</CardTitle>
                     <CardDescription>Start your journey with us</CardDescription>
                 </CardHeader>

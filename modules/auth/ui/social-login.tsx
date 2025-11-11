@@ -12,6 +12,7 @@ export function SocialLogin() {
                 provider="github"
                 label="GitHub"
                 icon="/icons/github.svg"
+
             />
             <AuthProviderButton
                 provider="discord"

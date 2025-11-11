@@ -13,6 +13,7 @@ import Link from "next/link";
 import {toast} from "sonner";
 import {SocialLogin} from "@/modules/auth/ui/social-login";
 import {PasswordInput} from "@/modules/auth/ui/password-input";
+import Image from "next/image";
 
 const loginSchema = z.object({
     email: z.email('Please enter a valid email address'),
@@ -51,8 +52,13 @@ export function LoginForm() {
 
     return (
         <div className='flex flex-col gap-6'>
+
             <Card>
                 <CardHeader>
+                    <Link href='/' className='flex gap-1 items-center justify-center py-3'>
+                        <Image src='/images/logo.svg' alt='logo' width={30} height={30}/>
+                        <span className='text-base'>Node Base</span>
+                    </Link>
                     <CardTitle>
                         Welcome Back!
                     </CardTitle>
@@ -109,7 +115,7 @@ export function LoginForm() {
                                 Sign In
                             </Button>
                             <div className="text-center text-sm">
-                                Don't have an account?{" "}
+                                Don&apos;t have an account?{" "}
                                 <Link className='text-primary underline underline-offset-4' href="/signup">Sign
                                     up</Link>
                             </div>

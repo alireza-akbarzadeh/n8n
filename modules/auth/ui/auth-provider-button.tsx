@@ -2,19 +2,19 @@
 
 import {Button} from "@/components/ui/button";
 import Image from "next/image";
-import {useTransition} from "react";
+import React, {useTransition} from "react";
 import {loginWithProvider} from "@/actions/auth";
 import {toast} from "sonner";
 
-interface AuthProviderButtonProps {
+interface AuthProviderButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     provider: string;
     label: string;
     icon: string;
-    className?: string;
+    type?: "button" | "submit" | "reset" | undefined
 }
 
 export function AuthProviderButton(props: AuthProviderButtonProps) {
-    const {provider, label, icon, className} = props;
+    const {provider, label, icon, className, type = 'button',...rest} = props;
     const [loading, startTransition] = useTransition();
 
     const onClick = () => {
@@ -33,6 +33,8 @@ export function AuthProviderButton(props: AuthProviderButtonProps) {
             className={className + " gap-2"}
             onClick={onClick}
             isLoading={loading}
+            type={type}
+            {...rest}
         >
             <Image src={icon} width={20} height={20} alt={label}/>
             {label}

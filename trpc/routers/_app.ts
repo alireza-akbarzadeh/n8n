@@ -1,12 +1,14 @@
 import {createTRPCRouter, protectedProcedure} from '../init';
+import {inngest} from "@/inngest/client";
 
 export const appRouter = createTRPCRouter({
-    getUsers: protectedProcedure.query(async ({ctx}) => {
-        return ctx.db.user.findMany({
-            where: {
-                id: ctx.userId
-            }
-        });
+    getWorkflow: protectedProcedure.query(async ({ctx}) => {
+        return ctx.db.workflow.findMany();
+    }),
+    createWorkflow: protectedProcedure.mutation(async ({ctx}) => {
+        await inngest.send({name: "test/hello.world", data: {email: "devtools@gmail.com"}})
+        return {message: "Job queued",success:true};
+        // return ctx.db.workflow.create({data: {name: "smoothing"}});
     }),
 });
 // export type definition of API

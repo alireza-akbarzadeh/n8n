@@ -46,7 +46,7 @@ export const protectedProcedure = publicProcedure.use(async ({ctx, next}) => {
     })
     const userId = session?.session?.userId;
 
-    if (!userId) {
+    if (!session) {
         throw new TRPCError({code: "UNAUTHORIZED", message: "Unauthorized"});
     }
 
@@ -55,6 +55,7 @@ export const protectedProcedure = publicProcedure.use(async ({ctx, next}) => {
             ...ctx,
             userId,
             auth: session,
+            isAuthenticated: Boolean(userId),
         },
     });
 });

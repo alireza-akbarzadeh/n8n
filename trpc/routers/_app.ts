@@ -1,10 +1,8 @@
-import { log } from "node:console";
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../init";
+import { createTRPCRouter, premiumProcedure, protectedProcedure, publicProcedure } from "../init";
 import { inngest } from "@/inngest/client";
 
 export const appRouter = createTRPCRouter({
-  testAi: publicProcedure.mutation(async ({ ctx }) => {
-    console.log("testAi");
+  testAi: premiumProcedure.mutation(async ({ ctx }) => {
     await inngest.send({ name: "execute/ai" });
   }),
   getWorkflow: protectedProcedure.query(async ({ ctx }) => {

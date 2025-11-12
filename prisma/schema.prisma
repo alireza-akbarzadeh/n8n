@@ -17,9 +17,10 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now()) @updatedAt
 
-  posts    Post[]
-  sessions Session[]
-  accounts Account[]
+  posts     Post[]
+  sessions  Session[]
+  accounts  Account[]
+  workflows Workflow[]
 
   @@map("user")
 }
@@ -83,6 +84,10 @@ model Verification {
 }
 
 model Workflow {
-  id   String @id @default(cuid())
-  name String
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

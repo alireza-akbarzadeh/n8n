@@ -1,5 +1,7 @@
-import React from 'react';
+import { requireAuth } from "@/actions/auth";
+import React from "react";
 
-export default function Executions() {
+export default async function Executions() {
+  await requireAuth();
   return <div>executions</div>;
 }

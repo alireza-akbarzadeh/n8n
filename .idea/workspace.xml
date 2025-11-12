@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d665199-6eb4-449f-9288-2ec8ffcd3c58" name="Changes" comment="feat: secure `getUsers` procedure and improve TRPC context initialization&#10;&#10;- Added user authentication to `getUsers` using `protectedProcedure`.&#10;- Enhanced `createTRPCContext` to include session retrieval via headers.&#10;- Updated Home page to dynamically display user data.&#10;- Modified IntelliJ data source configurations.">
-      <change afterPath="$PROJECT_DIR$/app/api/inngest/route.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/inngest/client.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/inngest/functions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mprocs.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(auth)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/login/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/ui/auth-provider-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/ui/auth-provider-button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/ui/login-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/ui/login-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/ui/register-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/ui/register-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/auth/ui/social-login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/modules/auth/ui/social-login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trpc/init.ts" beforeDir="false" afterPath="$PROJECT_DIR$/trpc/init.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trpc/routers/_app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/trpc/routers/_app.ts" afterDir="false" />
-    </list>
+    <list default="true" id="8d665199-6eb4-449f-9288-2ec8ffcd3c58" name="Changes" comment="feat: setup inngest and mprocs" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -137,7 +117,7 @@
       <workItem from="1762677118642" duration="2834000" />
       <workItem from="1762778511142" duration="1899000" />
       <workItem from="1762780538899" duration="2620000" />
-      <workItem from="1762844733334" duration="3626000" />
+      <workItem from="1762844733334" duration="4012000" />
     </task>
     <task id="LOCAL-00001" summary="refactor: remove IntelliJ Data Source configuration files">
       <option name="closed" value="true" />
@@ -163,7 +143,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762778737135</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: setup inngest and mprocs">
+      <option name="closed" value="true" />
+      <created>1762848492101</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1762848492101</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,7 +161,8 @@
     <MESSAGE value="refactor: remove IntelliJ Data Source configuration files" />
     <MESSAGE value="feat: add authentication UI components and integration&#10;&#10;- Added `SignOutButton`, `SocialLogin`, and `PasswordInput` components.&#10;- Updated `LoginForm` and `RegisterForm` to utilize the new components.&#10;- Added email verification functionality.&#10;- Integrated `toast` notifications for improved user feedback.&#10;- Adjusted layout styles for login and signup pages." />
     <MESSAGE value="feat: secure `getUsers` procedure and improve TRPC context initialization&#10;&#10;- Added user authentication to `getUsers` using `protectedProcedure`.&#10;- Enhanced `createTRPCContext` to include session retrieval via headers.&#10;- Updated Home page to dynamically display user data.&#10;- Modified IntelliJ data source configurations." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: secure `getUsers` procedure and improve TRPC context initialization&#10;&#10;- Added user authentication to `getUsers` using `protectedProcedure`.&#10;- Enhanced `createTRPCContext` to include session retrieval via headers.&#10;- Updated Home page to dynamically display user data.&#10;- Modified IntelliJ data source configurations." />
+    <MESSAGE value="feat: setup inngest and mprocs" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: setup inngest and mprocs" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

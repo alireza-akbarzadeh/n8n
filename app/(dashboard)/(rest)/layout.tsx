@@ -1,7 +1,10 @@
 import { AppHeader } from "@/components/app-header";
-import { WorkflowLayoutProps } from "./layout";
 
-export default function WorkflowLayout({ children }: WorkflowLayoutProps) {
+interface WorkflowLayoutProps {
+  children: React.ReactNode;
+}
+
+export default function Layout({ children }: WorkflowLayoutProps) {
   return (
     <>
       <AppHeader />

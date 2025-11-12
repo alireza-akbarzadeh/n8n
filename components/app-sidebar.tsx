@@ -17,6 +17,40 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { SignOutButton } from "@/modules/auth/ui/sign-out-button";
+import { useHasActiveSubscription } from "@/modules/subscription";
+
+const menuItems = [
+  {
+    title: "Workflows",
+    items: [
+      {
+        title: "Workflows",
+        path: "/workflows",
+        icon: FolderOpenIcon,
+      },
+      {
+        title: "Credintials",
+        path: "/credentials",
+        icon: KeyIcon,
+      },
+      {
+        title: "Executions",
+        path: "/executions",
+        icon: HistoryIcon,
+      },
+    ],
+  },
+  {
+    title: "History",
+    items: [
+      {
+        title: "History",
+        path: "/history",
+        icon: HistoryIcon,
+      },
+    ],
+  },
+];
 
 export function AppSidebar() {
   const router = useRouter();
@@ -24,38 +58,7 @@ export function AppSidebar() {
   const isActive = (url: string) => {
     return url === "/" ? pathname === "/" : pathname.startsWith(url);
   };
-  const menuItems = [
-    {
-      title: "Workflows",
-      items: [
-        {
-          title: "Workflows",
-          path: "/workflows",
-          icon: FolderOpenIcon,
-        },
-        {
-          title: "Credintials",
-          path: "/credentials",
-          icon: KeyIcon,
-        },
-        {
-          title: "Executions",
-          path: "/executions",
-          icon: HistoryIcon,
-        },
-      ],
-    },
-    {
-      title: "History",
-      items: [
-        {
-          title: "History",
-          path: "/history",
-          icon: HistoryIcon,
-        },
-      ],
-    },
-  ];
+  const { hasActiveSubscription, isLoading } = useHasActiveSubscription();
 
   return (
     <Sidebar collapsible="icon">
@@ -94,16 +97,28 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
+          {!hasActiveSubscription && !isLoading && (
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                onClick={() => authClient.checkout({ slug: "pro" })}
+                className="gap-x-4 h-10 px-4 cursor-pointer"
+                tooltip="Upgrade to Pro"
+                asChild
+              >
+                <div className="flex items-center">
+                  <StarIcon className="size-4 mr-2" />
+                  <span>Upgrade to Pro</span>
+                </div>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
           <SidebarMenuItem>
-            <SidebarMenuButton onClick={() => {}} className="gap-x-4 h-10 px-4" tooltip="Upgrade to Pro" asChild>
-              <div className="flex items-center">
-                <StarIcon className="size-4 mr-2" />
-                <span>Upgrade to Pro</span>
-              </div>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton onClick={() => {}} className="gap-x-4 h-10 px-4" tooltip="Billing Portal" asChild>
+            <SidebarMenuButton
+              onClick={() => authClient.customer.portal()}
+              className="gap-x-4 h-10 px-4 cursor-pointer"
+              tooltip="Billing Portal"
+              asChild
+            >
               <div className="flex items-center">
                 <CreditCardIcon className="size-4 mr-2" />
                 <span>Billing Portal</span>

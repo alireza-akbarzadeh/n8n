@@ -1,6 +1,6 @@
 "use client";
 
-import { CreditCardIcon, FolderOpenIcon, HistoryIcon, HomeIcon, KeyIcon, LogOutIcon, StarIcon } from "lucide-react";
+import { CreditCardIcon, FolderOpenIcon, HistoryIcon, KeyIcon, LogOutIcon, StarIcon } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -15,7 +15,6 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { logout } from "@/actions/auth";
 import { authClient } from "@/lib/auth-client";
 import { SignOutButton } from "@/modules/auth/ui/sign-out-button";
 

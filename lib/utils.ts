@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 import { TRPCError } from "@trpc/server";
 import type { TRPC_ERROR_CODE_KEY } from "@trpc/server/rpc";
-import { HTTP_STATUS, HttpStatusCode } from "./constants";
+import { HTTP_STATUS, HttpStatusCode } from "@/config/constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

@@ -2,22 +2,37 @@ import { createTRPCRouter, premiumProcedure, protectedProcedure } from "@/trpc/i
 import z from "zod";
 import { generateSlug } from "random-word-slugs";
 import { dbTry, ok } from "@/lib/utils";
-import { HTTP_STATUS } from "@/lib/constants";
-
-const getMant = z.object({
-  search: z.string().optional(),
-  pageSize: z.number().optional(),
-  pageNumber: z.number().optional(),
-});
+import { HTTP_STATUS } from "@/config/constants";
+import { baseQuerySchema } from "@/trpc/schemas";
 
 export const workflowsRouter = createTRPCRouter({
-  getMany: protectedProcedure.query(async ({ ctx }) => {
-    const workflow = await dbTry(
-      () => ctx.db.workflow.findMany({ where: { userId: ctx.userId } }),
-      "Failed to get workflow",
-      "BAD_REQUEST",
-    );
-    return ok({ data: workflow, message: "Workflow retrieved successfully" });
+  getMany: protectedProcedure.input(baseQuerySchema).query(async ({ ctx, input }) => {
+    const { page, pageSize, search } = input;
+
+    const [items, totalCount] = await Promise.all([
+      dbTry(
+        () =>
+          ctx.db.workflow.findMany({
+            where: { userId: ctx.userId, name: { contains: search, mode: "insensitive" } },
+            orderBy: { updatedAt: "desc" },
+            skip: (page - 1) * pageSize,
+            take: pageSize,
+          }),
+        "Failed to get workflow",
+        "BAD_REQUEST",
+      ),
+      ctx.db.workflow.count({
+        where: { userId: ctx.userId, name: { contains: search, mode: "insensitive" } },
+      }),
+    ]);
+    const totalPages = Math.ceil(totalCount / pageSize);
+    const hasNextPage = page < totalPages;
+    const hasPreviousPage = page > 1;
+
+    return ok({
+      data: { items, totalCount, totalPages, hasNextPage, hasPreviousPage, page, pageSize, search },
+      message: "Workflow retrieved successfully",
+    });
   }),
 
   getOne: protectedProcedure.input(z.object({ id: z.uuid() })).query(async ({ input, ctx }) => {

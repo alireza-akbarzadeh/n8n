@@ -1,3 +1,10 @@
+export const PAGINAITION = {
+  DEFAULT_PAGE: 1,
+  DEFAULT_PAGE_SIZE: 1,
+  MAX_PAGE_SIZE: 100,
+  MIN_PAGE_SIZE: 1,
+};
+
 export const HTTP_STATUS = {
   // ✅ Success
   OK: 200,

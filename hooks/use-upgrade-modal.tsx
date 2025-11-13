@@ -1,6 +1,5 @@
 import UpgradeModal from "@/components/upgrade-modal";
 import { TRPCClientError } from "@trpc/client";
-import { err } from "inngest/types";
 import * as React from "react";
 
 export function useUpgradeModal() {

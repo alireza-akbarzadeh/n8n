@@ -1,8 +1,14 @@
-import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
+import { createTRPCRouter, premiumProcedure, protectedProcedure } from "@/trpc/init";
 import z from "zod";
 import { generateSlug } from "random-word-slugs";
 import { dbTry, ok } from "@/lib/utils";
 import { HTTP_STATUS } from "@/lib/constants";
+
+const getMant = z.object({
+  search: z.string().optional(),
+  pageSize: z.number().optional(),
+  pageNumber: z.number().optional(),
+});
 
 export const workflowsRouter = createTRPCRouter({
   getMany: protectedProcedure.query(async ({ ctx }) => {
@@ -29,7 +35,7 @@ export const workflowsRouter = createTRPCRouter({
     return ok({ data: workflow, message: "Workflow retrieved successfully" });
   }),
 
-  create: protectedProcedure.mutation(async ({ ctx }) => {
+  create: premiumProcedure.mutation(async ({ ctx }) => {
     const workflow = await dbTry(
       () =>
         ctx.db.workflow.create({
@@ -39,9 +45,10 @@ export const workflowsRouter = createTRPCRouter({
           },
         }),
       "Failed to create workflow",
+      "FORBIDDEN",
     );
 
-    return ok({ data: workflow, message: "Workflow created successfully", code: HTTP_STATUS.CREATED });
+    return ok({ data: workflow, message: `Workflow ${workflow.name} created successfully`, code: HTTP_STATUS.CREATED });
   }),
 
   update: protectedProcedure

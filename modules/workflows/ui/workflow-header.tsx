@@ -1,5 +1,5 @@
 "use client";
-import { EntityHeader } from "@/components/entity-components";
+import { EntityHeader } from "@/components/entities/entity-header";
 import { useUpgradeModal } from "@/hooks/use-upgrade-modal";
 import { useRouter } from "next/navigation";
 import { useCreateWorkflow } from "../hooks/use-workflows";

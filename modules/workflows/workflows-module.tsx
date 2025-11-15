@@ -5,7 +5,7 @@ import { WorkflowEmpty } from "./ui/workflow-empty";
 import { WorkflowItem } from "./ui/workflow-item";
 import { EntityList } from "./ui/workflow-list";
 
-export function WorkflowModules() {
+export function WorkflowModule() {
   const workflows = useSuspenseWorkflows();
   return (
     <EntityList

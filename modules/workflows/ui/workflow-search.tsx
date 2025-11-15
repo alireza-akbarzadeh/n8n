@@ -1,5 +1,6 @@
 "use client";
-import { EntitySearch } from "@/components/entity-components";
+
+import { EntitySearch } from "@/components/entities/entity-search";
 import { useWorkflowParams } from "../hooks/use-workflow-params";
 import { useEntitySearch } from "@/hooks/use-entity-search";
 

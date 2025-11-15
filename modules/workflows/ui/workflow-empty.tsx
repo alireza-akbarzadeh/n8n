@@ -1,5 +1,5 @@
 "use client";
-import { EmptyView } from "@/components/entity-components";
+import { EmptyView } from "@/components/entities/entity-view";
 import { useUpgradeModal } from "@/hooks/use-upgrade-modal";
 import { useRouter } from "next/router";
 import { useWorkflowParams } from "../hooks/use-workflow-params";

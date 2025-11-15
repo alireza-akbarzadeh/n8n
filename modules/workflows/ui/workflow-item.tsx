@@ -1,4 +1,4 @@
-import { EnityItem } from "@/components/entity-components";
+import { EnityItem } from "@/components/entities/entity-item";
 import { Workflow } from "@/prisma/generated/prisma/client";
 import { formatDistanceToNow } from "date-fns";
 import { WorkflowIcon } from "lucide-react";

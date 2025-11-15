@@ -30,7 +30,17 @@ export const workflowsRouter = createTRPCRouter({
     const hasPreviousPage = page > 1;
 
     return ok({
-      data: { items, totalCount, totalPages, hasNextPage, hasPreviousPage, page, pageSize, search },
+      data: {
+        items,
+        totalCount,
+        hasPaginate: totalCount > 0,
+        totalPages,
+        hasNextPage,
+        hasPreviousPage,
+        page,
+        pageSize,
+        search,
+      },
       message: "Workflow retrieved successfully",
     });
   }),
@@ -89,7 +99,7 @@ export const workflowsRouter = createTRPCRouter({
       return ok({ data: workflow, message: "Workflow updated successfully" });
     }),
 
-  remove: protectedProcedure.input(z.object({ id: z.uuid() })).mutation(async ({ input, ctx }) => {
+  remove: protectedProcedure.input(z.object({ id: z.string() })).mutation(async ({ input, ctx }) => {
     const { id } = input;
 
     const workflow = await dbTry(
@@ -100,7 +110,6 @@ export const workflowsRouter = createTRPCRouter({
       "Failed to delete workflow",
       "BAD_REQUEST",
     );
-
     return ok({ data: workflow, message: "Workflow deleted successfully" });
   }),
 

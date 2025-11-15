@@ -45,12 +45,12 @@ export const workflowsRouter = createTRPCRouter({
     });
   }),
 
-  getOne: protectedProcedure.input(z.object({ id: z.uuid() })).query(async ({ input, ctx }) => {
+  getOne: protectedProcedure.input(z.object({ id: z.string() })).query(async ({ input, ctx }) => {
     const { id } = input;
-
+    console.log(id, "id");
     const workflow = await dbTry(
       () =>
-        ctx.db.workflow.findUnique({
+        ctx.db.workflow.findUniqueOrThrow({
           where: { id, userId: ctx.userId },
         }),
       "Failed to get workflow",
@@ -79,7 +79,7 @@ export const workflowsRouter = createTRPCRouter({
   update: protectedProcedure
     .input(
       z.object({
-        id: z.uuid(),
+        id: z.string(),
         name: z.string().min(2).max(100),
       }),
     )
@@ -92,11 +92,11 @@ export const workflowsRouter = createTRPCRouter({
             where: { id, userId: ctx.userId },
             data: { name },
           }),
-        "Failed to update workflow",
+        "Failed to update workflow name",
         "BAD_REQUEST",
       );
 
-      return ok({ data: workflow, message: "Workflow updated successfully" });
+      return ok({ data: workflow, message: `${name} updated successfully` });
     }),
 
   remove: protectedProcedure.input(z.object({ id: z.string() })).mutation(async ({ input, ctx }) => {
@@ -114,7 +114,7 @@ export const workflowsRouter = createTRPCRouter({
   }),
 
   updateName: protectedProcedure
-    .input(z.object({ id: z.uuid(), name: z.string().min(2).max(100) }))
+    .input(z.object({ id: z.string(), name: z.string().min(2).max(100) }))
     .mutation(async ({ input, ctx }) => {
       const { id, name } = input;
 

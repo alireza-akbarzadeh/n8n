@@ -13,10 +13,10 @@ export function cn(...inputs: ClassValue[]) {
  * Standard API response type.
  * `T` is the type of the `data` property.
  */
-export type ApiResponse<T> = {
+export type OkApiResult<T> = {
   success: boolean;
   message: string;
-  data?: T | null;
+  data: T;
   error?: unknown;
   code?: HttpStatusCode;
 };
@@ -24,7 +24,16 @@ export type ApiResponse<T> = {
 /**
  * Fully type-safe helper to infer the type of API response from data type T.
  */
-export type InferApiResponse<T> = ApiResponse<T>;
+
+export type FailApiResult = {
+  success: false;
+  message: string;
+  data: null;
+  error?: unknown;
+  code?: HttpStatusCode;
+};
+
+export type InferApiResponse<T> = OkApiResult<T>;
 
 /**
  * Create a successful response.
@@ -34,10 +43,10 @@ export function ok<T>({
   message = "Success",
   code = HTTP_STATUS.OK,
 }: {
-  data: T;
+  data: T; // keep required
   message?: string;
   code?: HttpStatusCode;
-}): ApiResponse<T> {
+}): OkApiResult<T> {
   return {
     success: true,
     code,
@@ -49,7 +58,7 @@ export function ok<T>({
 /**
  * Create a failure response.
  */
-export function fail<T = null>(message = "Something went wrong", error?: unknown): ApiResponse<T> {
+export function fail(message = "Something went wrong", error?: unknown): FailApiResult {
   return {
     success: false,
     message,
@@ -77,3 +86,5 @@ export async function dbTry<T>(
     });
   }
 }
+
+export const normalizeName = (value: string) => value.trim().replace(/\s+/g, " ");

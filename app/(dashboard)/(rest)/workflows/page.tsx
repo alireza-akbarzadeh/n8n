@@ -1,6 +1,6 @@
 import { requireAuth } from "@/actions/auth";
 import { prefetchWorflows } from "@/modules/workflows/server/prefetch";
-import { baseLoaderParams, WorkflowError, WorkflowLoading, WorkflowModule } from "@/modules/workflows";
+import { baseLoaderParams, WorkflowError, WorkflowLoading, WorkflowsModule } from "@/modules/workflows";
 import { HydrateClient } from "@/trpc/server";
 import { Suspense } from "react";
 
@@ -24,7 +24,7 @@ export default async function WrokflowsPage({ searchParams }: PropsPage) {
       <HydrateClient>
         <ErrorBoundary fallback={<WorkflowError />}>
           <Suspense fallback={<WorkflowLoading />}>
-            <WorkflowModule />
+            <WorkflowsModule />
           </Suspense>
         </ErrorBoundary>
       </HydrateClient>

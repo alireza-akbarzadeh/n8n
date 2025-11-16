@@ -193,7 +193,6 @@ export const workflowsRouter = createTRPCRouter({
             if (edges.length > 0) {
               await tx.connection.createMany({
                 data: edges.map((edge) => ({
-                  id: edge.id,
                   workflowId: id,
                   fromNodeId: edge.source,
                   toNodeId: edge.target,

@@ -5,7 +5,7 @@ import { TRPCReactProvider } from '@/trpc/client';
 import { Toaster } from '@/components/ui/sonner';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Provider } from 'jotai';
-import React from "react";
+import React from 'react';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

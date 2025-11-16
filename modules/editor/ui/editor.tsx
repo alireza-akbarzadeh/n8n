@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useSuspenseWorkflow } from "@/modules/workflows/hooks/use-workflows";
-import * as React from "react";
+import { useSuspenseWorkflow } from '@/modules/workflows/hooks/use-workflows';
+import * as React from 'react';
 import {
   ReactFlow,
   applyNodeChanges,
@@ -16,29 +16,35 @@ import {
   Controls,
   MiniMap,
   Panel,
-} from "@xyflow/react";
+} from '@xyflow/react';
 
-import "@xyflow/react/dist/style.css";
-import { nodeComponnets } from "@/config/node-components";
-import { AddNodeButton } from "@/components/add-node-button";
+import '@xyflow/react/dist/style.css';
+import { nodeComponents } from '@/config/node-components';
+import { AddNodeButton } from '@/components/add-node-button';
+import { useSetAtom } from 'jotai';
+import { editorAtom } from '../store/atoms';
 
 export function Editor({ workflowId }: { workflowId: string }) {
   const { data } = useSuspenseWorkflow(workflowId);
 
   const [nodes, setNodes] = React.useState<Node[]>(data.data.nodes);
   const [edges, setEdges] = React.useState<Edge[]>(data.data.edges);
+  const setEditor = useSetAtom(editorAtom);
 
   const onNodesChange = React.useCallback(
-    (changes: NodeChange[]) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
-    [],
+    (changes: NodeChange[]) =>
+      setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
+    []
   );
   const onEdgesChange = React.useCallback(
-    (changes: EdgeChange[]) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
-    [],
+    (changes: EdgeChange[]) =>
+      setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
+    []
   );
   const onConnect = React.useCallback(
-    (params: Connection) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
-    [],
+    (params: Connection) =>
+      setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
+    []
   );
 
   return (
@@ -49,7 +55,8 @@ export function Editor({ workflowId }: { workflowId: string }) {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        nodeTypes={nodeComponnets}
+        nodeTypes={nodeComponents}
+        onInit={setEditor}
         fitView
         proOptions={{ hideAttribution: true }}
       >

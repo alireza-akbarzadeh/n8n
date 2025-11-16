@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { Method } from "@/types";
-import { Node, NodeProps } from "@xyflow/react";
-import * as React from "react";
-import { BaseExecuationNode } from "../base-execuation-node";
-import { GlobeIcon } from "lucide-react";
+import { Method } from '@/types';
+import { Node, NodeProps } from '@xyflow/react';
+import * as React from 'react';
+import { BaseExecutionNode } from '../base-execution-node';
+import { GlobeIcon } from 'lucide-react';
 
 interface HttpRequestNodeData {
   endpoint?: string;
@@ -15,23 +15,27 @@ interface HttpRequestNodeData {
 
 type HttpRequestNodeType = Node<HttpRequestNodeData>;
 
-export const HttpRequestNode = React.memo(function (props: NodeProps<HttpRequestNodeType>) {
-  const nodeData = props.data as HttpRequestNodeData;
-  const description = nodeData?.endpoint ? `${nodeData.method || "GET"}: ${nodeData.endpoint}` : "Not configured";
+export const HttpRequestNode = React.memo(function (
+  props: NodeProps<HttpRequestNodeType>
+) {
+  const nodeData = props.data;
+  const description = nodeData?.endpoint
+    ? `${nodeData.method || 'GET'}: ${nodeData.endpoint}`
+    : 'Not configured';
 
   return (
     <>
-      <BaseExecuationNode
+      <BaseExecutionNode
         {...props}
         id={props.id}
         name="HTTP Request"
         icon={GlobeIcon}
         descritpion={description}
         onSetting={() => {}}
-        onDubbleClick={() => {}}
+        onDoubleClick={() => {}}
       />
     </>
   );
 });
 
-HttpRequestNode.displayName = "HttpRequestNode";
+HttpRequestNode.displayName = 'HttpRequestNode';

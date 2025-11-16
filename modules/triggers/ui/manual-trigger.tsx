@@ -1,8 +1,8 @@
-import { NodeProps, Position } from "@xyflow/react";
-import * as React from "react";
+import { NodeProps } from '@xyflow/react';
+import * as React from 'react';
 
-import { MousePointerIcon, type LucideIcon } from "lucide-react";
-import { BaseTriggerNode } from "./base-trigger-node";
+import { MousePointerIcon } from 'lucide-react';
+import { BaseTriggerNode } from './base-trigger-node';
 
 export const ManualTrigger = React.memo(function (props: NodeProps) {
   return (
@@ -11,11 +11,11 @@ export const ManualTrigger = React.memo(function (props: NodeProps) {
         {...props}
         icon={MousePointerIcon}
         name="When clicking 'Execute workflow'"
-        onDubbleClick={() => {}}
+        onDoubleClick={() => {}}
         onSetting={() => {}}
       />
     </>
   );
 });
 
-ManualTrigger.displayName = "ManualTrigger";
+ManualTrigger.displayName = 'ManualTrigger';

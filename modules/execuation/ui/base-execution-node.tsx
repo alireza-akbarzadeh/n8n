@@ -7,7 +7,7 @@ import { BaseNode, BaseNodeContent } from '@/components/react-flow/base-node';
 import Image from 'next/image';
 import { BaseHandle } from '@/components/react-flow/base-handle';
 
-interface BaseTriggerNodeProps extends NodeProps {
+interface BaseExecutionNodeProps extends NodeProps {
   icon: LucideIcon | string;
   name: string;
   descritpion?: string;
@@ -16,8 +16,8 @@ interface BaseTriggerNodeProps extends NodeProps {
   onDoubleClick?: () => void;
 }
 
-export const BaseTriggerNode = React.memo(function (
-  props: BaseTriggerNodeProps
+export const BaseExecutionNode = React.memo(function (
+  props: BaseExecutionNodeProps
 ) {
   const {
     id,
@@ -37,11 +37,7 @@ export const BaseTriggerNode = React.memo(function (
       onSetting={onSetting}
       onDelete={handleDelete}
     >
-      {/*TOOD: wrap it with an indicator */}
-      <BaseNode
-        onDoubleClick={onDoubleClick}
-        className="rounded-l-2xl relative group"
-      >
+      <BaseNode onDoubleClick={onDoubleClick}>
         <BaseNodeContent>
           {typeof Icon === 'string' ? (
             <Image src={Icon} alt={name} width={16} height={16} />
@@ -49,6 +45,7 @@ export const BaseTriggerNode = React.memo(function (
             <Icon className="size-4 text-muted-foreground" />
           )}
           {children}
+          <BaseHandle id="traget-1" type="target" position={Position.Left} />
           <BaseHandle id="source-1" type="source" position={Position.Right} />
         </BaseNodeContent>
       </BaseNode>
@@ -56,4 +53,4 @@ export const BaseTriggerNode = React.memo(function (
   );
 });
 
-BaseTriggerNode.displayName = 'BaseTriggerNodeNode';
+BaseExecutionNode.displayName = 'BaseExecutionNode';

@@ -1,7 +1,7 @@
-"use client";
-import { SidebarTrigger } from "@/components/ui/sidebar";
-import { EditorSaveButton } from "./editor-save-button";
-import { EditorBreadcrump } from "./editor-breadcrump";
+'use client';
+import { SidebarTrigger } from '@/components/ui/sidebar';
+import { EditorSaveButton } from './editor-save-button';
+import { EditorBreadcrump } from './editor-breadcrump';
 
 export function EditorHeader({ workflowId }: { workflowId: string }) {
   return (

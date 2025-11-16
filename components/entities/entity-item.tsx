@@ -9,6 +9,7 @@ import {
 import { cn } from "@/lib/utils";
 import { MoreVerticalIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
+import * as React from "react";
 
 interface EntityItemProps {
   href: string;

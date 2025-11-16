@@ -17,7 +17,7 @@ export default async function WorkflowId({ params }: PageProps) {
       <ErrorBoundary fallback={<EditorError />}>
         <Suspense fallback={<EditorLoading />}>
           <EditorHeader workflowId={workflowId} />
-          <main>
+          <main className="h-full">
             <Editor workflowId={workflowId} />
           </main>
         </Suspense>

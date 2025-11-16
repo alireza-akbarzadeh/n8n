@@ -6,7 +6,7 @@ import { WorkflowNode } from "./workflow-node";
 
 export default function InitialNode(props: NodeProps) {
   return (
-    <WorkflowNode showToolbar>
+    <WorkflowNode>
       <PlaceholderNode {...props}>
         <div className="flex cursor-pointer items-center justify-center">
           <PlusIcon className="size-4" />

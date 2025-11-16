@@ -15,10 +15,12 @@ import {
   Background,
   Controls,
   MiniMap,
+  Panel,
 } from "@xyflow/react";
 
 import "@xyflow/react/dist/style.css";
 import { nodeComponnets } from "@/config/node-components";
+import { AddNodeButton } from "@/components/add-node-button";
 
 export function Editor({ workflowId }: { workflowId: string }) {
   const { data } = useSuspenseWorkflow(workflowId);
@@ -54,6 +56,9 @@ export function Editor({ workflowId }: { workflowId: string }) {
         <Background />
         <Controls />
         <MiniMap />
+        <Panel position="top-right">
+          <AddNodeButton />
+        </Panel>
       </ReactFlow>
     </div>
   );

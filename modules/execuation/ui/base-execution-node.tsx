@@ -14,7 +14,7 @@ import {
 interface BaseExecutionNodeProps extends NodeProps {
   icon: LucideIcon | string;
   name: string;
-  descritpion?: string;
+  description?: string;
   children?: ReactNode;
   onSetting?: () => void;
   onDoubleClick?: () => void;
@@ -28,7 +28,7 @@ export const BaseExecutionNode = React.memo(function (
     id,
     icon: Icon,
     name,
-    descritpion,
+    description,
     children,
     onSetting,
     onDoubleClick,
@@ -43,7 +43,7 @@ export const BaseExecutionNode = React.memo(function (
   return (
     <WorkflowNode
       name={name}
-      description={descritpion}
+      description={description}
       onSetting={onSetting}
       onDelete={handleDelete}
     >

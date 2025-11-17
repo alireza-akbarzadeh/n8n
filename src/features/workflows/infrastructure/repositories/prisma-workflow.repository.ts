@@ -123,7 +123,7 @@ export class PrismaWorkflowRepository implements IWorkflowRepository {
         await tx.node.createMany({
           data: bulkData.nodes.map((node) => ({
             ...node,
-            data: node.data as any,
+            data: node.data,
             workflowId,
           })),
         });

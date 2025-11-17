@@ -16,7 +16,8 @@ describe('Workflow Entity', () => {
       edges: [],
     });
     expect(result.success).toBe(true);
-    workflow = result.data!;
+    if (!result.success) throw new Error('Failed to create workflow');
+    workflow = result.data;
   });
 
   describe('create', () => {
@@ -29,8 +30,10 @@ describe('Workflow Entity', () => {
       });
 
       expect(result.success).toBe(true);
-      expect(result.data?.name).toBe('My Workflow');
-      expect(result.data?.userId).toBe('user-123');
+      if (result.success) {
+        expect(result.data.name).toBe('My Workflow');
+        expect(result.data.userId).toBe('user-123');
+      }
     });
 
     it('should fail with empty name', () => {
@@ -42,7 +45,9 @@ describe('Workflow Entity', () => {
       });
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('name');
+      if (!result.success) {
+        expect(result.error).toContain('name');
+      }
     });
 
     it('should fail with name too short', () => {
@@ -76,7 +81,9 @@ describe('Workflow Entity', () => {
       });
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('User ID');
+      if (!result.success) {
+        expect(result.error).toContain('User ID');
+      }
     });
   });
 
@@ -107,7 +114,8 @@ describe('Workflow Entity', () => {
       });
 
       expect(nodeResult.success).toBe(true);
-      const node = nodeResult.data!;
+      if (!nodeResult.success) throw new Error('Failed to create node');
+      const node = nodeResult.data;
 
       const result = workflow.addNode(node);
 
@@ -125,13 +133,16 @@ describe('Workflow Entity', () => {
         data: {},
       });
 
-      const node = nodeResult.data!;
+      if (!nodeResult.success) throw new Error('Failed to create node');
+      const node = nodeResult.data;
       workflow.addNode(node);
 
       const result = workflow.addNode(node);
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('already exists');
+      if (!result.success) {
+        expect(result.error).toContain('already exists');
+      }
       expect(workflow.nodes).toHaveLength(1);
     });
   });
@@ -146,7 +157,8 @@ describe('Workflow Entity', () => {
         data: {},
       });
 
-      const node = nodeResult.data!;
+      if (!nodeResult.success) throw new Error('Failed to create node');
+      const node = nodeResult.data;
       workflow.addNode(node);
 
       const result = workflow.removeNode(node.id);
@@ -160,7 +172,9 @@ describe('Workflow Entity', () => {
       const result = workflow.removeNode(nonExistentId);
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('not found');
+      if (!result.success) {
+        expect(result.error).toContain('not found');
+      }
     });
 
     it('should remove connected edges when removing node', () => {
@@ -180,8 +194,10 @@ describe('Workflow Entity', () => {
         data: {},
       });
 
-      const node1 = node1Result.data!;
-      const node2 = node2Result.data!;
+      if (!node1Result.success) throw new Error('Failed to create node1');
+      if (!node2Result.success) throw new Error('Failed to create node2');
+      const node1 = node1Result.data;
+      const node2 = node2Result.data;
 
       workflow.addNode(node1);
       workflow.addNode(node2);
@@ -191,9 +207,12 @@ describe('Workflow Entity', () => {
         sourceNodeId: node1.id.getValue(),
         targetNodeId: node2.id.getValue(),
         workflowId: workflow.id.getValue(),
+        sourceHandle: 'main',
+        targetHandle: 'main',
       });
 
-      workflow.addEdge(edgeResult.data!);
+      if (!edgeResult.success) throw new Error('Failed to create edge');
+      workflow.addEdge(edgeResult.data);
 
       expect(workflow.edges).toHaveLength(1);
 
@@ -226,8 +245,10 @@ describe('Workflow Entity', () => {
         data: {},
       });
 
-      node1 = node1Result.data!;
-      node2 = node2Result.data!;
+      if (!node1Result.success) throw new Error('Failed to create node1');
+      if (!node2Result.success) throw new Error('Failed to create node2');
+      node1 = node1Result.data;
+      node2 = node2Result.data;
 
       workflow.addNode(node1);
       workflow.addNode(node2);
@@ -238,9 +259,12 @@ describe('Workflow Entity', () => {
         sourceNodeId: node1.id.getValue(),
         targetNodeId: node2.id.getValue(),
         workflowId: workflow.id.getValue(),
+        sourceHandle: 'main',
+        targetHandle: 'main',
       });
 
-      const edge = edgeResult.data!;
+      if (!edgeResult.success) throw new Error('Failed to create edge');
+      const edge = edgeResult.data;
       const result = workflow.addEdge(edge);
 
       expect(result.success).toBe(true);
@@ -252,15 +276,20 @@ describe('Workflow Entity', () => {
         sourceNodeId: node1.id.getValue(),
         targetNodeId: node2.id.getValue(),
         workflowId: workflow.id.getValue(),
+        sourceHandle: 'main',
+        targetHandle: 'main',
       });
 
-      const edge = edgeResult.data!;
+      if (!edgeResult.success) throw new Error('Failed to create edge');
+      const edge = edgeResult.data;
       workflow.addEdge(edge);
 
       const result = workflow.addEdge(edge);
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('already exists');
+      if (!result.success) {
+        expect(result.error).toContain('already exists');
+      }
     });
 
     it('should fail when source node does not exist', () => {
@@ -269,13 +298,18 @@ describe('Workflow Entity', () => {
         sourceNodeId: nonExistentId.getValue(),
         targetNodeId: node2.id.getValue(),
         workflowId: workflow.id.getValue(),
+        sourceHandle: 'main',
+        targetHandle: 'main',
       });
 
-      const edge = edgeResult.data!;
+      if (!edgeResult.success) throw new Error('Failed to create edge');
+      const edge = edgeResult.data;
       const result = workflow.addEdge(edge);
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('Source node');
+      if (!result.success) {
+        expect(result.error).toContain('Source node');
+      }
     });
 
     it('should fail when target node does not exist', () => {
@@ -284,13 +318,18 @@ describe('Workflow Entity', () => {
         sourceNodeId: node1.id.getValue(),
         targetNodeId: nonExistentId.getValue(),
         workflowId: workflow.id.getValue(),
+        sourceHandle: 'main',
+        targetHandle: 'main',
       });
 
-      const edge = edgeResult.data!;
+      if (!edgeResult.success) throw new Error('Failed to create edge');
+      const edge = edgeResult.data;
       const result = workflow.addEdge(edge);
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('Target node');
+      if (!result.success) {
+        expect(result.error).toContain('Target node');
+      }
     });
   });
 
@@ -315,8 +354,10 @@ describe('Workflow Entity', () => {
         data: {},
       });
 
-      node1 = node1Result.data!;
-      node2 = node2Result.data!;
+      if (!node1Result.success) throw new Error('Failed to create node1');
+      if (!node2Result.success) throw new Error('Failed to create node2');
+      node1 = node1Result.data;
+      node2 = node2Result.data;
 
       workflow.addNode(node1);
       workflow.addNode(node2);
@@ -325,9 +366,12 @@ describe('Workflow Entity', () => {
         sourceNodeId: node1.id.getValue(),
         targetNodeId: node2.id.getValue(),
         workflowId: workflow.id.getValue(),
+        sourceHandle: 'main',
+        targetHandle: 'main',
       });
 
-      edge = edgeResult.data!;
+      if (!edgeResult.success) throw new Error('Failed to create edge');
+      edge = edgeResult.data;
       workflow.addEdge(edge);
     });
 
@@ -343,7 +387,9 @@ describe('Workflow Entity', () => {
       const result = workflow.removeEdge(nonExistentId);
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('not found');
+      if (!result.success) {
+        expect(result.error).toContain('not found');
+      }
     });
   });
 
@@ -357,7 +403,8 @@ describe('Workflow Entity', () => {
         data: {},
       });
 
-      const node = nodeResult.data!;
+      if (!nodeResult.success) throw new Error('Failed to create node');
+      const node = nodeResult.data;
       workflow.addNode(node);
 
       expect(workflow.hasNode(node.id)).toBe(true);
@@ -379,7 +426,8 @@ describe('Workflow Entity', () => {
         data: {},
       });
 
-      const node = nodeResult.data!;
+      if (!nodeResult.success) throw new Error('Failed to create node');
+      const node = nodeResult.data;
       workflow.addNode(node);
 
       const foundNode = workflow.getNodeById(node.id);

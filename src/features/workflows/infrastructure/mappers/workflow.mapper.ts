@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
   Workflow as PrismaWorkflow,
   Node as PrismaNode,
@@ -161,7 +162,7 @@ export class WorkflowMapper {
       name: string;
       type: NodeType;
       position: Position;
-      data: Record<string, unknown>;
+      data: Record<any, any>;
     }>;
     connections: Array<{
       id: string;

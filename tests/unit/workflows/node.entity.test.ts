@@ -13,9 +13,11 @@ describe('Node Entity', () => {
       });
 
       expect(result.success).toBe(true);
-      expect(result.data?.type).toBe(NodeType.INITIAL);
-      expect(result.data?.name).toBe('Start Node');
-      expect(result.data?.position).toEqual({ x: 100, y: 200 });
+      if (result.success) {
+        expect(result.data.type).toBe(NodeType.INITIAL);
+        expect(result.data.name).toBe('Start Node');
+        expect(result.data.position).toEqual({ x: 100, y: 200 });
+      }
     });
 
     it('should fail with empty name', () => {
@@ -28,7 +30,9 @@ describe('Node Entity', () => {
       });
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('name');
+      if (!result.success) {
+        expect(result.error).toContain('name');
+      }
     });
 
     it('should fail with empty workflow ID', () => {
@@ -41,7 +45,9 @@ describe('Node Entity', () => {
       });
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('Workflow ID');
+      if (!result.success) {
+        expect(result.error).toContain('Workflow ID');
+      }
     });
   });
 
@@ -55,7 +61,8 @@ describe('Node Entity', () => {
         data: {},
       });
 
-      const node = nodeResult.data!;
+      if (!nodeResult.success) throw new Error('Failed to create node');
+      const node = nodeResult.data;
       const result = node.updatePosition({ x: 50, y: 100 });
 
       expect(result.success).toBe(true);
@@ -71,7 +78,8 @@ describe('Node Entity', () => {
         data: {},
       });
 
-      const node = nodeResult.data!;
+      if (!nodeResult.success) throw new Error('Failed to create node');
+      const node = nodeResult.data;
       const result = node.updatePosition({ x: -10, y: 20 });
 
       expect(result.success).toBe(false);
@@ -89,7 +97,8 @@ describe('Node Entity', () => {
         data: { url: 'https://api.example.com' },
       });
 
-      const node = nodeResult.data!;
+      if (!nodeResult.success) throw new Error('Failed to create node');
+      const node = nodeResult.data;
       node.updateData({ url: 'https://newapi.example.com', method: 'POST' });
 
       expect(node.data).toEqual({ url: 'https://newapi.example.com', method: 'POST' });
@@ -104,7 +113,8 @@ describe('Node Entity', () => {
         data: { url: 'https://api.example.com', timeout: 5000 },
       });
 
-      const node = nodeResult.data!;
+      if (!nodeResult.success) throw new Error('Failed to create node');
+      const node = nodeResult.data;
       node.mergeData({ method: 'POST' });
 
       expect(node.data).toEqual({
@@ -125,7 +135,8 @@ describe('Node Entity', () => {
         data: {},
       });
 
-      const node = nodeResult.data!;
+      if (!nodeResult.success) throw new Error('Failed to create node');
+      const node = nodeResult.data;
       const result = node.rename('New Start');
 
       expect(result.success).toBe(true);
@@ -141,7 +152,8 @@ describe('Node Entity', () => {
         data: {},
       });
 
-      const node = nodeResult.data!;
+      if (!nodeResult.success) throw new Error('Failed to create node');
+      const node = nodeResult.data;
       const result = node.rename('');
 
       expect(result.success).toBe(false);

@@ -1,4 +1,5 @@
-import { workflowsRouter } from '@/modules/workflows';
+// New architecture workflows router
+import { workflowsRouter } from '@/src/features/workflows/api';
 import { createTRPCRouter } from '../init';
 import { exampleRouter } from '@/trpc/routers/example-router';
 

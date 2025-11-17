@@ -6,7 +6,6 @@ export { WorkflowSearch } from './ui/workflow-search';
 export { WorkflowPagination } from './ui/workflow-pagination';
 export { WorkflowEmpty } from './ui/workflow-empty';
 export { WorkflowError, WorkflowLoading } from './ui/workflow-status';
-export { WorkflowModule } from './workflow-module';
 export { WorkflowsModule } from './workflows-module';
 
 // Re-export containers
@@ -18,7 +17,6 @@ export {
   useSuspenseWorkflow,
   useCreateWorkflow,
   useUpdateWorkflow,
-  useDeleteWorkflow,
 } from './hooks/use-workflows';
 export { useWorkflowParams } from './hooks/use-workflow-params';
 

@@ -3,6 +3,7 @@ import type {
   Node as PrismaNode,
   Connection,
 } from '@/prisma/generated/prisma/client';
+import type { Prisma } from '@/prisma/generated/prisma/client';
 import { Workflow } from '../../domain/entities/workflow.entity';
 import { Node, NodeType, Position } from '../../domain/entities/node.entity';
 import { Edge } from '../../domain/entities/edge.entity';
@@ -100,7 +101,7 @@ export class WorkflowMapper {
         name: string;
         type: NodeType;
         position: Position;
-        data: Record<string, unknown>;
+        data: Prisma.InputJsonValue;
       }>;
     };
     connection: {
@@ -123,7 +124,7 @@ export class WorkflowMapper {
           name: node.name,
           type: node.type,
           position: node.position,
-          data: node.data,
+          data: node.data as Prisma.InputJsonValue,
         })),
       },
       connection: {

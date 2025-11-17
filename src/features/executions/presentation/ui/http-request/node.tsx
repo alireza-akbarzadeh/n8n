@@ -1,6 +1,6 @@
 'use client';
 
-import { Method } from '@/types';
+import { Method } from '@/core/types';
 import { Node, NodeProps, useReactFlow } from '@xyflow/react';
 import * as React from 'react';
 import { BaseExecutionNode } from '../base-execution-node';

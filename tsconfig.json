@@ -32,7 +32,8 @@
       "@/inngest/*": ["./src/inngest/*"],
       "@/modules/*": ["./src/features/*"],
       "@/trpc/*": ["./src/trpc/*"],
-      "@/types/*": ["./src/core/types/*"]
+      "@/types/*": ["./src/core/types/*"],
+      "@/prisma/*": ["./prisma/*"]
     }
   },
   "include": [

@@ -8,3 +8,6 @@ export const baseQueryParams = {
     .withOptions({ clearOnDefault: true }),
   search: parseAsString.withDefault('').withOptions({ clearOnDefault: true }),
 };
+
+// Alias for backward compatibility
+export const WORKFLOW_PARAMS = baseQueryParams;

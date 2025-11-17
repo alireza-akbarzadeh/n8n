@@ -1,10 +1,16 @@
 import { EnityItem } from '@/components/entities/entity-item';
-import { Workflow } from '@/prisma/generated/prisma/client';
 import { formatDistanceToNow } from 'date-fns';
 import { WorkflowIcon } from 'lucide-react';
 import { useRemoveWorkflow } from '../hooks/use-workflows';
 
-export const WorkflowItem = ({ data }: { data: Workflow }) => {
+type WorkflowItemData = {
+  id: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export const WorkflowItem = ({ data }: { data: WorkflowItemData }) => {
   const removeWorkflow = useRemoveWorkflow();
   const handleRemoveWorkflow = () => {
     removeWorkflow.mutate({ id: data.id });

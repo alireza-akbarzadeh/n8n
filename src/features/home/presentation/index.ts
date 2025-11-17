@@ -1,2 +1,2 @@
 // Re-export home components
-export { HomeModule } from './home-modules';
+export { ClientGreeting } from './home-modules';

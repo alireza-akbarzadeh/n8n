@@ -5,6 +5,9 @@ export const PAGINAITION = {
   MIN_PAGE_SIZE: 1,
 };
 
+// Alias for backward compatibility
+export const PAGINATION = PAGINAITION;
+
 export const HTTP_STATUS = {
   // ✅ Success
   OK: 200,

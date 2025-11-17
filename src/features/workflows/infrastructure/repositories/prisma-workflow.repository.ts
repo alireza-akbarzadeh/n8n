@@ -11,7 +11,7 @@ import type {
   Workflow as PrismaWorkflow,
   Node as PrismaNode,
   Connection,
-} from '@/prisma/generated/prisma';
+} from '@/prisma/generated/prisma/client';
 
 /**
  * Prisma Workflow Repository

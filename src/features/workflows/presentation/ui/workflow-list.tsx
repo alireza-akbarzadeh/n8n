@@ -26,3 +26,6 @@ export const EntityList = <T,>(props: EntityListProps<T>) => {
     </div>
   );
 };
+
+// Alias for backward compatibility
+export const WorkflowList = EntityList;

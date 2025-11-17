@@ -2,6 +2,24 @@
 
 This project includes comprehensive health check endpoints for monitoring application status, database connectivity, and system resources.
 
+## 🎨 Visual Dashboard
+
+**Endpoint:** `GET /api/health/dashboard`
+
+A beautiful, interactive web dashboard for monitoring all health endpoints in real-time.
+
+**Features:**
+
+- ✅ Real-time status updates for all endpoints
+- 🔄 Manual and auto-refresh (every 5 seconds)
+- 📊 Visual status indicators (healthy, degraded, unhealthy)
+- 📈 Key metrics display (uptime, response times, memory usage)
+- 🎨 Modern, responsive design
+
+**Access:** Open [http://localhost:3000/api/health/dashboard](http://localhost:3000/api/health/dashboard) in your browser
+
+---
+
 ## Endpoints
 
 ### 1. Basic Health Check
@@ -417,6 +435,36 @@ If response times are consistently high:
 2. Review database connection pool settings
 3. Monitor server resources (CPU, memory)
 4. Consider adding database indexes
+
+---
+
+## Quick Access
+
+### Development
+
+```bash
+# Start the development server
+pnpm dev
+
+# Open endpoints in browser:
+# 🎨 Dashboard:      http://localhost:3000/api/health/dashboard
+# 📊 Basic Health:   http://localhost:3000/api/health
+# 🔍 Detailed:       http://localhost:3000/api/health/detailed
+# ❤️ Liveness:       http://localhost:3000/api/health/live
+# ✅ Readiness:      http://localhost:3000/api/health/ready
+```
+
+### Browser Access
+
+1. **Dashboard** (Recommended): [http://localhost:3000/api/health/dashboard](http://localhost:3000/api/health/dashboard)
+
+   - Interactive UI with real-time updates
+   - Auto-refresh capability
+   - Visual status indicators
+
+2. **JSON Endpoints**: Access directly for API integration
+   - [http://localhost:3000/api/health](http://localhost:3000/api/health)
+   - [http://localhost:3000/api/health/detailed](http://localhost:3000/api/health/detailed)
 
 ---
 

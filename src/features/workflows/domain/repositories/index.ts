@@ -1,1 +1,1 @@
-export { IWorkflowRepository, type WorkflowSearchParams } from './workflow.repository.interface';
+export type { IWorkflowRepository, WorkflowSearchParams } from './workflow.repository.interface';

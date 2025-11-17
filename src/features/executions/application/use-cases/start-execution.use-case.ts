@@ -1,7 +1,7 @@
 import { IExecutionRepository } from '../../domain/repositories/execution.repository.interface';
 import { Execution, ExecutionMode, ExecutionStatus } from '../../domain/entities/execution.entity';
 import { Result } from '@/core/types/common.types';
-import { logger } from '@/lib/logger';
+import logger from '@/src/shared/infrastructure/logger/logger';
 
 export interface StartExecutionInput {
   workflowId: string;

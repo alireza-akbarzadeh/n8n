@@ -2,13 +2,13 @@ import { initTRPC, TRPCError } from '@trpc/server';
 import superjson from 'superjson';
 import { z, ZodError } from 'zod';
 
-import prisma from '@/lib/db';
-import { auth } from '@/lib/auth';
+import prisma from '@/shared/infrastructure/database/db';
+import { auth } from '@/core/auth/auth';
 import { headers } from 'next/headers';
-import { polarClient } from '@/lib/polar';
-import { getOrCreateRequestId } from '@/lib/request-id';
-import { logger } from '@/lib/logger';
-import { checkRateLimit } from '@/lib/rate-limit';
+import { polarClient } from '@/shared/application/services/polar';
+import { getOrCreateRequestId } from '@/shared/infrastructure/request-id';
+import { logger } from '@/shared/infrastructure/logger/logger';
+import { checkRateLimit } from '@/core/api/rate-limit';
 
 export type TRPCContext = {
   db: typeof prisma;

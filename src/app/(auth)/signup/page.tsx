@@ -1,6 +1,6 @@
+import { requireUnAuth } from '@/src/core/auth';
+import { RegisterForm } from '@/src/features/auth';
 import React from 'react';
-import { RegisterForm } from '@/modules/auth';
-import { requireUnAuth } from '@/actions/auth';
 
 export default async function RegisterPage() {
   await requireUnAuth();

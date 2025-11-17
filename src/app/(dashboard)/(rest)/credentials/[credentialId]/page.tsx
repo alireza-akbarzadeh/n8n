@@ -1,5 +1,4 @@
-import { requireAuth } from '@/actions/auth';
-import React from 'react';
+import { requireAuth } from '@/src/core/auth';
 
 interface PageProps {
   params: Promise<{ credentialId: string }>;

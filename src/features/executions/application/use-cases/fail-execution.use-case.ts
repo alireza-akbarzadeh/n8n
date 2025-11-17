@@ -1,7 +1,7 @@
 import { IExecutionRepository } from '../../domain/repositories/execution.repository.interface';
 import { ExecutionNodeResults } from '../../domain/entities/execution.entity';
 import { Result } from '@/core/types/common.types';
-import { logger } from '@/lib/logger';
+import logger from '@/src/shared/infrastructure/logger/logger';
 
 export interface FailExecutionInput {
   executionId: string;

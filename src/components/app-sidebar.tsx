@@ -22,9 +22,9 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import { authClient } from '@/lib/auth-client';
-import { SignOutButton } from '@/modules/auth/ui/sign-out-button';
-import { useHasActiveSubscription } from '@/modules/subscription';
+import { authClient } from '@/core/auth/auth-client';
+import { SignOutButton } from '@/features/auth/presentation/ui/sign-out-button';
+import { useHasActiveSubscription } from '@/features/subscription';
 
 const menuItems = [
   {

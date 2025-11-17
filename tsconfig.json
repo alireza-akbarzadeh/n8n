@@ -25,14 +25,14 @@
       "@/core/*": ["./src/core/*"],
       "@/app/*": ["./src/app/*"],
       "@/components/*": ["./src/components/*"],
-      "@/lib/*": ["./src/lib/*"],
-      "@/actions/*": ["./src/actions/*"],
-      "@/config/*": ["./src/config/*"],
-      "@/hooks/*": ["./src/hooks/*"],
+      "@/lib/*": ["./src/shared/infrastructure/*", "./src/shared/ui/utils/*", "./src/core/auth/*", "./src/core/api/*", "./src/shared/application/services/*"],
+      "@/actions/*": ["./src/core/auth/*"],
+      "@/config/*": ["./src/core/config/*"],
+      "@/hooks/*": ["./src/shared/ui/hooks/*"],
       "@/inngest/*": ["./src/inngest/*"],
-      "@/modules/*": ["./src/modules/*"],
+      "@/modules/*": ["./src/features/*"],
       "@/trpc/*": ["./src/trpc/*"],
-      "@/types/*": ["./src/types/*"]
+      "@/types/*": ["./src/core/types/*"]
     }
   },
   "include": [

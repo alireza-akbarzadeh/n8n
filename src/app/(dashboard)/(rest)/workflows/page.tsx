@@ -1,7 +1,5 @@
-import { requireAuth } from '@/actions/auth';
-import { prefetchWorflows } from '@/modules/workflows/server/prefetch';
 import {
-  baseLoaderParams,
+  prefetchWorflows,
   WorkflowError,
   WorkflowLoading,
   WorkflowsModule,
@@ -12,7 +10,9 @@ import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { SearchParams } from 'nuqs/server';
-import { WorkflowContainer } from '@/modules/workflows/containers/workflow-containers';
+import { requireAuth } from '@/src/core/auth';
+import { baseLoaderParams } from '@/src/features/workflows/presentation/server/load-params';
+import { WorkflowContainer } from '@/src//features/workflows';
 
 type PropsPage = {
   searchParams: Promise<SearchParams>;

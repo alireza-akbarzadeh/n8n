@@ -12,7 +12,7 @@
 import { z } from 'zod';
 import { createTRPCRouter, protectedProcedure, publicProcedure } from '../init';
 import { auditMiddleware } from '../middleware';
-import { logger } from '@/lib/logger';
+import { logger } from '@/shared/infrastructure/logger/logger';
 
 /**
  * Example router showing different usage patterns

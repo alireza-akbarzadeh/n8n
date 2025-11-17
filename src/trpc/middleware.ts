@@ -1,7 +1,7 @@
 import { TRPCError } from '@trpc/server';
 import type { AuditAction, EntityType } from '@/prisma/generated/prisma/enums';
-import { createAuditLog } from '@/lib/audit';
-import { logger } from '@/lib/logger';
+import { createAuditLog } from '@/shared/application/services/audit';
+import { logger } from '@/shared/infrastructure/logger/logger';
 import { protectedProcedure } from './init';
 
 /**

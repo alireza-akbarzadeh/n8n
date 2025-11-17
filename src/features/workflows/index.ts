@@ -9,3 +9,6 @@ export * from './infrastructure';
 
 // API
 export * from './api';
+
+// Presentation
+export * from './presentation';

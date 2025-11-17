@@ -1,4 +1,4 @@
-import { requireAuth } from '@/actions/auth';
+import { requireAuth } from '@/src/core/auth';
 import React from 'react';
 
 export default async function Executions() {

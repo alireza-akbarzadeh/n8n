@@ -19,8 +19,8 @@ describe('Health Check API', () => {
   });
 
   it('returns healthy status when database is accessible', async () => {
-    const prisma = await import('@/lib/db');
-    vi.mocked(prisma.default.$queryRaw).mockResolvedValueOnce([{ '?column?': 1 }]);
+    const prisma = await import('@/src/shared/infrastructure');
+    vi.mocked(prisma.$queryRaw).mockResolvedValueOnce([{ '?column?': 1 }]);
 
     const response = await GET();
     const data = await response.json();

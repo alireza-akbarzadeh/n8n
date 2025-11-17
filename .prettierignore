@@ -1,0 +1,42 @@
+# Prettier ignore file
+
+# Dependencies
+node_modules
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Build outputs
+.next
+out
+dist
+build
+coverage
+
+# Generated files
+prisma/generated
+*.d.ts
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Markdown files (optional - uncomment if you want to skip)
+# *.md
+# README.md
+# CHANGELOG.md
+
+# Public assets
+public/icons/**
+public/images/**
+
+# Test snapshots
+**/__snapshots__/**
+
+# Configuration files that should remain as-is
+tsconfig.json
+.prettierrc.json

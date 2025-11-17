@@ -1,5 +1,5 @@
-import { workflowsRouter } from "@/modules/workflows";
-import { createTRPCRouter } from "../init";
+import { workflowsRouter } from '@/modules/workflows';
+import { createTRPCRouter } from '../init';
 
 export const appRouter = createTRPCRouter({
   workflows: workflowsRouter,

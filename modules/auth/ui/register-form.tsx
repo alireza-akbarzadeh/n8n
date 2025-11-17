@@ -1,190 +1,187 @@
-"use client";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {useForm} from "react-hook-form";
-import {z} from "zod";
-import {Button} from "@/components/ui/button";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import React from "react";
-import {Input} from "@/components/ui/input";
-import {useRouter} from "next/navigation";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import {signUp} from "@/lib/auth-client";
-import Link from "next/link";
-import {toast} from "sonner";
-import {SocialLogin} from "@/modules/auth/ui/social-login";
-import {PasswordInput} from "@/modules/auth/ui/password-input";
-import Image from "next/image";
+'use client';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import React from 'react';
+import { Input } from '@/components/ui/input';
+import { useRouter } from 'next/navigation';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { signUp } from '@/lib/auth-client';
+import Link from 'next/link';
+import { toast } from 'sonner';
+import { SocialLogin } from '@/modules/auth/ui/social-login';
+import { PasswordInput } from '@/modules/auth/ui/password-input';
+import Image from 'next/image';
 
 const registerSchema = z
-    .object({
-        email: z.string().email("Please enter a valid email"),
-        name: z
-            .string()
-            .min(2, "Name must be at least 2 characters")
-            .max(20, "Max characters for name is 20"),
-        password: z
-            .string()
-            .min(6, "Password must be at least 6 characters"),
-        confirmPassword: z.string().min(1, "Confirm your password")
-    })
-    .refine((values) => values.password === values.confirmPassword, {
-        message: "Passwords do not match",
-        path: ["confirmPassword"]
-    });
+  .object({
+    email: z.string().email('Please enter a valid email'),
+    name: z
+      .string()
+      .min(2, 'Name must be at least 2 characters')
+      .max(20, 'Max characters for name is 20'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
+    confirmPassword: z.string().min(1, 'Confirm your password'),
+  })
+  .refine((values) => values.password === values.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
+  });
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export function RegisterForm() {
-    const router = useRouter();
-    const form = useForm<RegisterFormValues>({
-        resolver: zodResolver(registerSchema),
-        defaultValues: {
-            email: "",
-            name: "",
-            password: "",
-            confirmPassword: ""
-        }
+  const router = useRouter();
+  const form = useForm<RegisterFormValues>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      email: '',
+      name: '',
+      password: '',
+      confirmPassword: '',
+    },
+  });
+
+  async function onSubmit(values: RegisterFormValues) {
+    const payload = {
+      email: values.email.trim(),
+      password: values.password.trim(),
+      name: values.name.trim(),
+      callbackURL: '/',
+    };
+
+    await signUp.email(payload, {
+      onSuccess: () => {
+        toast.success('Account created — check your email!');
+        router.push('/');
+      },
+      onError: (ctx) => {
+        toast.error(ctx.error.message);
+      },
     });
+  }
 
-    async function onSubmit(values: RegisterFormValues) {
-        const payload = {
-            email: values.email.trim(),
-            password: values.password.trim(),
-            name: values.name.trim(),
-            callbackURL: "/"
-        };
+  const isPending = form.formState.isSubmitting;
 
-        await signUp.email(payload, {
-            onSuccess: () => {
-                toast.success("Account created — check your email!");
-                router.push("/");
-            },
-            onError: (ctx) => {
-                toast.error(ctx.error.message);
-            }
-        });
-    }
+  return (
+    <div className="flex flex-col gap-6">
+      <Card>
+        <CardHeader>
+          <Link href="/" className="flex items-center justify-center gap-1 py-3">
+            <Image src="/images/logo.svg" alt="logo" width={30} height={30} />
+            <span className="text-base">Node Base</span>
+          </Link>
+          <CardTitle>Create an account</CardTitle>
+          <CardDescription>Start your journey with us</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
+              <SocialLogin />
 
-    const isPending = form.formState.isSubmitting;
-
-    return (
-        <div className="flex flex-col gap-6">
-            <Card>
-                <CardHeader>
-                    <Link href='/' className='flex gap-1 items-center justify-center py-3'>
-                        <Image src='/images/logo.svg' alt='logo' width={30} height={30}/>
-                        <span className='text-base'>Node Base</span>
-                    </Link>
-                    <CardTitle>Create an account</CardTitle>
-                    <CardDescription>Start your journey with us</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <Form {...form}>
-                        <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
-
-                            <SocialLogin/>
-
-                            <div className="relative flex items-center my-4">
-                                <div className="flex-grow border-t"/>
-                                <span className="mx-3 text-xs text-muted-foreground uppercase tracking-wide">
+              <div className="relative my-4 flex items-center">
+                <div className="flex-grow border-t" />
+                <span className="text-muted-foreground mx-3 text-xs tracking-wide uppercase">
                   or continue with email
                 </span>
-                                <div className="flex-grow border-t"/>
-                            </div>
+                <div className="flex-grow border-t" />
+              </div>
 
-                            <FormField
-                                control={form.control}
-                                name="name"
-                                render={({field}) => (
-                                    <FormItem>
-                                        <FormLabel className="text-sm">Name</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                className="h-9 bg-background"
-                                                placeholder="Alireza Akbarzadeh"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage className="text-xs"/>
-                                    </FormItem>
-                                )}
-                            />
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm">Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="bg-background h-9"
+                        placeholder="Alireza Akbarzadeh"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className="text-xs" />
+                  </FormItem>
+                )}
+              />
 
-                            <FormField
-                                control={form.control}
-                                name="email"
-                                render={({field}) => (
-                                    <FormItem>
-                                        <FormLabel className="text-sm">Email</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                className="h-9 bg-background"
-                                                placeholder="devtools@gmail.com"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage className="text-xs"/>
-                                    </FormItem>
-                                )}
-                            />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm">Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="bg-background h-9"
+                        placeholder="devtools@gmail.com"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className="text-xs" />
+                  </FormItem>
+                )}
+              />
 
-                            <FormField
-                                control={form.control}
-                                name="password"
-                                render={({field}) => (
-                                    <FormItem>
-                                        <FormLabel className="text-sm">Password</FormLabel>
-                                        <FormControl>
-                                            <PasswordInput
-                                                className="h-9 bg-background"
-                                                placeholder="********"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage className="text-xs"/>
-                                    </FormItem>
-                                )}
-                            />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm">Password</FormLabel>
+                    <FormControl>
+                      <PasswordInput
+                        className="bg-background h-9"
+                        placeholder="********"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className="text-xs" />
+                  </FormItem>
+                )}
+              />
 
-                            <FormField
-                                control={form.control}
-                                name="confirmPassword"
-                                render={({field}) => (
-                                    <FormItem>
-                                        <FormLabel className="text-sm">Confirm Password</FormLabel>
-                                        <FormControl>
-                                            <PasswordInput
-                                                className="h-9 bg-background"
-                                                placeholder="********"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage className="text-xs"/>
-                                    </FormItem>
-                                )}
-                            />
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm">Confirm Password</FormLabel>
+                    <FormControl>
+                      <PasswordInput
+                        className="bg-background h-9"
+                        placeholder="********"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className="text-xs" />
+                  </FormItem>
+                )}
+              />
 
-                            <Button
-                                isLoading={isPending}
-                                className="h-9 w-full text-sm"
-                                type="submit"
-                            >
-                                Sign Up
-                            </Button>
+              <Button isLoading={isPending} className="h-9 w-full text-sm" type="submit">
+                Sign Up
+              </Button>
 
-                            <div className="text-center text-sm">
-                                Already have an account?{" "}
-                                <Link
-                                    className="text-primary underline underline-offset-4"
-                                    href="/login"
-                                >
-                                    Login
-                                </Link>
-                            </div>
-                        </form>
-                    </Form>
-                </CardContent>
-            </Card>
-        </div>
-    );
+              <div className="text-center text-sm">
+                Already have an account?{' '}
+                <Link className="text-primary underline underline-offset-4" href="/login">
+                  Login
+                </Link>
+              </div>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
+  );
 }

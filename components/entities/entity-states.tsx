@@ -1,6 +1,6 @@
-import { Spinner } from "../ui/spinner";
+import { Spinner } from '../ui/spinner';
 
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle } from 'lucide-react';
 
 export interface StateViewProps {
   message?: string;
@@ -14,9 +14,11 @@ export const LoadingView = (props: LoadingViewProps) => {
   const { entity, message } = props;
 
   return (
-    <div className="flex-1 flex justify-center items-center h-full flex-col gap-y-4">
+    <div className="flex h-full flex-1 flex-col items-center justify-center gap-y-4">
       <Spinner />
-      {!!message && <p className="text-sm text-muted-foreground">{message || `Loading ${entity}...`}</p>}
+      {!!message && (
+        <p className="text-muted-foreground text-sm">{message || `Loading ${entity}...`}</p>
+      )}
     </div>
   );
 };
@@ -29,9 +31,9 @@ export const ErrorView = (props: ErrorViewProps) => {
   const { message } = props;
 
   return (
-    <div className="flex-1 flex justify-center items-center h-full flex-col gap-y-4">
-      <AlertTriangle className="size-6 text-primary" />
-      {!!message && <p className="text-sm text-muted-foreground">{message}</p>}
+    <div className="flex h-full flex-1 flex-col items-center justify-center gap-y-4">
+      <AlertTriangle className="text-primary size-6" />
+      {!!message && <p className="text-muted-foreground text-sm">{message}</p>}
     </div>
   );
 };

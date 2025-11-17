@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { EntityPagination } from "@/components/entities/entity-pagination";
-import { useWorkflowParams } from "../hooks/use-workflow-params";
-import { useSuspenseWorkflows } from "../hooks/use-workflows";
+import { EntityPagination } from '@/components/entities/entity-pagination';
+import { useWorkflowParams } from '../hooks/use-workflow-params';
+import { useSuspenseWorkflows } from '../hooks/use-workflows';
 
 export const WorkflowPagination = () => {
   const [params, setParams] = useWorkflowParams();

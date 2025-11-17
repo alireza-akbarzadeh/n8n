@@ -1,9 +1,12 @@
-import { BreadcrumbItem } from "@/components/ui/breadcrumb";
-import { Input } from "@/components/ui/input";
-import { Skeleton } from "@/components/ui/skeleton";
-import { normalizeName } from "@/lib/utils";
-import { useSuspenseWorkflow, useUpdateWorkflowName } from "@/modules/workflows/hooks/use-workflows";
-import React from "react";
+import { BreadcrumbItem } from '@/components/ui/breadcrumb';
+import { Input } from '@/components/ui/input';
+import { Skeleton } from '@/components/ui/skeleton';
+import { normalizeName } from '@/lib/utils';
+import {
+  useSuspenseWorkflow,
+  useUpdateWorkflowName,
+} from '@/modules/workflows/hooks/use-workflows';
+import React from 'react';
 
 export function EditorNameInput({ workflowId }: { workflowId: string }) {
   const { data: workflow } = useSuspenseWorkflow(workflowId);
@@ -41,8 +44,8 @@ export function EditorNameInput({ workflowId }: { workflowId: string }) {
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter") handleSave();
-    if (event.key === "Escape") {
+    if (event.key === 'Enter') handleSave();
+    if (event.key === 'Escape') {
       setName(workflow.data.name);
       setIsEditing(false);
     }
@@ -58,7 +61,7 @@ export function EditorNameInput({ workflowId }: { workflowId: string }) {
         onBlur={handleSave}
         onKeyDown={handleKeyDown}
         onChange={(e) => setName(e.target.value)}
-        className="h-7 px-2 max-w-[400px] transition-all"
+        className="h-7 max-w-[400px] px-2 transition-all"
         style={{
           width: `${inputWidth}ch`,
         }}
@@ -69,7 +72,7 @@ export function EditorNameInput({ workflowId }: { workflowId: string }) {
   return (
     <BreadcrumbItem
       onClick={() => setIsEditing(true)}
-      className="font-semibold cursor-pointer hover:text-foreground transition-colors"
+      className="hover:text-foreground cursor-pointer font-semibold transition-colors"
     >
       {updateWorkflow.isPending ? <Skeleton className="h-5 w-[200px]" /> : workflow.data.name}
     </BreadcrumbItem>

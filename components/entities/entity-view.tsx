@@ -1,6 +1,6 @@
-import { PackageIcon } from "lucide-react";
-import { Button } from "../ui/button";
-import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "../ui/empty";
+import { PackageIcon } from 'lucide-react';
+import { Button } from '../ui/button';
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '../ui/empty';
 
 interface EmptyViewProps {
   onNew?: () => void;

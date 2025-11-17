@@ -1,1 +1,1 @@
-export {ClientGreeting} from "./home-modules"
+export { ClientGreeting } from './home-modules';

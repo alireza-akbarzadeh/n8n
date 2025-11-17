@@ -1,1 +1,1 @@
-export { ManualTrigger } from "./ui/manual-trigger";
+export { ManualTrigger } from './ui/manual-trigger';

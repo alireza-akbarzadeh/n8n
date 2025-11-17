@@ -1,15 +1,15 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from '@/components/ui/button';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
-import { MoreVerticalIcon, TrashIcon } from "lucide-react";
-import Link from "next/link";
-import * as React from "react";
+} from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
+import { MoreVerticalIcon, TrashIcon } from 'lucide-react';
+import Link from 'next/link';
+import * as React from 'react';
 
 interface EntityItemProps {
   href: string;
@@ -36,9 +36,9 @@ export const EnityItem = (props: EntityItemProps) => {
     <Link href={href} prefetch>
       <Card
         className={cn(
-          "p-4 shadow-neutral-50 hover:shadow cursor-pointer",
-          isRemoving && "opacity-50 cursor-not-allowed",
-          className,
+          'cursor-pointer p-4 shadow-neutral-50 hover:shadow',
+          isRemoving && 'cursor-not-allowed opacity-50',
+          className
         )}
       >
         <CardHeader className="flex flex-row items-center justify-between p-0">
@@ -51,13 +51,17 @@ export const EnityItem = (props: EntityItemProps) => {
           </div>
 
           {(actions || onRemove) && (
-            <div className="flex gap-x-4 items-center">
+            <div className="flex items-center gap-x-4">
               {actions}
 
               {onRemove && (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button size="icon" variant="ghost" onClick={(event) => event.stopPropagation()}>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      onClick={(event) => event.stopPropagation()}
+                    >
                       <MoreVerticalIcon className="scale-z-4" />
                     </Button>
                   </DropdownMenuTrigger>

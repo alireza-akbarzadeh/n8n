@@ -1,5 +1,5 @@
-import { PAGINAITION } from "@/config/constants";
-import * as React from "react";
+import { PAGINAITION } from '@/config/constants';
+import * as React from 'react';
 
 interface UseEntitySearchArgs<T> {
   params: T;
@@ -15,8 +15,8 @@ export function useEntitySearch<T extends { search: string; page: number }>({
   const [localSearch, setLocalSearch] = React.useState(params.search);
 
   React.useEffect(() => {
-    if (localSearch === "" && params.search !== "") {
-      setParams({ ...params, search: "", page: PAGINAITION.DEFAULT_PAGE });
+    if (localSearch === '' && params.search !== '') {
+      setParams({ ...params, search: '', page: PAGINAITION.DEFAULT_PAGE });
       return;
     }
 

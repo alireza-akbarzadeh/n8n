@@ -1,13 +1,18 @@
-import { requireAuth } from "@/actions/auth";
-import { prefetchWorflows } from "@/modules/workflows/server/prefetch";
-import { baseLoaderParams, WorkflowError, WorkflowLoading, WorkflowsModule } from "@/modules/workflows";
-import { HydrateClient } from "@/trpc/server";
-import { Suspense } from "react";
+import { requireAuth } from '@/actions/auth';
+import { prefetchWorflows } from '@/modules/workflows/server/prefetch';
+import {
+  baseLoaderParams,
+  WorkflowError,
+  WorkflowLoading,
+  WorkflowsModule,
+} from '@/modules/workflows';
+import { HydrateClient } from '@/trpc/server';
+import { Suspense } from 'react';
 
-import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundary } from 'react-error-boundary';
 
-import { SearchParams } from "nuqs/server";
-import { WorkflowContainer } from "@/modules/workflows/containers/workflow-containers";
+import { SearchParams } from 'nuqs/server';
+import { WorkflowContainer } from '@/modules/workflows/containers/workflow-containers';
 
 type PropsPage = {
   searchParams: Promise<SearchParams>;

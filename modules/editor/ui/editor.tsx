@@ -42,8 +42,7 @@ export function Editor({ workflowId }: { workflowId: string }) {
     []
   );
   const onConnect = React.useCallback(
-    (params: Connection) =>
-      setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
+    (params: Connection) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
     []
   );
 

@@ -27,8 +27,7 @@ const triggerNodes: NodeTypeOption[] = [
   {
     type: NodeType.MANUAL_TRIGGER,
     label: 'Trigger manaually',
-    description:
-      'Runs the flow on clicking a button.Good for getting started qucikly',
+    description: 'Runs the flow on clicking a button.Good for getting started qucikly',
     icon: MousePointer,
   },
 ];
@@ -56,9 +55,7 @@ export function NodeSelector(props: NodeSelectorProps) {
     (selected: NodeTypeOption) => {
       if (selected.type === NodeType.MANUAL_TRIGGER) {
         const nodes = getNodes();
-        const hasManualTrigger = nodes.some(
-          (node) => node.type === NodeType.MANUAL_TRIGGER
-        );
+        const hasManualTrigger = nodes.some((node) => node.type === NodeType.MANUAL_TRIGGER);
 
         if (hasManualTrigger) {
           toast.error('Only one manual trigger is allowed per workflow.');
@@ -92,12 +89,10 @@ export function NodeSelector(props: NodeSelectorProps) {
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent side="right" className="w-full sm:max-w-md overflow-y-auto">
+      <SheetContent side="right" className="w-full overflow-y-auto sm:max-w-md">
         <SheetHeader>
           <SheetTitle>What triggers this workflow?</SheetTitle>
-          <SheetDescription>
-            A trigger is a step that start your workflows.
-          </SheetDescription>
+          <SheetDescription>A trigger is a step that start your workflows.</SheetDescription>
         </SheetHeader>
         <div>
           {triggerNodes.map((node) => {
@@ -106,23 +101,21 @@ export function NodeSelector(props: NodeSelectorProps) {
               <div
                 key={node.type}
                 onClick={() => handleNodeSelect(node)}
-                className="w-full justify-start h-auto py-5 px-4 rounded-none cursor-pointer border-l-2 border-transparent hover:border-l-primary"
+                className="hover:border-l-primary h-auto w-full cursor-pointer justify-start rounded-none border-l-2 border-transparent px-4 py-5"
               >
-                <div className="flex items-center gap-6 w-full overflow-hidden">
+                <div className="flex w-full items-center gap-6 overflow-hidden">
                   {typeof node.icon === 'string' ? (
                     <img
                       src={node.icon}
                       alt={node.label}
-                      className="size-5 object-contain rounded-sm"
+                      className="size-5 rounded-sm object-contain"
                     />
                   ) : (
                     <Icon className="size-5" />
                   )}
                   <div className="flex flex-col items-start gap-1 text-left">
                     <span className="font-medium">{node.label}</span>
-                    <span className="text-xs text-muted-foreground">
-                      {node.description}
-                    </span>
+                    <span className="text-muted-foreground text-xs">{node.description}</span>
                   </div>
                 </div>
               </div>
@@ -137,23 +130,21 @@ export function NodeSelector(props: NodeSelectorProps) {
               <div
                 key={node.type}
                 onClick={() => handleNodeSelect(node)}
-                className="w-full justify-start h-auto py-5 px-4 rounded-none cursor-pointer border-l-2 border-transparent hover:border-l-primary"
+                className="hover:border-l-primary h-auto w-full cursor-pointer justify-start rounded-none border-l-2 border-transparent px-4 py-5"
               >
-                <div className="flex items-center gap-6 w-full overflow-hidden">
+                <div className="flex w-full items-center gap-6 overflow-hidden">
                   {typeof node.icon === 'string' ? (
                     <img
                       src={node.icon}
                       alt={node.label}
-                      className="size-5 object-contain rounded-sm"
+                      className="size-5 rounded-sm object-contain"
                     />
                   ) : (
                     <Icon className="size-5" />
                   )}
                   <div className="flex flex-col items-start gap-1 text-left">
                     <span className="font-medium">{node.label}</span>
-                    <span className="text-xs text-muted-foreground">
-                      {node.description}
-                    </span>
+                    <span className="text-muted-foreground text-xs">{node.description}</span>
                   </div>
                 </div>
               </div>

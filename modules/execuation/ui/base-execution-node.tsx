@@ -6,10 +6,7 @@ import { WorkflowNode } from '@/components/workflow-node';
 import { BaseNode, BaseNodeContent } from '@/components/react-flow/base-node';
 import Image from 'next/image';
 import { BaseHandle } from '@/components/react-flow/base-handle';
-import {
-  NodeStatus,
-  NodeStatusIndicator,
-} from '@/components/react-flow/node-status-Indicator';
+import { NodeStatus, NodeStatusIndicator } from '@/components/react-flow/node-status-Indicator';
 
 interface BaseExecutionNodeProps extends NodeProps {
   icon: LucideIcon | string;
@@ -21,9 +18,7 @@ interface BaseExecutionNodeProps extends NodeProps {
   status?: NodeStatus;
 }
 
-export const BaseExecutionNode = React.memo(function (
-  props: BaseExecutionNodeProps
-) {
+export const BaseExecutionNode = React.memo(function (props: BaseExecutionNodeProps) {
   const {
     id,
     icon: Icon,
@@ -53,7 +48,7 @@ export const BaseExecutionNode = React.memo(function (
             {typeof Icon === 'string' ? (
               <Image src={Icon} alt={name} width={16} height={16} />
             ) : (
-              <Icon className="size-4 text-muted-foreground" />
+              <Icon className="text-muted-foreground size-4" />
             )}
             {children}
             <BaseHandle id="traget-1" type="target" position={Position.Left} />

@@ -20,11 +20,9 @@ export function ManualTriggerDialog(props: ManualTriggerDialogProps) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Manual Trigger</DialogTitle>
-          <DialogDescription>
-            Configure setting for the manual trigger node.
-          </DialogDescription>
+          <DialogDescription>Configure setting for the manual trigger node.</DialogDescription>
           <div className="py-4">
-            <div className="text-sm text-muted-foreground">
+            <div className="text-muted-foreground text-sm">
               Used to manually create a workflow, no configuration available.
             </div>
           </div>

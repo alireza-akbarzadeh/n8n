@@ -4,9 +4,9 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import Link from "next/link";
-import { EditorNameInput } from "./editor-input";
+} from '@/components/ui/breadcrumb';
+import Link from 'next/link';
+import { EditorNameInput } from './editor-input';
 
 export function EditorBreadcrump({ workflowId }: { workflowId: string }) {
   return (

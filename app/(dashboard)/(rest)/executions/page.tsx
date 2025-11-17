@@ -1,5 +1,5 @@
-import { requireAuth } from "@/actions/auth";
-import React from "react";
+import { requireAuth } from '@/actions/auth';
+import React from 'react';
 
 export default async function Executions() {
   await requireAuth();

@@ -1,4 +1,4 @@
-import { ErrorView, LoadingView } from "@/components/entities/entity-states";
+import { ErrorView, LoadingView } from '@/components/entities/entity-states';
 
 export function EditorLoading() {
   return <LoadingView message="Error loading editor" />;

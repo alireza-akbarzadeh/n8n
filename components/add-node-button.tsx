@@ -1,7 +1,7 @@
-import * as React from "react";
-import { Button } from "./ui/button";
-import { PlusIcon } from "lucide-react";
-import { NodeSelector } from "./node-selector";
+import * as React from 'react';
+import { Button } from './ui/button';
+import { PlusIcon } from 'lucide-react';
+import { NodeSelector } from './node-selector';
 
 export const AddNodeButton = React.memo(function AddNodeButton() {
   const [selectorOpen, setSelectorOpen] = React.useState<boolean>(false);
@@ -14,4 +14,4 @@ export const AddNodeButton = React.memo(function AddNodeButton() {
   );
 });
 
-AddNodeButton.displayName = "AddNodeButton";
+AddNodeButton.displayName = 'AddNodeButton';

@@ -48,12 +48,7 @@ export function EditorSaveButton({ workflowId }: { workflowId: string }) {
 
   return (
     <div className="ml-auto">
-      <Button
-        isLoading={saveWorkflow.isPending}
-        size="sm"
-        onClick={handleSave}
-        disabled={false}
-      >
+      <Button isLoading={saveWorkflow.isPending} size="sm" onClick={handleSave} disabled={false}>
         <SaveIcon className="size-4" />
         Save
       </Button>

@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useSuspenseWorkflows } from "./hooks/use-workflows";
-import { WorkflowEmpty } from "./ui/workflow-empty";
-import { WorkflowItem } from "./ui/workflow-item";
-import { EntityList } from "./ui/workflow-list";
+import { useSuspenseWorkflows } from './hooks/use-workflows';
+import { WorkflowEmpty } from './ui/workflow-empty';
+import { WorkflowItem } from './ui/workflow-item';
+import { EntityList } from './ui/workflow-list';
 
 export function WorkflowsModule() {
   const workflows = useSuspenseWorkflows();

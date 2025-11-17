@@ -1,9 +1,9 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
-import { TRPCError } from "@trpc/server";
-import type { TRPC_ERROR_CODE_KEY } from "@trpc/server/rpc";
-import { HTTP_STATUS, HttpStatusCode } from "@/config/constants";
+import { TRPCError } from '@trpc/server';
+import type { TRPC_ERROR_CODE_KEY } from '@trpc/server/rpc';
+import { HTTP_STATUS, HttpStatusCode } from '@/config/constants';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -40,7 +40,7 @@ export type InferApiResponse<T> = OkApiResult<T>;
  */
 export function ok<T>({
   data,
-  message = "Success",
+  message = 'Success',
   code = HTTP_STATUS.OK,
 }: {
   data: T; // keep required
@@ -58,7 +58,7 @@ export function ok<T>({
 /**
  * Create a failure response.
  */
-export function fail(message = "Something went wrong", error?: unknown): FailApiResult {
+export function fail(message = 'Something went wrong', error?: unknown): FailApiResult {
   return {
     success: false,
     message,
@@ -74,7 +74,7 @@ export function fail(message = "Something went wrong", error?: unknown): FailApi
 export async function dbTry<T>(
   fn: () => Promise<T>,
   msg: string,
-  code: TRPC_ERROR_CODE_KEY = "INTERNAL_SERVER_ERROR",
+  code: TRPC_ERROR_CODE_KEY = 'INTERNAL_SERVER_ERROR'
 ): Promise<T> {
   try {
     return await fn();
@@ -87,4 +87,4 @@ export async function dbTry<T>(
   }
 }
 
-export const normalizeName = (value: string) => value.trim().replace(/\s+/g, " ");
+export const normalizeName = (value: string) => value.trim().replace(/\s+/g, ' ');

@@ -1,11 +1,11 @@
-import { initTRPC, TRPCError } from "@trpc/server";
-import superjson from "superjson";
-import { z, ZodError } from "zod";
+import { initTRPC, TRPCError } from '@trpc/server';
+import superjson from 'superjson';
+import { z, ZodError } from 'zod';
 
-import prisma from "@/lib/db";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
-import { polarClient } from "@/lib/polar";
+import prisma from '@/lib/db';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import { polarClient } from '@/lib/polar';
 
 export type TRPCContext = {
   db: typeof prisma;
@@ -43,7 +43,7 @@ export const protectedProcedure = publicProcedure.use(async ({ ctx, next }) => {
   const userId = session?.session?.userId;
 
   if (!session) {
-    throw new TRPCError({ code: "UNAUTHORIZED", message: "Unauthorized" });
+    throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Unauthorized' });
   }
 
   return next({
@@ -61,7 +61,7 @@ export const premiumProcedure = protectedProcedure.use(async ({ ctx, next }) => 
     externalId: ctx.userId!,
   });
   if (!custumer.activeSubscriptions || custumer.activeSubscriptions.length === 0) {
-    throw new TRPCError({ code: "FORBIDDEN", message: "Active subscription required" });
+    throw new TRPCError({ code: 'FORBIDDEN', message: 'Active subscription required' });
   }
 
   return next({

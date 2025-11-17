@@ -10,7 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **Package Manager Migration**: Migrated from npm to pnpm
-
   - Added `packageManager` field enforcing pnpm@8.6.12
   - Added `preinstall` hook to prevent npm/yarn usage
   - Created `PNPM-MIGRATION.md` guide for developers
@@ -18,7 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added pnpm lock files to `.gitignore` (npm/yarn locks)
 
 - **Testing Infrastructure**: Comprehensive test setup with Vitest and Playwright
-
   - Unit and integration tests using **Vitest** with React Testing Library
   - End-to-end tests using **Playwright** for cross-browser testing (Chromium, Firefox, WebKit)
   - Test utilities and helpers in `tests/utils/test-utils.tsx`
@@ -26,7 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Coverage reporting with V8 provider (80% threshold across all metrics)
 
 - **Test Scripts**: New npm/pnpm scripts for running tests
-
   - `test` - Run unit tests
   - `test:watch` - Run tests in watch mode for development
   - `test:coverage` - Generate coverage reports
@@ -38,14 +35,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `test:ci` - Run all tests with coverage for CI/CD
 
 - **Example Tests**: Initial test suites to demonstrate best practices
-
   - `tests/unit/button.test.tsx` - Button component tests with user interactions
   - `tests/unit/example.test.ts` - Basic utility function tests
   - `e2e/workflows.spec.ts` - Workflows page E2E tests
   - `e2e/auth.spec.ts` - Authentication flow E2E tests
 
 - **Test Configuration Files**:
-
   - `vitest.config.ts` - Vitest configuration with coverage thresholds
   - `playwright.config.ts` - Playwright multi-browser configuration
   - `tests/setupTests.ts` - Global test setup and MSW initialization
@@ -54,7 +49,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `e2e/fixtures.ts` - Playwright custom fixtures
 
 - **CI/CD Integration**: GitHub Actions workflow for automated testing
-
   - `.github/workflows/ci.yml` - Runs linting, unit tests, and E2E tests
   - Separate jobs for linting, unit tests, and E2E tests
   - PostgreSQL service for database testing

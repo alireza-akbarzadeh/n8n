@@ -457,7 +457,6 @@ pnpm dev
 ### Browser Access
 
 1. **Dashboard** (Recommended): [http://localhost:3000/api/health/dashboard](http://localhost:3000/api/health/dashboard)
-
    - Interactive UI with real-time updates
    - Auto-refresh capability
    - Visual status indicators

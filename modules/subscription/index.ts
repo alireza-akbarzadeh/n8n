@@ -1,1 +1,1 @@
-export { useSubscription, useHasActiveSubscription } from "./hooks/useSubscription";
+export { useSubscription, useHasActiveSubscription } from './hooks/useSubscription';

@@ -6,10 +6,7 @@ import { WorkflowNode } from '@/components/workflow-node';
 import { BaseNode, BaseNodeContent } from '@/components/react-flow/base-node';
 import Image from 'next/image';
 import { BaseHandle } from '@/components/react-flow/base-handle';
-import {
-  NodeStatus,
-  NodeStatusIndicator,
-} from '@/components/react-flow/node-status-Indicator';
+import { NodeStatus, NodeStatusIndicator } from '@/components/react-flow/node-status-Indicator';
 
 interface BaseTriggerNodeProps extends NodeProps {
   icon: LucideIcon | string;
@@ -21,9 +18,7 @@ interface BaseTriggerNodeProps extends NodeProps {
   onDoubleClick?: () => void;
 }
 
-export const BaseTriggerNode = React.memo(function (
-  props: BaseTriggerNodeProps
-) {
+export const BaseTriggerNode = React.memo(function (props: BaseTriggerNodeProps) {
   const {
     id,
     icon: Icon,
@@ -48,21 +43,17 @@ export const BaseTriggerNode = React.memo(function (
       onSetting={onSetting}
       onDelete={handleDelete}
     >
-      <NodeStatusIndicator
-        className="rounded-l-2xl"
-        status={status}
-        variant="border"
-      >
+      <NodeStatusIndicator className="rounded-l-2xl" status={status} variant="border">
         <BaseNode
           status={status}
           onDoubleClick={onDoubleClick}
-          className="rounded-l-2xl relative group"
+          className="group relative rounded-l-2xl"
         >
           <BaseNodeContent>
             {typeof Icon === 'string' ? (
               <Image src={Icon} alt={name} width={16} height={16} />
             ) : (
-              <Icon className="size-4 text-muted-foreground" />
+              <Icon className="text-muted-foreground size-4" />
             )}
             {children}
             <BaseHandle id="source-1" type="source" position={Position.Right} />

@@ -1,8 +1,8 @@
-import { Editor, EditorError, EditorHeader, EditorLoading } from "@/modules/editor";
-import { prefetchWorflow } from "@/modules/workflows/server/prefetch";
-import { HydrateClient } from "@/trpc/server";
-import { Suspense } from "react";
-import { ErrorBoundary } from "react-error-boundary";
+import { Editor, EditorError, EditorHeader, EditorLoading } from '@/modules/editor';
+import { prefetchWorflow } from '@/modules/workflows/server/prefetch';
+import { HydrateClient } from '@/trpc/server';
+import { Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 
 interface PageProps {
   params: Promise<{ workflowId: string }>;

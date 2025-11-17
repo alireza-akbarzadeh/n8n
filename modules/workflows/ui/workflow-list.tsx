@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 interface EntityListProps<T> {
   items: T[];
@@ -13,13 +13,13 @@ export const EntityList = <T,>(props: EntityListProps<T>) => {
 
   if (items.length === 0 && emptyView) {
     return (
-      <div className="flex-1 flex justify-center items-center">
-        <div className="max-w-sm mx-auto">{emptyView}</div>
+      <div className="flex flex-1 items-center justify-center">
+        <div className="mx-auto max-w-sm">{emptyView}</div>
       </div>
     );
   }
   return (
-    <div className={cn("flex flex-col gap-y-4", className)}>
+    <div className={cn('flex flex-col gap-y-4', className)}>
       {items.map((item, index) => (
         <div key={getKey ? getKey(item, index) : index}>{renderItem(item, index)}</div>
       ))}

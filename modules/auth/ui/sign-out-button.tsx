@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { ReactNode, useState } from "react";
-import { Button, ButtonProps } from "@/components/ui/button";
-import { signOut } from "@/lib/auth-client";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { ReactNode, useState } from 'react';
+import { Button, ButtonProps } from '@/components/ui/button';
+import { signOut } from '@/lib/auth-client';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 interface SignOutButtonProps extends ButtonProps {
   redirectTo?: string;
   icon: ReactNode;
 }
 
-export function SignOutButton({ redirectTo = "/", icon, ...rest }: SignOutButtonProps) {
+export function SignOutButton({ redirectTo = '/', icon, ...rest }: SignOutButtonProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -22,16 +22,16 @@ export function SignOutButton({ redirectTo = "/", icon, ...rest }: SignOutButton
       await signOut({
         fetchOptions: {
           onSuccess: () => {
-            toast.success("Signed out successfully");
+            toast.success('Signed out successfully');
             router.push(redirectTo);
           },
           onError: (context) => {
-            toast.error(context.error?.message || "Failed to sign out.");
+            toast.error(context.error?.message || 'Failed to sign out.');
           },
         },
       });
     } catch {
-      toast.error("Something went wrong during logout.");
+      toast.error('Something went wrong during logout.');
     } finally {
       setLoading(false);
     }

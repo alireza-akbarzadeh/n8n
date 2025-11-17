@@ -1,13 +1,13 @@
-import UpgradeModal from "@/components/upgrade-modal";
-import { TRPCClientError } from "@trpc/client";
-import * as React from "react";
+import UpgradeModal from '@/components/upgrade-modal';
+import { TRPCClientError } from '@trpc/client';
+import * as React from 'react';
 
 export function useUpgradeModal() {
   const [open, setOpen] = React.useState(false);
 
   const handleError = (error: unknown) => {
     if (error instanceof TRPCClientError) {
-      if (error.data?.code === "FORBIDDEN") {
+      if (error.data?.code === 'FORBIDDEN') {
         setOpen(true);
         return true;
       }

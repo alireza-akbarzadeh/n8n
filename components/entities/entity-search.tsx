@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
-import { SearchIcon } from "lucide-react";
-import { Input } from "../ui/input";
+import { cn } from '@/lib/utils';
+import { SearchIcon } from 'lucide-react';
+import { Input } from '../ui/input';
 
 interface EntitySearchProps {
   value?: string;
@@ -12,19 +12,19 @@ interface EntitySearchProps {
 }
 
 export function EntitySearch({
-  value = "",
+  value = '',
   onChange,
-  placeholder = "Search...",
+  placeholder = 'Search...',
   isLoading = false,
   autoFocus = false,
   className,
 }: EntitySearchProps) {
   return (
-    <div className={cn("relative flex items-center w-full h-full max-w-xs", className)}>
+    <div className={cn('relative flex h-full w-full max-w-xs items-center', className)}>
       <SearchIcon
         className={cn(
-          "absolute left-3 size-4 text-muted-foreground transition-opacity",
-          isLoading && "opacity-50 animate-pulse",
+          'text-muted-foreground absolute left-3 size-4 transition-opacity',
+          isLoading && 'animate-pulse opacity-50'
         )}
       />
 
@@ -33,8 +33,8 @@ export function EntitySearch({
         type="search"
         placeholder={placeholder}
         className={cn(
-          "pl-9  bg-background border-border shadow-none focus-visible:ring-1",
-          "focus-visible:ring-primary transition-colors",
+          'bg-background border-border pl-9 shadow-none focus-visible:ring-1',
+          'focus-visible:ring-primary transition-colors'
         )}
         aria-label={placeholder}
         onChange={(e) => {

@@ -84,7 +84,7 @@ test.describe('Health Check Endpoints', () => {
 
     const responses = await Promise.all(promises);
 
-    responses.forEach(response => {
+    responses.forEach((response) => {
       expect(response.ok()).toBeTruthy();
     });
   });

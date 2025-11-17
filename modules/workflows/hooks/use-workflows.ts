@@ -1,10 +1,5 @@
 import { useTRPC } from '@/trpc/client';
-import {
-  useMutation,
-  useQuery,
-  useQueryClient,
-  useSuspenseQuery,
-} from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { useWorkflowParams } from './use-workflow-params';
 
@@ -46,9 +41,7 @@ export const useRemoveWorkflow = () => {
     trpc.workflows.remove.mutationOptions({
       onSuccess: async (data) => {
         toast.success(`workflow ${data.data?.name} removed successfully`);
-        await queryclient.invalidateQueries(
-          trpc.workflows.getMany.queryOptions({})
-        );
+        await queryclient.invalidateQueries(trpc.workflows.getMany.queryOptions({}));
       },
       onError: (error) => {
         toast.error(error.message);
@@ -70,9 +63,7 @@ export const useUpdateWorkflowName = () => {
     trpc.workflows.updateName.mutationOptions({
       onSuccess: async (data) => {
         toast.success(data.message);
-        await queryClient.invalidateQueries(
-          trpc.workflows.getMany.queryOptions({})
-        );
+        await queryClient.invalidateQueries(trpc.workflows.getMany.queryOptions({}));
         await queryClient.invalidateQueries(
           trpc.workflows.getOne.queryOptions({ id: data.data?.id as string })
         );
@@ -92,9 +83,7 @@ export const useUpdateWorkflow = () => {
     trpc.workflows.update.mutationOptions({
       onSuccess: async (data) => {
         toast.success(data.message);
-        await queryClient.invalidateQueries(
-          trpc.workflows.getMany.queryOptions({})
-        );
+        await queryClient.invalidateQueries(trpc.workflows.getMany.queryOptions({}));
         await queryClient.invalidateQueries(
           trpc.workflows.getOne.queryOptions({ id: data.data?.id as string })
         );

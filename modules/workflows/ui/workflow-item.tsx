@@ -1,8 +1,8 @@
-import { EnityItem } from "@/components/entities/entity-item";
-import { Workflow } from "@/prisma/generated/prisma/client";
-import { formatDistanceToNow } from "date-fns";
-import { WorkflowIcon } from "lucide-react";
-import { useRemoveWorkflow } from "../hooks/use-workflows";
+import { EnityItem } from '@/components/entities/entity-item';
+import { Workflow } from '@/prisma/generated/prisma/client';
+import { formatDistanceToNow } from 'date-fns';
+import { WorkflowIcon } from 'lucide-react';
+import { useRemoveWorkflow } from '../hooks/use-workflows';
 
 export const WorkflowItem = ({ data }: { data: Workflow }) => {
   const removeWorkflow = useRemoveWorkflow();
@@ -15,13 +15,13 @@ export const WorkflowItem = ({ data }: { data: Workflow }) => {
       title={data.name}
       subtitle={
         <>
-          Updated {formatDistanceToNow(data.updatedAt, { addSuffix: true })} Todo &bull; Create{" "}
+          Updated {formatDistanceToNow(data.updatedAt, { addSuffix: true })} Todo &bull; Create{' '}
           {formatDistanceToNow(data.createdAt, { addSuffix: true })}
         </>
       }
       image={
         <>
-          <div className="size-8 flex items-center justify-center">
+          <div className="flex size-8 items-center justify-center">
             <WorkflowIcon className="size-5" />
           </div>
         </>

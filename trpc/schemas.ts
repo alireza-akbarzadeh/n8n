@@ -1,8 +1,8 @@
-import { PAGINAITION } from "@/config/constants";
-import z from "zod";
+import { PAGINAITION } from '@/config/constants';
+import z from 'zod';
 
 export const baseQuerySchema = z.object({
-  search: z.string().default(""),
+  search: z.string().default(''),
   page: z.number().default(PAGINAITION.DEFAULT_PAGE),
   pageSize: z
     .number()
@@ -19,7 +19,7 @@ export const editorSchema = z.object({
       type: z.string().nullish(),
       position: z.object({ x: z.number(), y: z.number() }),
       data: z.record(z.string(), z.any()).optional(),
-    }),
+    })
   ),
   edges: z.array(
     z.object({
@@ -27,6 +27,6 @@ export const editorSchema = z.object({
       target: z.string(),
       sourceHandle: z.string().nullish(),
       targetHandle: z.string().nullish(),
-    }),
+    })
   ),
 });

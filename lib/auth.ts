@@ -1,12 +1,12 @@
-import { betterAuth } from "better-auth";
-import { prismaAdapter } from "better-auth/adapters/prisma";
-import prisma from "@/lib/db";
-import { checkout, polar, portal } from "@polar-sh/better-auth";
-import { polarClient } from "./polar";
+import { betterAuth } from 'better-auth';
+import { prismaAdapter } from 'better-auth/adapters/prisma';
+import prisma from '@/lib/db';
+import { checkout, polar, portal } from '@polar-sh/better-auth';
+import { polarClient } from './polar';
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
-    provider: "postgresql",
+    provider: 'postgresql',
   }),
   emailAndPassword: {
     enabled: true,
@@ -26,8 +26,8 @@ export const auth = betterAuth({
         checkout({
           products: [
             {
-              productId: "e094d173-c2cb-45bb-a81e-66d538911ac5",
-              slug: "pro",
+              productId: 'e094d173-c2cb-45bb-a81e-66d538911ac5',
+              slug: 'pro',
             },
           ],
           successUrl: process.env.POLAR_SUCCESS_URL,

@@ -27,8 +27,23 @@ import { editorAtom } from '../store/atoms';
 export function Editor({ workflowId }: { workflowId: string }) {
   const { data } = useSuspenseWorkflow(workflowId);
 
+  // Helper to build a human-readable label from handles
+  const buildLabel = React.useCallback(
+    (sourceHandle?: string | null, targetHandle?: string | null) => {
+      const s = sourceHandle && sourceHandle.length > 0 ? sourceHandle : 'main';
+      const t = targetHandle && targetHandle.length > 0 ? targetHandle : 'main';
+      return `${s} -> ${t}`;
+    },
+    []
+  );
+
   const [nodes, setNodes] = React.useState<Node[]>(data.data.nodes);
-  const [edges, setEdges] = React.useState<Edge[]>(data.data.edges);
+  const [edges, setEdges] = React.useState<Edge[]>(
+    data.data.edges.map((e) => ({
+      ...e,
+      label: e.label ?? buildLabel(e.sourceHandle, e.targetHandle),
+    }))
+  );
   const setEditor = useSetAtom(editorAtom);
 
   const onNodesChange = React.useCallback(
@@ -42,8 +57,17 @@ export function Editor({ workflowId }: { workflowId: string }) {
     []
   );
   const onConnect = React.useCallback(
-    (params: Connection) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
-    []
+    (params: Connection) =>
+      setEdges((edgesSnapshot) =>
+        addEdge(
+          {
+            ...params,
+            label: buildLabel(params.sourceHandle as string, params.targetHandle as string),
+          },
+          edgesSnapshot
+        )
+      ),
+    [buildLabel]
   );
 
   return (

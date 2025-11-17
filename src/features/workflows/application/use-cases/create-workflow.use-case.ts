@@ -37,30 +37,7 @@ export class CreateWorkflowUseCase {
     );
 
     try {
-      // Create initial node
-      const initialNodeResult = Node.create({
-        name: NodeType.INITIAL,
-        type: NodeType.INITIAL,
-        workflowId: '', // Will be set when workflow is created
-        position: { x: 0, y: 0 },
-        data: {},
-      });
-
-      if (!initialNodeResult.success) {
-        logger.error(
-          {
-            requestId,
-            userId,
-            error: initialNodeResult.error,
-          },
-          'Failed to create initial node'
-        );
-        return Result.fail(initialNodeResult.error);
-      }
-
-      const initialNode = initialNodeResult.data;
-
-      // Create workflow with initial node
+      // Step 1: Create workflow entity (no nodes yet)
       const workflowResult = Workflow.create({
         name,
         userId,
@@ -82,32 +59,29 @@ export class CreateWorkflowUseCase {
 
       const workflow = workflowResult.data;
 
-      // Update initial node's workflowId
-      const updatedInitialNodeResult = Node.create(
-        {
-          name: NodeType.INITIAL,
-          type: NodeType.INITIAL,
-          workflowId: workflow.id.getValue(),
-          position: { x: 0, y: 0 },
-          data: {},
-        },
-        initialNode.id
-      );
+      // Step 2: Create initial node with correct workflowId
+      const initialNodeResult = Node.create({
+        name: NodeType.INITIAL,
+        type: NodeType.INITIAL,
+        workflowId: workflow.id.getValue(),
+        position: { x: 0, y: 0 },
+        data: {},
+      });
 
-      if (!updatedInitialNodeResult.success) {
+      if (!initialNodeResult.success) {
         logger.error(
           {
             requestId,
             userId,
-            error: updatedInitialNodeResult.error,
+            error: initialNodeResult.error,
           },
-          'Failed to update initial node workflowId'
+          'Failed to create initial node'
         );
-        return Result.fail(updatedInitialNodeResult.error);
+        return Result.fail(initialNodeResult.error);
       }
 
-      // Add initial node to workflow
-      const addNodeResult = workflow.addNode(updatedInitialNodeResult.data);
+      // Step 3: Add initial node to workflow
+      const addNodeResult = workflow.addNode(initialNodeResult.data);
       if (!addNodeResult.success) {
         logger.error(
           {
@@ -120,7 +94,7 @@ export class CreateWorkflowUseCase {
         return Result.fail(addNodeResult.error);
       }
 
-      // Persist workflow
+      // Step 4: Persist workflow (with initial node)
       const savedWorkflow = await this.workflowRepository.create(workflow);
 
       logger.info(

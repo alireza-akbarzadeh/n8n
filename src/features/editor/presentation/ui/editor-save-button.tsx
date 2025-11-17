@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { useAtomValue } from 'jotai';
 import { SaveIcon } from 'lucide-react';
+import { toast } from 'sonner';
 import { editorAtom } from '../store/atoms';
 import { useUpdateWorkflow } from '@/features/workflows/presentation/hooks/use-workflows';
 
@@ -15,22 +16,53 @@ export function EditorSaveButton({ workflowId }: { workflowId: string }) {
     const rawNodes = editor.getNodes();
     const rawEdges = editor.getEdges();
 
-    // Clean nodes - remove React Flow internal properties
+    // Clean nodes - remove React Flow internal properties and clamp negative positions
     const nodes = rawNodes.map((node) => ({
       id: node.id,
       type: node.type,
-      position: node.position,
+      position: {
+        x: Math.max(0, node.position.x),
+        y: Math.max(0, node.position.y),
+      },
       data: node.data || {},
     }));
 
-    // Clean edges - remove React Flow internal properties
-    const edges = rawEdges.map((edge) => ({
-      id: edge.id,
-      source: edge.source,
-      target: edge.target,
-      sourceHandle: edge.sourceHandle,
-      targetHandle: edge.targetHandle,
-    }));
+    // Utility to sanitize handle names
+    function sanitizeHandleName(name?: string | null) {
+      if (!name) return undefined;
+      return name.replace(/[^a-zA-Z0-9_]/g, '_');
+    }
+
+    // Utility to create a unique key for each edge
+    function edgeKey(edge: {
+      source: string;
+      target: string;
+      sourceHandle?: string;
+      targetHandle?: string;
+    }) {
+      return `${edge.source}_${edge.target}_${sanitizeHandleName(edge.sourceHandle) || 'main'}_${sanitizeHandleName(edge.targetHandle) || 'main'}`;
+    }
+
+    // Clean and deduplicate edges
+    const edges = Array.from(
+      new Map(
+        rawEdges.map((edge) => [
+          edgeKey({
+            source: edge.source,
+            target: edge.target,
+            sourceHandle: edge.sourceHandle ?? undefined,
+            targetHandle: edge.targetHandle ?? undefined,
+          }),
+          {
+            id: edge.id,
+            source: edge.source,
+            target: edge.target,
+            sourceHandle: sanitizeHandleName(edge.sourceHandle),
+            targetHandle: sanitizeHandleName(edge.targetHandle),
+          },
+        ])
+      ).values()
+    );
 
     console.log('Saving workflow:', { id: workflowId, nodes, edges });
 
@@ -40,8 +72,11 @@ export function EditorSaveButton({ workflowId }: { workflowId: string }) {
         nodes,
         edges,
       });
-      console.log('Workflow saved successfully');
+      toast.success('Workflow saved successfully');
     } catch (error) {
+      const message =
+        error instanceof Error && error.message ? error.message : 'Failed to save workflow';
+      toast.error(message);
       console.error('Failed to save workflow:', error);
     }
   };

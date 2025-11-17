@@ -1,5 +1,5 @@
 import pino from 'pino';
-import { env, isDevelopment } from './env';
+import { env } from './env';
 
 /**
  * Structured logger using Pino
@@ -11,21 +11,15 @@ import { env, isDevelopment } from './env';
  * logger.warn({ duration: 1500 }, 'Slow query detected');
  * ```
  */
+// Disable async logging to avoid worker thread issues with Next.js/Turbopack
+// This fixes "Cannot find module 'thread-stream/lib/worker.js'" errors
 export const logger = pino({
   level: env.LOG_LEVEL || 'info',
 
-  // Pretty print in development, JSON in production
-  transport: isDevelopment
-    ? {
-        target: 'pino-pretty',
-        options: {
-          colorize: true,
-          translateTime: 'HH:MM:ss Z',
-          ignore: 'pid,hostname',
-          singleLine: false,
-        },
-      }
-    : undefined,
+  // Simple browser-friendly console output (no worker threads)
+  browser: {
+    asObject: true,
+  },
 
   // Base fields to include in every log
   base: {

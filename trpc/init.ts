@@ -63,8 +63,28 @@ export const protectedProcedure = publicProcedure.use(async ({ ctx, next }) => {
     throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Unauthorized' });
   }
 
-  // Apply rate limiting per user
-  const rateLimitResult = await checkRateLimit(userId);
+  // Apply rate limiting per user with error handling
+  let rateLimitResult;
+  try {
+    rateLimitResult = await checkRateLimit(userId);
+  } catch (error) {
+    // If rate limit check completely fails, log and allow request
+    logger.error(
+      {
+        requestId: ctx.requestId,
+        userId,
+        error: error instanceof Error ? error.message : String(error),
+      },
+      'Rate limit check failed critically, allowing request'
+    );
+    rateLimitResult = {
+      success: true,
+      limit: 10,
+      remaining: 10,
+      reset: Date.now() + 10000,
+    };
+  }
+
   if (!rateLimitResult.success) {
     logger.warn(
       {

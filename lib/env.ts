@@ -17,9 +17,15 @@ const envSchema = z.object({
     .min(32, 'BETTER_AUTH_SECRET must be at least 32 characters')
     .describe('Secret for Better Auth session encryption'),
 
-  BETTER_AUTH_URL: z.string().url().describe('Canonical URL of your site'),
+  BETTER_AUTH_URL: z.url().describe('Canonical URL of your site'),
 
   NEXT_PUBLIC_APP_NAME: z.string().default('Nodebase').describe('Application name'),
+
+  // Encryption
+  ENCRYPTION_KEY: z
+    .string()
+    .min(32, 'ENCRYPTION_KEY must be at least 32 characters')
+    .describe('Secret key for encrypting sensitive data (credentials, secrets)'),
 
   // OAuth Providers
   GITHUB_CLIENT_ID: z.string().describe('GitHub OAuth client ID').optional(),
@@ -58,11 +64,7 @@ const envSchema = z.object({
     .describe('Minimum log level'),
 
   // Rate Limiting (optional)
-  UPSTASH_REDIS_REST_URL: z
-    .string()
-    .url()
-    .describe('Upstash Redis REST URL for rate limiting')
-    .optional(),
+  UPSTASH_REDIS_REST_URL: z.url().describe('Upstash Redis REST URL for rate limiting').optional(),
 
   UPSTASH_REDIS_REST_TOKEN: z.string().describe('Upstash Redis REST token').optional(),
 

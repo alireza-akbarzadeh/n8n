@@ -17,10 +17,12 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now()) @updatedAt
 
-  posts     Post[]
-  sessions  Session[]
-  accounts  Account[]
-  workflows Workflow[]
+  posts       Post[]
+  sessions    Session[]
+  accounts    Account[]
+  workflows   Workflow[]
+  executions  Execution[]
+  credentials Credential[]
 
   @@map("user")
 }
@@ -92,12 +94,34 @@ model Workflow {
   user       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   nodes      Node[]
   connection Connection[]
+  executions Execution[]
 }
 
 enum NodeType {
+  // Triggers
   INITIAL
   MANUAL_TRIGGER
-  HTTP_REQUEST // Fixed: was HTTP_REQUSET
+  WEBHOOK_TRIGGER
+  SCHEDULE_TRIGGER
+  EMAIL_TRIGGER
+
+  // Actions
+  HTTP_REQUEST
+  SEND_EMAIL
+  DATABASE_QUERY
+
+  // Transformations
+  DATA_TRANSFORMER
+  CODE_EXECUTOR
+  FILTER
+  ROUTER
+  MERGE
+  SPLIT
+
+  // Integrations
+  GOOGLE_SHEETS
+  SLACK
+  GITHUB
 }
 
 model Node {
@@ -134,4 +158,138 @@ model Connection {
   updatedAt DateTime @updatedAt
 
   @@unique([fromNodeId, toNodeId, fromOutput, toInput])
+}
+
+model Execution {
+  id          String          @id @default(cuid())
+  workflowId  String
+  workflow    Workflow        @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  status      ExecutionStatus
+  mode        ExecutionMode   @default(MANUAL)
+  startedAt   DateTime        @default(now())
+  finishedAt  DateTime?
+  duration    Int? // milliseconds
+  error       String? // Error message if failed
+  errorStack  String? // Full stack trace
+  nodeResults Json? // Results per node: { nodeId: { success, data, error } }
+  triggerData Json? // Data that triggered the execution
+  userId      String
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  auditLogs AuditLog[]
+
+  @@index([workflowId])
+  @@index([userId])
+  @@index([status])
+  @@index([startedAt])
+  @@map("execution")
+}
+
+model Credential {
+  id         String         @id @default(cuid())
+  name       String
+  type       CredentialType
+  data       String // Encrypted JSON string
+  isActive   Boolean        @default(true)
+  lastUsedAt DateTime?
+  userId     String
+  user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+
+  auditLogs AuditLog[]
+
+  @@index([userId])
+  @@index([type])
+  @@map("credential")
+}
+
+model Webhook {
+  id           String        @id @default(cuid())
+  workflowId   String
+  path         String        @unique // e.g., /webhook/abc123
+  method       WebhookMethod @default(POST)
+  isActive     Boolean       @default(true)
+  lastTrigger  DateTime?
+  triggerCount Int           @default(0)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([workflowId])
+  @@index([isActive])
+  @@map("webhook")
+}
+
+model AuditLog {
+  id         String      @id @default(cuid())
+  action     AuditAction
+  entityType EntityType
+  entityId   String
+  userId     String?
+  metadata   Json? // Additional context (IP, user agent, changes, etc.)
+  timestamp  DateTime    @default(now())
+
+  // Optional relations
+  execution    Execution?  @relation(fields: [executionId], references: [id], onDelete: SetNull)
+  executionId  String?
+  credential   Credential? @relation(fields: [credentialId], references: [id], onDelete: SetNull)
+  credentialId String?
+
+  @@index([userId])
+  @@index([action])
+  @@index([entityType])
+  @@index([timestamp])
+  @@map("audit_log")
+}
+
+enum ExecutionStatus {
+  PENDING
+  RUNNING
+  SUCCESS
+  FAILED
+  CANCELLED
+}
+
+enum ExecutionMode {
+  MANUAL
+  WEBHOOK
+  SCHEDULE
+  TEST
+}
+
+enum CredentialType {
+  API_KEY
+  OAUTH2
+  BASIC_AUTH
+  BEARER_TOKEN
+  SSH_KEY
+  AWS_CREDENTIALS
+}
+
+enum WebhookMethod {
+  GET
+  POST
+  PUT
+  PATCH
+  DELETE
+  HEAD
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  EXECUTE
+  VIEW
+  EXPORT
+  IMPORT
+}
+
+enum EntityType {
+  WORKFLOW
+  EXECUTION
+  CREDENTIAL
+  WEBHOOK
+  USER
+  NODE
 }

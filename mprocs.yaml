@@ -1,9 +1,9 @@
 procs:
   next:
-    cmd: ['npm', 'run', 'dev']
+    cmd: ['pnpm', 'dev']
 
   db:studio:
-    cmd: ['npm', 'run', 'db:studio']
+    cmd: ['pnpm', 'db:studio']
 
   inngest:
-    cmd: ['npm', 'run', 'inngest:dev']
+    cmd: ['pnpm', 'inngest:dev']

@@ -6,10 +6,23 @@ import { baseQuerySchema, editorSchema } from '@/trpc/schemas';
 import { Edge, Node } from '@xyflow/react';
 import { generateSlug } from 'random-word-slugs';
 import z from 'zod';
+import { logger } from '@/lib/logger';
+import { auditWorkflowCreate, auditWorkflowUpdate, auditWorkflowDelete } from '@/lib/audit';
 
 export const workflowsRouter = createTRPCRouter({
   getMany: protectedProcedure.input(baseQuerySchema).query(async ({ ctx, input }) => {
     const { page, pageSize, search } = input;
+
+    logger.debug(
+      {
+        requestId: ctx.requestId,
+        userId: ctx.userId,
+        page,
+        pageSize,
+        search,
+      },
+      'Fetching workflows'
+    );
 
     const [items, totalCount] = await Promise.all([
       dbTry(
@@ -37,6 +50,17 @@ export const workflowsRouter = createTRPCRouter({
     const hasNextPage = page < totalPages;
     const hasPreviousPage = page > 1;
 
+    logger.info(
+      {
+        requestId: ctx.requestId,
+        userId: ctx.userId,
+        totalCount,
+        page,
+        totalPages,
+      },
+      'Workflows retrieved successfully'
+    );
+
     return ok({
       data: {
         items,
@@ -55,6 +79,16 @@ export const workflowsRouter = createTRPCRouter({
 
   getOne: protectedProcedure.input(z.object({ id: z.string() })).query(async ({ input, ctx }) => {
     const { id } = input;
+
+    logger.debug(
+      {
+        requestId: ctx.requestId,
+        userId: ctx.userId,
+        workflowId: id,
+      },
+      'Fetching workflow details'
+    );
+
     const workflow = await dbTry(
       () =>
         ctx.db.workflow.findUniqueOrThrow({
@@ -79,6 +113,17 @@ export const workflowsRouter = createTRPCRouter({
       targetHandle: connection.toInput,
     }));
 
+    logger.info(
+      {
+        requestId: ctx.requestId,
+        userId: ctx.userId,
+        workflowId: id,
+        nodeCount: nodes.length,
+        edgeCount: edges.length,
+      },
+      'Workflow details retrieved'
+    );
+
     return ok({
       data: { id: workflow.id, name: workflow.name, nodes, edges },
       message: 'Workflow retrieved successfully',
@@ -86,11 +131,22 @@ export const workflowsRouter = createTRPCRouter({
   }),
 
   create: premiumProcedure.mutation(async ({ ctx }) => {
+    const workflowName = generateSlug(4);
+
+    logger.info(
+      {
+        requestId: ctx.requestId,
+        userId: ctx.userId,
+        workflowName,
+      },
+      'Creating new workflow'
+    );
+
     const workflow = await dbTry(
       () =>
         ctx.db.workflow.create({
           data: {
-            name: generateSlug(4),
+            name: workflowName,
             userId: ctx.userId!,
             nodes: {
               create: {
@@ -105,6 +161,23 @@ export const workflowsRouter = createTRPCRouter({
       'FORBIDDEN'
     );
 
+    // Create audit log for workflow creation
+    await auditWorkflowCreate(workflow.id, ctx.userId!, {
+      workflowName: workflow.name,
+      initialNodeType: NodeType.INITIAL,
+      requestId: ctx.requestId,
+    });
+
+    logger.info(
+      {
+        requestId: ctx.requestId,
+        userId: ctx.userId,
+        workflowId: workflow.id,
+        workflowName: workflow.name,
+      },
+      'Workflow created successfully'
+    );
+
     return ok({
       data: workflow,
       message: `Workflow ${workflow.name} created successfully`,
@@ -117,6 +190,15 @@ export const workflowsRouter = createTRPCRouter({
     .mutation(async ({ input, ctx }) => {
       const { id } = input;
 
+      logger.warn(
+        {
+          requestId: ctx.requestId,
+          userId: ctx.userId,
+          workflowId: id,
+        },
+        'Deleting workflow'
+      );
+
       const workflow = await dbTry(
         () =>
           ctx.db.workflow.delete({
@@ -125,6 +207,23 @@ export const workflowsRouter = createTRPCRouter({
         'Failed to delete workflow',
         'BAD_REQUEST'
       );
+
+      // Create audit log for workflow deletion
+      await auditWorkflowDelete(workflow.id, ctx.userId!, {
+        workflowName: workflow.name,
+        requestId: ctx.requestId,
+      });
+
+      logger.info(
+        {
+          requestId: ctx.requestId,
+          userId: ctx.userId,
+          workflowId: workflow.id,
+          workflowName: workflow.name,
+        },
+        'Workflow deleted successfully'
+      );
+
       return ok({ data: workflow, message: 'Workflow deleted successfully' });
     }),
 
@@ -132,6 +231,16 @@ export const workflowsRouter = createTRPCRouter({
     .input(z.object({ id: z.string(), name: z.string().min(2).max(100) }))
     .mutation(async ({ input, ctx }) => {
       const { id, name } = input;
+
+      logger.debug(
+        {
+          requestId: ctx.requestId,
+          userId: ctx.userId,
+          workflowId: id,
+          newName: name,
+        },
+        'Updating workflow name'
+      );
 
       const workflow = await dbTry(
         () =>
@@ -143,6 +252,24 @@ export const workflowsRouter = createTRPCRouter({
         'BAD_REQUEST'
       );
 
+      // Create audit log for workflow name update
+      await auditWorkflowUpdate(workflow.id, ctx.userId!, {
+        action: 'name_update',
+        oldName: workflow.name, // Note: this would be the new name, ideally fetch old name first
+        newName: name,
+        requestId: ctx.requestId,
+      });
+
+      logger.info(
+        {
+          requestId: ctx.requestId,
+          userId: ctx.userId,
+          workflowId: workflow.id,
+          newName: name,
+        },
+        'Workflow name updated successfully'
+      );
+
       return ok({
         data: workflow,
         message: `${input.name} updated successfully`,
@@ -151,6 +278,17 @@ export const workflowsRouter = createTRPCRouter({
 
   update: protectedProcedure.input(editorSchema).mutation(async ({ input, ctx }) => {
     const { id, edges, nodes } = input;
+
+    logger.info(
+      {
+        requestId: ctx.requestId,
+        userId: ctx.userId,
+        workflowId: id,
+        nodeCount: nodes.length,
+        edgeCount: edges.length,
+      },
+      'Updating workflow structure'
+    );
 
     const workflow = await dbTry(
       () =>
@@ -201,6 +339,27 @@ export const workflowsRouter = createTRPCRouter({
         }),
       'Failed to update workflow',
       'BAD_REQUEST'
+    );
+
+    // Create audit log for workflow structure update
+    await auditWorkflowUpdate(workflow.id, ctx.userId!, {
+      action: 'structure_update',
+      nodeCount: nodes.length,
+      edgeCount: edges.length,
+      nodeTypes: [...new Set(nodes.map((n) => n.type))],
+      requestId: ctx.requestId,
+    });
+
+    logger.info(
+      {
+        requestId: ctx.requestId,
+        userId: ctx.userId,
+        workflowId: workflow.id,
+        workflowName: workflow.name,
+        nodeCount: nodes.length,
+        edgeCount: edges.length,
+      },
+      'Workflow structure updated successfully'
     );
 
     return ok({

@@ -1,11 +1,11 @@
-import { Button } from '@/components/ui/button';
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/src/shared/ui/components/ui/button';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/src/shared/ui/components/ui/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from '@/src/shared/ui/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import { MoreVerticalIcon, TrashIcon } from 'lucide-react';
 import Link from 'next/link';

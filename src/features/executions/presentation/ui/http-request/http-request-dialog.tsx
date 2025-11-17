@@ -6,7 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from '@/src/shared/ui/components/ui/dialog';
 import { Method } from '@/core/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -19,17 +19,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from '@/src/shared/ui/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
+} from '@/src/shared/ui/components/ui/select';
+import { Input } from '@/src/shared/ui/components/ui/input';
+import { Textarea } from '@/src/shared/ui/components/ui/textarea';
+import { Button } from '@/src/shared/ui/components/ui/button';
 import { useEffect } from 'react';
 
 const formSchema = z.object({

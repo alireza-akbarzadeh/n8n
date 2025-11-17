@@ -1,6 +1,6 @@
-import { BreadcrumbItem } from '@/components/ui/breadcrumb';
-import { Input } from '@/components/ui/input';
-import { Skeleton } from '@/components/ui/skeleton';
+import { BreadcrumbItem } from '@/src/shared/ui/components/ui/breadcrumb';
+import { Input } from '@/src/shared/ui/components/ui/input';
+import { Skeleton } from '@/src/shared/ui/components/ui/skeleton';
 import { normalizeName } from '@/shared/ui/utils/utils';
 import {
   useSuspenseWorkflow,

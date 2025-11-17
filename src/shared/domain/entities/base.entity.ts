@@ -18,14 +18,17 @@ export abstract class BaseEntity<T> {
   }
 
   get createdAt(): Date {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (this.props as any).createdAt;
   }
 
   get updatedAt(): Date {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (this.props as any).updatedAt;
   }
 
   protected touch(): void {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (this.props as any).updatedAt = new Date();
   }
 

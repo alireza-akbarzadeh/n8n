@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useState } from 'react';
-import { Button, ButtonProps } from '@/components/ui/button';
+import { Button, ButtonProps } from '@/src/shared/ui/components/ui/button';
 import { signOut } from '@/core/auth/auth-client';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';

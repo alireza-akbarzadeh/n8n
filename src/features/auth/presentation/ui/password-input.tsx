@@ -2,9 +2,9 @@
 
 import * as React from 'react';
 import { Eye, EyeOff } from 'lucide-react';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/src/shared/ui/components/ui/input';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/src/shared/ui/components/ui/button';
 
 interface PasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: boolean;

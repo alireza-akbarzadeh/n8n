@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/src/shared/ui/components/ui/button';
 import Image from 'next/image';
 import React, { useTransition } from 'react';
 import { loginWithProvider } from '@/core/auth/actions';

@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@/src/shared/ui/components/ui/button';
 import { useAtomValue } from 'jotai';
 import { SaveIcon } from 'lucide-react';
 import { toast } from 'sonner';

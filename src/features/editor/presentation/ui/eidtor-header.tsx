@@ -1,5 +1,5 @@
 'use client';
-import { SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarTrigger } from '@/src/shared/ui/components/ui/sidebar';
 import { EditorSaveButton } from './editor-save-button';
 import { EditorBreadcrump } from './editor-breadcrump';
 

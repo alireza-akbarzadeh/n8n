@@ -69,7 +69,7 @@ describe('Node Entity', () => {
       expect(node.position).toEqual({ x: 50, y: 100 });
     });
 
-    it('should fail with negative position', () => {
+    it('should allow negative position for React Flow compatibility', () => {
       const nodeResult = Node.create({
         type: NodeType.INITIAL,
         name: 'Start',
@@ -82,8 +82,8 @@ describe('Node Entity', () => {
       const node = nodeResult.data;
       const result = node.updatePosition({ x: -10, y: 20 });
 
-      expect(result.success).toBe(false);
-      expect(node.position).toEqual({ x: 0, y: 0 }); // Position unchanged
+      expect(result.success).toBe(true);
+      expect(node.position).toEqual({ x: -10, y: 20 }); // Position updated with negative values
     });
   });
 

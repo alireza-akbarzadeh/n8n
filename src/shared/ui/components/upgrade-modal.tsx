@@ -8,7 +8,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
+} from '@/src/shared/ui/components/ui/alert-dialog';
 import { authClient } from '@/lib/auth-client';
 
 interface UpgradeModalProps {

@@ -1,5 +1,5 @@
 import { HttpRequestNode } from '@/features/executions/presentation';
-import InitialNode from '@/components/initial-node';
+import InitialNode from '@/src/shared/ui/components/initial-node';
 import { ManualTrigger } from '@/features/triggers/presentation';
 import { NodeType } from '@/prisma/generated/prisma/enums';
 import { NodeTypes } from '@xyflow/react';

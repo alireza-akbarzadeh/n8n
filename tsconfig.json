@@ -19,7 +19,34 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/features/*": ["./src/features/*"],
+      "@/shared/*": ["./src/shared/*"],
+      "@/core/*": ["./src/core/*"],
+      "@/app/*": ["./src/app/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/lib/utils": ["./src/shared/ui/utils/utils.ts"],
+      "@/lib/db": ["./src/shared/infrastructure/database/db.ts"],
+      "@/lib/auth": ["./src/core/auth/auth.ts"],
+      "@/lib/auth-client": ["./src/core/auth/auth-client.ts"],
+      "@/lib/audit": ["./src/shared/application/services/audit.ts"],
+      "@/lib/logger": ["./src/shared/infrastructure/logger/pino.logger.ts"],
+      "@/lib/encryption": ["./src/shared/infrastructure/encryption.ts"],
+      "@/lib/env": ["./src/shared/infrastructure/env.ts"],
+      "@/lib/rate-limit": ["./src/core/api/rate-limit.ts"],
+      "@/lib/polar": ["./src/shared/application/services/polar.ts"],
+      "@/lib/credentials": ["./src/shared/application/services/credentials.ts"],
+      "@/lib/*": ["./src/shared/infrastructure/*", "./src/shared/ui/utils/*", "./src/core/auth/*", "./src/core/api/*", "./src/shared/application/services/*"],
+      "@/actions/*": ["./src/core/auth/*"],
+      "@/config/*": ["./src/core/config/*"],
+      "@/hooks/*": ["./src/shared/ui/hooks/*"],
+      "@/inngest/*": ["./src/inngest/*"],
+      "@/modules/*": ["./src/features/*"],
+      "@/trpc/*": ["./src/trpc/*"],
+      "@/types/*": ["./src/core/types/*"],
+      "@/prisma/*": ["./prisma/*"],
+      "@/src/*": ["./src/*"],
+      "@/tests/*": ["./tests/*"]
     }
   },
   "include": [

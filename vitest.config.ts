@@ -38,8 +38,29 @@ export default defineConfig({
     },
   },
   resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './'),
-    },
+    alias: [
+      { find: '@/features', replacement: path.resolve(__dirname, './src/features') },
+      { find: '@/shared', replacement: path.resolve(__dirname, './src/shared') },
+      { find: '@/core', replacement: path.resolve(__dirname, './src/core') },
+      { find: '@/app', replacement: path.resolve(__dirname, './src/app') },
+      { find: '@/components', replacement: path.resolve(__dirname, './src/components') },
+      { find: '@/lib/utils', replacement: path.resolve(__dirname, './src/shared/ui/utils/utils') },
+      {
+        find: '@/lib/db',
+        replacement: path.resolve(__dirname, './src/shared/infrastructure/database/db'),
+      },
+      { find: '@/lib', replacement: path.resolve(__dirname, './src/shared/infrastructure') },
+      { find: '@/actions', replacement: path.resolve(__dirname, './src/core/auth') },
+      { find: '@/config', replacement: path.resolve(__dirname, './src/core/config') },
+      { find: '@/hooks', replacement: path.resolve(__dirname, './src/shared/ui/hooks') },
+      { find: '@/inngest', replacement: path.resolve(__dirname, './src/inngest') },
+      { find: '@/modules', replacement: path.resolve(__dirname, './src/features') },
+      { find: '@/trpc', replacement: path.resolve(__dirname, './src/trpc') },
+      { find: '@/types', replacement: path.resolve(__dirname, './src/core/types') },
+      { find: '@/prisma', replacement: path.resolve(__dirname, './prisma') },
+      { find: '@/src', replacement: path.resolve(__dirname, './src') },
+      { find: '@/tests', replacement: path.resolve(__dirname, './tests') },
+      { find: '@', replacement: path.resolve(__dirname, './') },
+    ],
   },
 });

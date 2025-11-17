@@ -10,9 +10,7 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
     ];
-  },
-
-  // Security headers
+  }, // Security headers
   async headers() {
     return [
       {

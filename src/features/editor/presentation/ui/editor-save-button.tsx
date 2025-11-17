@@ -16,20 +16,17 @@ export function EditorSaveButton({ workflowId }: { workflowId: string }) {
     const rawNodes = editor.getNodes();
     const rawEdges = editor.getEdges();
 
-    // Clean nodes - remove React Flow internal properties and clamp negative positions
+    // Clean nodes - remove React Flow internal properties
     const nodes = rawNodes.map((node) => ({
       id: node.id,
       type: node.type,
-      position: {
-        x: Math.max(0, node.position.x),
-        y: Math.max(0, node.position.y),
-      },
+      position: node.position,
       data: node.data || {},
     }));
 
     // Utility to sanitize handle names
     function sanitizeHandleName(name?: string | null) {
-      if (!name) return undefined;
+      if (!name) return 'main';
       return name.replace(/[^a-zA-Z0-9_]/g, '_');
     }
 
@@ -40,7 +37,7 @@ export function EditorSaveButton({ workflowId }: { workflowId: string }) {
       sourceHandle?: string;
       targetHandle?: string;
     }) {
-      return `${edge.source}_${edge.target}_${sanitizeHandleName(edge.sourceHandle) || 'main'}_${sanitizeHandleName(edge.targetHandle) || 'main'}`;
+      return `${edge.source}_${edge.target}_${sanitizeHandleName(edge.sourceHandle)}_${sanitizeHandleName(edge.targetHandle)}`;
     }
 
     // Clean and deduplicate edges
@@ -64,8 +61,6 @@ export function EditorSaveButton({ workflowId }: { workflowId: string }) {
       ).values()
     );
 
-    console.log('Saving workflow:', { id: workflowId, nodes, edges });
-
     try {
       await saveWorkflow.mutateAsync({
         id: workflowId,
@@ -77,7 +72,6 @@ export function EditorSaveButton({ workflowId }: { workflowId: string }) {
       const message =
         error instanceof Error && error.message ? error.message : 'Failed to save workflow';
       toast.error(message);
-      console.error('Failed to save workflow:', error);
     }
   };
 

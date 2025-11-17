@@ -86,6 +86,11 @@ export function Editor({ workflowId }: { workflowId: string }) {
         panOnScroll
         panOnDrag={false}
         selectionOnDrag
+        defaultEdgeOptions={{
+          type: 'default',
+          animated: false,
+          style: { stroke: '#b1b1b7', strokeWidth: 2 },
+        }}
         proOptions={{ hideAttribution: true }}
       >
         <Background />

@@ -51,8 +51,8 @@ export const BaseExecutionNode = React.memo(function (props: BaseExecutionNodePr
               <Icon className="text-muted-foreground size-4" />
             )}
             {children}
-            <BaseHandle id="traget-1" type="target" position={Position.Left} />
-            <BaseHandle id="source-1" type="source" position={Position.Right} />
+            <BaseHandle id="target_1" type="target" position={Position.Left} />
+            <BaseHandle id="source_1" type="source" position={Position.Right} />
           </BaseNodeContent>
         </BaseNode>
       </NodeStatusIndicator>

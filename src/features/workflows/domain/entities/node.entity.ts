@@ -243,10 +243,6 @@ export class Node extends BaseEntity<NodeProps> {
       return Result.fail('Position coordinates must be numbers');
     }
 
-    if (position.x < 0 || position.y < 0) {
-      return Result.fail('Position coordinates cannot be negative');
-    }
-
     if (!isFinite(position.x) || !isFinite(position.y)) {
       return Result.fail('Position coordinates must be finite numbers');
     }

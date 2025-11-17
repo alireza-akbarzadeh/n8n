@@ -56,7 +56,7 @@ export const BaseTriggerNode = React.memo(function (props: BaseTriggerNodeProps)
               <Icon className="text-muted-foreground size-4" />
             )}
             {children}
-            <BaseHandle id="source-1" type="source" position={Position.Right} />
+            <BaseHandle id="source_1" type="source" position={Position.Right} />
           </BaseNodeContent>
         </BaseNode>
       </NodeStatusIndicator>

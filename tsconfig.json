@@ -23,9 +23,16 @@
       "@/features/*": ["./src/features/*"],
       "@/shared/*": ["./src/shared/*"],
       "@/core/*": ["./src/core/*"],
-      "@/app/*": ["./app/*"],
-      "@/components/*": ["./components/*"],
-      "@/lib/*": ["./lib/*"]
+      "@/app/*": ["./src/app/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/actions/*": ["./src/actions/*"],
+      "@/config/*": ["./src/config/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/inngest/*": ["./src/inngest/*"],
+      "@/modules/*": ["./src/modules/*"],
+      "@/trpc/*": ["./src/trpc/*"],
+      "@/types/*": ["./src/types/*"]
     }
   },
   "include": [

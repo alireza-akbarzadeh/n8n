@@ -186,6 +186,20 @@ export class Workflow extends BaseEntity<WorkflowProps> {
   }
 
   /**
+   * Check if a node exists in the workflow
+   */
+  public hasNode(nodeId: ID): boolean {
+    return this.props.nodes.some((n) => n.id.equals(nodeId));
+  }
+
+  /**
+   * Get a node by its ID
+   */
+  public getNodeById(nodeId: ID): Node | undefined {
+    return this.props.nodes.find((n) => n.id.equals(nodeId));
+  }
+
+  /**
    * Update nodes and edges (bulk operation)
    */
   public updateNodesAndEdges(nodes: Node[], edges: Edge[]): Result<void, string> {

@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { Workflow } from '../../../src/features/workflows/domain/entities/workflow.entity';
-import { Node } from '../../../src/features/workflows/domain/entities/node.entity';
+import { Node, NodeType } from '../../../src/features/workflows/domain/entities/node.entity';
 import { Edge } from '../../../src/features/workflows/domain/entities/edge.entity';
 import { ID } from '../../../src/shared/domain/value-objects/id.vo';
 
@@ -99,7 +99,7 @@ describe('Workflow Entity', () => {
   describe('addNode', () => {
     it('should add a node to workflow', () => {
       const nodeResult = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: 'Start',
         workflowId: workflow.id.getValue(),
         position: { x: 0, y: 0 },
@@ -118,7 +118,7 @@ describe('Workflow Entity', () => {
 
     it('should fail when adding duplicate node', () => {
       const nodeResult = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: 'Start',
         workflowId: workflow.id.getValue(),
         position: { x: 0, y: 0 },
@@ -139,7 +139,7 @@ describe('Workflow Entity', () => {
   describe('removeNode', () => {
     it('should remove a node from workflow', () => {
       const nodeResult = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: 'Start',
         workflowId: workflow.id.getValue(),
         position: { x: 0, y: 0 },
@@ -166,14 +166,14 @@ describe('Workflow Entity', () => {
     it('should remove connected edges when removing node', () => {
       // Create two nodes
       const node1Result = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: 'Start',
         workflowId: workflow.id.getValue(),
         position: { x: 0, y: 0 },
         data: {},
       });
       const node2Result = Node.create({
-        type: 'HTTP_REQUEST',
+        type: NodeType.HTTP_REQUEST,
         name: 'HTTP',
         workflowId: workflow.id.getValue(),
         position: { x: 100, y: 100 },
@@ -212,14 +212,14 @@ describe('Workflow Entity', () => {
 
     beforeEach(() => {
       const node1Result = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: 'Start',
         workflowId: workflow.id.getValue(),
         position: { x: 0, y: 0 },
         data: {},
       });
       const node2Result = Node.create({
-        type: 'HTTP_REQUEST',
+        type: NodeType.HTTP_REQUEST,
         name: 'HTTP',
         workflowId: workflow.id.getValue(),
         position: { x: 100, y: 100 },
@@ -301,14 +301,14 @@ describe('Workflow Entity', () => {
 
     beforeEach(() => {
       const node1Result = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: 'Start',
         workflowId: workflow.id.getValue(),
         position: { x: 0, y: 0 },
         data: {},
       });
       const node2Result = Node.create({
-        type: 'HTTP_REQUEST',
+        type: NodeType.HTTP_REQUEST,
         name: 'HTTP',
         workflowId: workflow.id.getValue(),
         position: { x: 100, y: 100 },
@@ -350,7 +350,7 @@ describe('Workflow Entity', () => {
   describe('hasNode', () => {
     it('should return true for existing node', () => {
       const nodeResult = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: 'Start',
         workflowId: workflow.id.getValue(),
         position: { x: 0, y: 0 },
@@ -372,7 +372,7 @@ describe('Workflow Entity', () => {
   describe('getNodeById', () => {
     it('should return node when it exists', () => {
       const nodeResult = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: 'Start',
         workflowId: workflow.id.getValue(),
         position: { x: 0, y: 0 },

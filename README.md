@@ -1,57 +1,351 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Nodebase - Workflow Automation Platform
 
-## Getting Started
+[![Next.js 16](https://img.shields.io/badge/Next.js-16.0-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
+[![Clean Architecture](https://img.shields.io/badge/Architecture-Clean-green)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+[![Prisma](https://img.shields.io/badge/ORM-Prisma-2D3748)](https://www.prisma.io/)
+[![Tests](https://img.shields.io/badge/Tests-80%20passing-success)](./tests)
 
-This project uses **pnpm** as its package manager. Make sure you have it installed:
+A modern, scalable workflow automation platform built with **Clean Architecture**, **Domain-Driven Design**, and **TypeScript**.
+
+---
+
+## 🎯 Overview
+
+Nodebase is a workflow automation platform that allows users to create, manage, and execute complex workflows visually. Built with enterprise-grade architecture and modern technologies.
+
+### ✨ Key Features
+
+- 🎨 **Visual Workflow Editor** - Drag-and-drop interface using React Flow
+- 🔐 **Multi-Provider Auth** - GitHub, Google, and email authentication
+- 📊 **Real-time Monitoring** - Track workflow executions in real-time
+- 🎯 **Type-safe APIs** - Full type safety with tRPC
+- 🧪 **Comprehensive Testing** - 80+ unit, integration, and E2E tests
+- 🔄 **Background Jobs** - Reliable execution with Inngest
+- 🗃️ **PostgreSQL** - Type-safe database access with Prisma
+
+---
+
+## 📚 Documentation
+
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - System architecture, diagrams, and patterns
+- **[DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)** - Complete guide for new developers
+- **[.env.example](./.env.example)** - Environment variables reference
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 20+
+- pnpm 8+
+- PostgreSQL 14+
+
+### Installation
 
 ```bash
+# 1. Install pnpm
 npm install -g pnpm
-```
 
-First, install dependencies and run the development server:
-
-```bash
+# 2. Clone and install
+git clone <repo-url>
+cd n8n
 pnpm install
-pnpm dev
+
+# 3. Set up environment
+cp .env.example .env.local
+# Edit .env.local with your values
+
+# 4. Set up database
+pnpm db:generate
+pnpm db:migrate
+
+# 5. Start development (all services)
+pnpm dev:all
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**For detailed setup instructions, see [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Testing
+## 📁 Project Structure
 
-This project includes comprehensive test coverage with both unit/integration and end-to-end tests.
+```
+src/
+├── app/                    # Next.js App Router (UI)
+├── features/              # Feature modules (Clean Architecture)
+│   ├── workflows/         # Workflow management
+│   │   ├── domain/        # Business logic (entities, interfaces)
+│   │   ├── application/   # Use cases (business operations)
+│   │   ├── infrastructure/# Implementations (Prisma, APIs)
+│   │   ├── api/           # tRPC routers
+│   │   └── ui/            # React components
+│   ├── auth/              # Authentication
+│   ├── executions/        # Execution tracking
+│   └── triggers/          # Trigger management
+├── shared/                # Shared domain & infrastructure
+├── components/            # Reusable UI components
+└── trpc/                  # API configuration
+```
 
-### Running Tests
+**For detailed structure explanation, see [ARCHITECTURE.md](./ARCHITECTURE.md)**
+
+---
+
+## 🛠️ Development
+
+### Available Scripts
 
 ```bash
-# Unit & integration tests
-pnpm test                 # Run tests once
-pnpm test:watch          # Run in watch mode
-pnpm test:coverage       # Generate coverage report
+# Development
+pnpm dev              # Start Next.js dev server
+pnpm dev:all          # Start all services (Next.js + DB + Inngest)
+pnpm build            # Build for production
+pnpm start            # Start production server
 
-# End-to-end tests
-pnpm e2e                 # Run E2E tests
-pnpm e2e:headed          # Run with visible browser
-pnpm e2e:debug           # Debug tests with Playwright Inspector
+# Database
+pnpm db:studio        # Open Prisma Studio
+pnpm db:generate      # Generate Prisma Client
+pnpm db:migrate       # Run migrations
+pnpm db:reset         # Reset database
+
+# Testing
+pnpm test             # Run unit tests
+pnpm test:watch       # Run tests in watch mode
+pnpm test:coverage    # Generate coverage report
+pnpm e2e              # Run E2E tests
+
+# Code Quality
+pnpm lint             # Run ESLint
+pnpm format           # Format with Prettier
 ```
 
-For detailed testing documentation, see [TESTING.md](./TESTING.md).
+**For complete scripts documentation, see [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md#-useful-scripts--utils)**
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🏛️ Architecture
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project follows **Clean Architecture** with **Domain-Driven Design**:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+┌─────────────────────────────────────┐
+│  Presentation (React, Next.js)      │
+├─────────────────────────────────────┤
+│  API (tRPC Routers)                 │
+├─────────────────────────────────────┤
+│  Application (Use Cases)            │
+├─────────────────────────────────────┤
+│  Domain (Entities, Business Logic)  │  ← No dependencies
+├─────────────────────────────────────┤
+│  Infrastructure (Prisma, APIs)      │
+└─────────────────────────────────────┘
+```
 
-## Deploy on Vercel
+**Key Principles:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- ✅ **Domain Independence** - Business logic has no external dependencies
+- ✅ **Dependency Inversion** - Infrastructure implements domain interfaces
+- ✅ **Testability** - Each layer can be tested independently
+- ✅ **Scalability** - Easy to add features and swap implementations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**For detailed architecture diagrams and explanations, see [ARCHITECTURE.md](./ARCHITECTURE.md)**
+
+---
+
+## 🧪 Testing
+
+We maintain high test coverage with three testing layers:
+
+```bash
+# Unit Tests (Domain & Application)
+pnpm test                    # 80 tests passing
+
+# Integration Tests (with database)
+pnpm test tests/integration
+
+# End-to-End Tests (full user flows)
+pnpm e2e                     # Playwright
+pnpm e2e:ui                  # Open Playwright UI
+```
+
+**Test Structure:**
+
+```
+tests/
+├── unit/              # Entity & use case tests
+│   ├── workflows/     # Workflow entity tests
+│   ├── auth/          # User entity tests
+│   └── executions/    # Execution entity tests
+├── integration/       # Repository & API tests
+└── e2e/               # User flow tests
+```
+
+---
+
+## 🛠️ Tech Stack
+
+### Core
+- **Next.js 16** - React framework with App Router
+- **TypeScript 5** - Type safety
+- **Tailwind CSS 4** - Styling
+
+### Backend
+- **tRPC** - Type-safe APIs
+- **Prisma** - Database ORM
+- **PostgreSQL** - Database
+- **Better Auth** - Authentication
+- **Inngest** - Background jobs
+
+### Frontend
+- **React Flow** - Workflow visualization
+- **Radix UI** - Accessible components
+- **Tanstack Query** - Data fetching
+- **Zod** - Validation
+
+### Development
+- **Vitest** - Unit testing
+- **Playwright** - E2E testing
+- **ESLint** - Linting
+- **Prettier** - Formatting
+
+---
+
+## 📖 Learning Path
+
+### For New Developers
+
+**Week 1: Setup & Understanding**
+1. Complete [Quick Start](#-quick-start)
+2. Read [ARCHITECTURE.md](./ARCHITECTURE.md)
+3. Explore the codebase (workflows feature)
+
+**Week 2: First Change**
+1. Follow [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)
+2. Make a small change (add a field)
+3. Write tests for your change
+
+**Week 3: First Feature**
+1. Create a new entity
+2. Add use cases
+3. Create API endpoints
+4. Write comprehensive tests
+
+**Week 4: Advanced**
+1. Add background jobs
+2. Write E2E tests
+3. Review PRs and best practices
+
+---
+
+## 🤝 Contributing
+
+1. **Read the guides**
+   - [ARCHITECTURE.md](./ARCHITECTURE.md) - Understand the system
+   - [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md) - Development workflow
+
+2. **Follow conventions**
+   ```bash
+   git commit -m "feat: add workflow templates"
+   git commit -m "fix: resolve execution timeout"
+   git commit -m "docs: update API documentation"
+   ```
+
+3. **Write tests**
+   - Unit tests for domain logic
+   - Integration tests for repositories
+   - E2E tests for critical flows
+
+4. **Code quality**
+   ```bash
+   pnpm lint          # Check linting
+   pnpm format        # Format code
+   pnpm test          # Run tests
+   npx tsc --noEmit   # Check types
+   ```
+
+---
+
+## 🔐 Environment Variables
+
+**Required:**
+
+```env
+DATABASE_URL=postgresql://...
+BETTER_AUTH_SECRET=<generate-with-openssl>
+ENCRYPTION_KEY=<generate-with-openssl>
+BETTER_AUTH_URL=http://localhost:3000
+```
+
+**Optional:**
+
+```env
+GITHUB_CLIENT_ID=...
+GITHUB_CLIENT_SECRET=...
+INNGEST_EVENT_KEY=...
+GOOGLE_GENERATIVE_AI_API_KEY=...
+SENTRY_DSN=...
+```
+
+**See [.env.example](./.env.example) for complete list**
+
+---
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Port already in use:**
+```bash
+lsof -ti:3000 | xargs kill -9
+```
+
+**Prisma Client out of sync:**
+```bash
+pnpm db:generate
+```
+
+**Module not found:**
+```bash
+rm -rf .next && pnpm dev
+```
+
+**Database connection failed:**
+```bash
+# Check PostgreSQL is running
+brew services list  # macOS
+systemctl status postgresql  # Linux
+```
+
+**For more troubleshooting, see [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md#-debugging-tips)**
+
+---
+
+## 📄 License
+
+This project is private and proprietary.
+
+---
+
+## 🙏 Acknowledgments
+
+Built with:
+- [Next.js](https://nextjs.org/)
+- [Prisma](https://www.prisma.io/)
+- [tRPC](https://trpc.io/)
+- [React Flow](https://reactflow.dev/)
+- [Radix UI](https://www.radix-ui.com/)
+
+Inspired by Clean Architecture principles from Uncle Bob Martin.
+
+---
+
+**Happy Coding! 🚀**
+
+For questions or support, check:
+- 📖 [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)
+- 🏛️ [ARCHITECTURE.md](./ARCHITECTURE.md)
+- 💬 Team Slack: #nodebase-dev

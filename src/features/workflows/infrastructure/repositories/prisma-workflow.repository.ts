@@ -1,17 +1,12 @@
+import { PAGINATION } from '@/core/config/constants';
+import { PaginatedResponse } from '@/core/types/common.types';
+import { prisma } from '@/shared/infrastructure/database/prisma.client';
+import { Workflow } from '../../domain/entities/workflow.entity';
 import {
   IWorkflowRepository,
   WorkflowSearchParams,
 } from '../../domain/repositories/workflow.repository.interface';
-import { Workflow } from '../../domain/entities/workflow.entity';
-import { PaginatedResponse } from '@/core/types/common.types';
-import { prisma } from '@/shared/infrastructure/database/prisma.client';
 import { WorkflowMapper } from '../mappers/workflow.mapper';
-import { PAGINATION } from '@/core/config/constants';
-import type {
-  Workflow as PrismaWorkflow,
-  Node as PrismaNode,
-  Connection,
-} from '@/prisma/generated/prisma/client';
 
 /**
  * Prisma Workflow Repository
@@ -70,7 +65,7 @@ export class PrismaWorkflowRepository implements IWorkflowRepository {
       this.db.workflow.count({ where }),
     ]);
 
-    const workflows = prismaWorkflows.map((pw: any) => WorkflowMapper.toDomain(pw));
+    const workflows = prismaWorkflows.map((pw) => WorkflowMapper.toDomain(pw));
     const totalPages = Math.ceil(totalCount / pageSize);
 
     return {
@@ -111,7 +106,7 @@ export class PrismaWorkflowRepository implements IWorkflowRepository {
     const userId = workflow.userId;
 
     // Delete existing nodes and connections, then create new ones
-    await this.db.$transaction(async (tx: any) => {
+    await this.db.$transaction(async (tx) => {
       // Delete existing nodes and connections
       await tx.node.deleteMany({ where: { workflowId } });
       await tx.connection.deleteMany({ where: { workflowId } });
@@ -128,6 +123,7 @@ export class PrismaWorkflowRepository implements IWorkflowRepository {
         await tx.node.createMany({
           data: bulkData.nodes.map((node) => ({
             ...node,
+            data: node.data as any,
             workflowId,
           })),
         });

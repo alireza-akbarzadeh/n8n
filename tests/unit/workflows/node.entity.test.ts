@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { Node } from '../../../src/features/workflows/domain/entities/node.entity';
+import { Node, NodeType } from '../../../src/features/workflows/domain/entities/node.entity';
 
 describe('Node Entity', () => {
   describe('create', () => {
     it('should create a node with valid data', () => {
       const result = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: 'Start Node',
         workflowId: 'workflow-123',
         position: { x: 100, y: 200 },
@@ -13,14 +13,14 @@ describe('Node Entity', () => {
       });
 
       expect(result.success).toBe(true);
-      expect(result.data?.type).toBe('INITIAL');
+      expect(result.data?.type).toBe(NodeType.INITIAL);
       expect(result.data?.name).toBe('Start Node');
       expect(result.data?.position).toEqual({ x: 100, y: 200 });
     });
 
     it('should fail with empty name', () => {
       const result = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: '',
         workflowId: 'workflow-123',
         position: { x: 0, y: 0 },
@@ -33,7 +33,7 @@ describe('Node Entity', () => {
 
     it('should fail with empty workflow ID', () => {
       const result = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: 'Test',
         workflowId: '',
         position: { x: 0, y: 0 },
@@ -48,7 +48,7 @@ describe('Node Entity', () => {
   describe('updatePosition', () => {
     it('should update node position', () => {
       const nodeResult = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: 'Start',
         workflowId: 'workflow-123',
         position: { x: 0, y: 0 },
@@ -64,7 +64,7 @@ describe('Node Entity', () => {
 
     it('should fail with negative position', () => {
       const nodeResult = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: 'Start',
         workflowId: 'workflow-123',
         position: { x: 0, y: 0 },
@@ -82,7 +82,7 @@ describe('Node Entity', () => {
   describe('updateData', () => {
     it('should update node data', () => {
       const nodeResult = Node.create({
-        type: 'HTTP_REQUEST',
+        type: NodeType.HTTP_REQUEST,
         name: 'HTTP',
         workflowId: 'workflow-123',
         position: { x: 0, y: 0 },
@@ -97,7 +97,7 @@ describe('Node Entity', () => {
 
     it('should merge data when updating', () => {
       const nodeResult = Node.create({
-        type: 'HTTP_REQUEST',
+        type: NodeType.HTTP_REQUEST,
         name: 'HTTP',
         workflowId: 'workflow-123',
         position: { x: 0, y: 0 },
@@ -105,7 +105,7 @@ describe('Node Entity', () => {
       });
 
       const node = nodeResult.data!;
-      node.updateData({ method: 'POST' });
+      node.mergeData({ method: 'POST' });
 
       expect(node.data).toEqual({
         url: 'https://api.example.com',
@@ -118,7 +118,7 @@ describe('Node Entity', () => {
   describe('rename', () => {
     it('should rename the node', () => {
       const nodeResult = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: 'Start',
         workflowId: 'workflow-123',
         position: { x: 0, y: 0 },
@@ -134,7 +134,7 @@ describe('Node Entity', () => {
 
     it('should fail with empty name', () => {
       const nodeResult = Node.create({
-        type: 'INITIAL',
+        type: NodeType.INITIAL,
         name: 'Start',
         workflowId: 'workflow-123',
         position: { x: 0, y: 0 },

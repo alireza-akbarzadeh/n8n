@@ -61,7 +61,7 @@ describe('Edge Entity', () => {
       });
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('cannot connect to itself');
+      expect(result.error).toContain('must be different');
     });
 
     it('should fail with empty workflow ID', () => {

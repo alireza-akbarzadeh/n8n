@@ -47,8 +47,12 @@ export class Edge extends BaseEntity<EdgeProps> {
       return Result.fail('Source and target nodes must be different');
     }
 
+    // Apply default handles before validation (handle empty strings and null/undefined)
+    const sourceHandle = props.sourceHandle?.trim() || 'main';
+    const targetHandle = props.targetHandle?.trim() || 'main';
+
     // Validate handles
-    const handleValidation = this.validateHandles(props.sourceHandle, props.targetHandle);
+    const handleValidation = this.validateHandles(sourceHandle, targetHandle);
     if (!handleValidation.success) {
       return Result.fail(handleValidation.error!);
     }
@@ -56,8 +60,8 @@ export class Edge extends BaseEntity<EdgeProps> {
     const edgeId = id || ID.generate();
     const edge = new Edge(edgeId, {
       ...props,
-      sourceHandle: props.sourceHandle || 'main',
-      targetHandle: props.targetHandle || 'main',
+      sourceHandle,
+      targetHandle,
       createdAt: props.createdAt || new Date(),
       updatedAt: props.updatedAt || new Date(),
     });
@@ -154,12 +158,12 @@ export class Edge extends BaseEntity<EdgeProps> {
    * Validate both handles
    */
   private static validateHandles(sourceHandle: string, targetHandle: string): Result<void, string> {
-    const sourceValidation = this.validateHandle(sourceHandle || 'main');
+    const sourceValidation = this.validateHandle(sourceHandle);
     if (!sourceValidation.success) {
       return Result.fail(`Source handle: ${sourceValidation.error}`);
     }
 
-    const targetValidation = this.validateHandle(targetHandle || 'main');
+    const targetValidation = this.validateHandle(targetHandle);
     if (!targetValidation.success) {
       return Result.fail(`Target handle: ${targetValidation.error}`);
     }

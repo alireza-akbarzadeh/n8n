@@ -124,7 +124,7 @@ export class User extends BaseEntity<UserProps> {
    * Check if user has completed profile
    */
   public hasCompleteProfile(): boolean {
-    return !!(this.props.email && this.props.name);
+    return !!(this.props.email && this.props.name && this.props.emailVerified);
   }
 
   /**

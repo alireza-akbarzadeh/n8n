@@ -44,6 +44,11 @@ export default defineConfig({
       { find: '@/core', replacement: path.resolve(__dirname, './src/core') },
       { find: '@/app', replacement: path.resolve(__dirname, './src/app') },
       { find: '@/components', replacement: path.resolve(__dirname, './src/components') },
+      { find: '@/lib/utils', replacement: path.resolve(__dirname, './src/shared/ui/utils/utils') },
+      {
+        find: '@/lib/db',
+        replacement: path.resolve(__dirname, './src/shared/infrastructure/database/db'),
+      },
       { find: '@/lib', replacement: path.resolve(__dirname, './src/shared/infrastructure') },
       { find: '@/actions', replacement: path.resolve(__dirname, './src/core/auth') },
       { find: '@/config', replacement: path.resolve(__dirname, './src/core/config') },

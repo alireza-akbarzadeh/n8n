@@ -9,12 +9,15 @@ describe('User Entity', () => {
         email: 'test@example.com',
         name: 'Test User',
         emailVerified: false,
+        image: null,
       });
 
       expect(result.success).toBe(true);
-      expect(result.data?.email).toBe('test@example.com');
-      expect(result.data?.name).toBe('Test User');
-      expect(result.data?.emailVerified).toBe(false);
+      if (result.success) {
+        expect(result.data.email).toBe('test@example.com');
+        expect(result.data.name).toBe('Test User');
+        expect(result.data.emailVerified).toBe(false);
+      }
     });
 
     it('should fail with invalid email format', () => {
@@ -22,10 +25,13 @@ describe('User Entity', () => {
         email: 'invalid-email',
         name: 'Test User',
         emailVerified: false,
+        image: null,
       });
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('email');
+      if (!result.success) {
+        expect(result.error).toContain('email');
+      }
     });
 
     it('should fail with email too long', () => {
@@ -33,6 +39,7 @@ describe('User Entity', () => {
         email: 'a'.repeat(250) + '@example.com',
         name: 'Test User',
         emailVerified: false,
+        image: null,
       });
 
       expect(result.success).toBe(false);
@@ -43,10 +50,13 @@ describe('User Entity', () => {
         email: 'test@example.com',
         name: 'a',
         emailVerified: false,
+        image: null,
       });
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('name');
+      if (!result.success) {
+        expect(result.error).toContain('Name must be at least');
+      }
     });
 
     it('should fail with name too long', () => {
@@ -54,6 +64,7 @@ describe('User Entity', () => {
         email: 'test@example.com',
         name: 'a'.repeat(101),
         emailVerified: false,
+        image: null,
       });
 
       expect(result.success).toBe(false);
@@ -66,9 +77,11 @@ describe('User Entity', () => {
         email: 'test@example.com',
         name: 'Test User',
         emailVerified: false,
+        image: null,
       });
 
-      const user = userResult.data!;
+      if (!userResult.success) throw new Error("Expected success");
+      const user = userResult.data;
       const result = user.updateProfile({
         name: 'Updated Name',
         email: 'updated@example.com',
@@ -84,9 +97,11 @@ describe('User Entity', () => {
         email: 'test@example.com',
         name: 'Test User',
         emailVerified: false,
+        image: null,
       });
 
-      const user = userResult.data!;
+      if (!userResult.success) throw new Error("Expected success");
+      const user = userResult.data;
       const result = user.updateProfile({ email: 'invalid-email' });
 
       expect(result.success).toBe(false);
@@ -101,7 +116,8 @@ describe('User Entity', () => {
         image: 'https://example.com/old.jpg',
       });
 
-      const user = userResult.data!;
+      if (!userResult.success) throw new Error("Expected success");
+      const user = userResult.data;
       user.updateProfile({ image: 'https://example.com/new.jpg' });
 
       expect(user.image).toBe('https://example.com/new.jpg');
@@ -116,9 +132,11 @@ describe('User Entity', () => {
         email: 'test@example.com',
         name: 'Test User',
         emailVerified: false,
+        image: null,
       });
 
-      const user = userResult.data!;
+      if (!userResult.success) throw new Error("Expected success");
+      const user = userResult.data;
       user.verifyEmail();
 
       expect(user.emailVerified).toBe(true);
@@ -134,7 +152,8 @@ describe('User Entity', () => {
         image: 'https://example.com/avatar.jpg',
       });
 
-      const user = userResult.data!;
+      if (!userResult.success) throw new Error("Expected success");
+      const user = userResult.data;
       expect(user.hasCompleteProfile()).toBe(true);
     });
 
@@ -146,7 +165,8 @@ describe('User Entity', () => {
         image: 'https://example.com/avatar.jpg',
       });
 
-      const user = userResult.data!;
+      if (!userResult.success) throw new Error("Expected success");
+      const user = userResult.data;
       expect(user.hasCompleteProfile()).toBe(false);
     });
 
@@ -155,9 +175,11 @@ describe('User Entity', () => {
         email: 'test@example.com',
         name: '',
         emailVerified: true,
+        image: null,
       });
 
-      const user = userResult.data!;
+      if (!userResult.success) throw new Error("Expected success");
+      const user = userResult.data;
       expect(user.hasCompleteProfile()).toBe(false);
     });
   });
@@ -168,9 +190,11 @@ describe('User Entity', () => {
         email: 'test@example.com',
         name: 'Test User',
         emailVerified: true,
+        image: null,
       });
 
-      const user = userResult.data!;
+      if (!userResult.success) throw new Error("Expected success");
+      const user = userResult.data;
       expect(user.isEmailVerified()).toBe(true);
     });
 
@@ -179,9 +203,11 @@ describe('User Entity', () => {
         email: 'test@example.com',
         name: 'Test User',
         emailVerified: false,
+        image: null,
       });
 
-      const user = userResult.data!;
+      if (!userResult.success) throw new Error("Expected success");
+      const user = userResult.data;
       expect(user.isEmailVerified()).toBe(false);
     });
   });

@@ -2,6 +2,15 @@ import { withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
+  poweredByHeader: false,
+  compress: true,
+
+  experimental: {
+    // Optimize package imports
+    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
+  },
+
   async redirects() {
     return [
       {
@@ -10,7 +19,9 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
     ];
-  }, // Security headers
+  },
+
+  // Security headers
   async headers() {
     return [
       {

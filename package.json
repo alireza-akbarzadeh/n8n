@@ -25,6 +25,7 @@
     "db:seed": "prisma db seed",
     "inngest:dev": "npx inngest-cli@latest dev",
     "dev:all": "mprocs",
+    "generate-feature": "tsx src/scripts/generate-feature.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "preinstall": "npx only-allow pnpm",

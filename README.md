@@ -189,11 +189,13 @@ tests/
 ## 🛠️ Tech Stack
 
 ### Core
+
 - **Next.js 16** - React framework with App Router
 - **TypeScript 5** - Type safety
 - **Tailwind CSS 4** - Styling
 
 ### Backend
+
 - **tRPC** - Type-safe APIs
 - **Prisma** - Database ORM
 - **PostgreSQL** - Database
@@ -201,12 +203,14 @@ tests/
 - **Inngest** - Background jobs
 
 ### Frontend
+
 - **React Flow** - Workflow visualization
 - **Radix UI** - Accessible components
 - **Tanstack Query** - Data fetching
 - **Zod** - Validation
 
 ### Development
+
 - **Vitest** - Unit testing
 - **Playwright** - E2E testing
 - **ESLint** - Linting
@@ -219,27 +223,144 @@ tests/
 ### For New Developers
 
 **Week 1: Setup & Understanding**
+
 1. Complete [Quick Start](#-quick-start)
 2. Read [ARCHITECTURE.md](./ARCHITECTURE.md)
 3. Explore the codebase (workflows feature)
 
 **Week 2: First Change**
+
 1. Follow [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)
 2. Make a small change (add a field)
 3. Write tests for your change
 
 **Week 3: First Feature**
+
 1. Create a new entity
 2. Add use cases
 3. Create API endpoints
 4. Write comprehensive tests
 
 **Week 4: Advanced**
+
 1. Add background jobs
 2. Write E2E tests
 3. Review PRs and best practices
 
 ---
+
+# Scripts
+
+## Generate Feature
+
+This script generates a complete feature folder structure following Clean Architecture principles.
+
+### Usage
+
+```bash
+pnpm run generate-feature <feature-name>
+```
+
+### Example
+
+```bash
+pnpm run generate-feature billing
+```
+
+This will create the following structure in `src/features/billing/`:
+
+```
+billing/
+├── index.ts                      # Main feature export
+├── api/                          # tRPC routers and API endpoints
+│   └── index.ts
+├── application/                  # Use cases and DTOs
+│   ├── index.ts
+│   ├── use-cases/
+│   │   └── index.ts
+│   └── dto/
+│       └── index.ts
+├── domain/                       # Entities, repositories, and business logic
+│   ├── index.ts
+│   ├── entities/
+│   │   └── index.ts
+│   ├── repositories/
+│   │   └── index.ts
+│   └── services/
+│       └── index.ts
+├── infrastructure/               # Implementations (mappers, repositories, services)
+│   ├── index.ts
+│   ├── mappers/
+│   │   └── index.ts
+│   ├── repositories/
+│   │   └── index.ts
+│   └── services/
+│       └── index.ts
+└── presentation/                 # UI components, hooks, and containers
+    ├── index.ts
+    ├── ui/
+    │   └── index.ts
+    ├── hooks/
+    │   └── index.ts
+    └── containers/
+        └── index.ts
+```
+
+### Development Workflow
+
+After generating a feature, follow these steps:
+
+1. **Define Domain Entities** in `domain/entities/`
+   - Create entity classes with business logic
+   - Follow the Result pattern for error handling
+
+2. **Define Repository Interfaces** in `domain/repositories/`
+   - Create interfaces for data access
+   - Keep them in the domain layer (dependency inversion)
+
+3. **Create Use Cases** in `application/use-cases/`
+   - Implement business logic orchestration
+   - Use cases should depend on repository interfaces
+
+4. **Implement Repositories** in `infrastructure/repositories/`
+   - Create Prisma repository implementations
+   - Implement the interfaces from the domain layer
+
+5. **Create Mappers** in `infrastructure/mappers/`
+   - Map between domain entities and Prisma models
+   - Keep domain entities pure and free from ORM dependencies
+
+6. **Add UI Components** in `presentation/ui/`
+   - Create React components
+   - Use hooks for state management
+
+7. **Create API Routes** in `api/`
+   - Define tRPC routers
+   - Connect use cases to API endpoints
+
+### Rules
+
+- Feature names must be lowercase alphanumeric with hyphens only (e.g., `billing`, `user-management`)
+- The script will fail if a feature with the same name already exists
+- All folders come with `index.ts` files for easier exports
+
+### Clean Architecture Principles
+
+The generated structure follows Clean Architecture:
+
+- **Domain Layer**: Core business logic, entities, and repository interfaces
+- **Application Layer**: Use cases that orchestrate domain entities
+- **Infrastructure Layer**: External concerns (database, APIs, file system)
+- **Presentation Layer**: UI components and user interaction
+- **API Layer**: HTTP/tRPC endpoints and routing
+
+Dependencies flow inward:
+
+```
+Presentation → Application → Domain ← Infrastructure
+      ↓                                      ↓
+      └──────────────→ API ←─────────────────┘
+```
 
 ## 🤝 Contributing
 
@@ -248,6 +369,7 @@ tests/
    - [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md) - Development workflow
 
 2. **Follow conventions**
+
    ```bash
    git commit -m "feat: add workflow templates"
    git commit -m "fix: resolve execution timeout"
@@ -299,21 +421,25 @@ SENTRY_DSN=...
 ### Common Issues
 
 **Port already in use:**
+
 ```bash
 lsof -ti:3000 | xargs kill -9
 ```
 
 **Prisma Client out of sync:**
+
 ```bash
 pnpm db:generate
 ```
 
 **Module not found:**
+
 ```bash
 rm -rf .next && pnpm dev
 ```
 
 **Database connection failed:**
+
 ```bash
 # Check PostgreSQL is running
 brew services list  # macOS
@@ -333,6 +459,7 @@ This project is private and proprietary.
 ## 🙏 Acknowledgments
 
 Built with:
+
 - [Next.js](https://nextjs.org/)
 - [Prisma](https://www.prisma.io/)
 - [tRPC](https://trpc.io/)
@@ -346,6 +473,7 @@ Inspired by Clean Architecture principles from Uncle Bob Martin.
 **Happy Coding! 🚀**
 
 For questions or support, check:
+
 - 📖 [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)
 - 🏛️ [ARCHITECTURE.md](./ARCHITECTURE.md)
 - 💬 Team Slack: #nodebase-dev

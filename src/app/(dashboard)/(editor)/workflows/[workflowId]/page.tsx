@@ -1,6 +1,6 @@
 import { Editor, EditorError, EditorHeader, EditorLoading } from '@/modules/editor';
 import { prefetchWorflow } from '@/src/features/workflows';
-import { HydrateClient } from '@/trpc/server';
+import { HydrateClient } from '@/src/core/api/trpc/server';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 

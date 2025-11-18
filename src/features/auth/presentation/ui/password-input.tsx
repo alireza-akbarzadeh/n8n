@@ -6,14 +6,11 @@ import { Input } from '@/src/shared/ui/components/ui/input';
 import { cn } from '@/lib/utils';
 import { Button } from '@/src/shared/ui/components/ui/button';
 
-interface PasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  error?: boolean;
-}
+type PasswordInputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
-  ({ className, error, ...props }, ref) => {
+  ({ className, ...props }, ref) => {
     const [show, setShow] = React.useState(false);
-
     return (
       <div className="relative">
         <Input

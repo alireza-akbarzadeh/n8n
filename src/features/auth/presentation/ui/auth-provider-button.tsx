@@ -21,8 +21,9 @@ export function AuthProviderButton(props: AuthProviderButtonProps) {
     startTransition(async () => {
       try {
         await loginWithProvider(provider);
-      } catch (error: any) {
-        toast.error(error.message ?? 'Something went wrong');
+      } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : 'Something went wrong';
+        toast.error(message);
       }
     });
   };

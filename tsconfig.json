@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -24,7 +25,7 @@
       "@/shared/*": ["./src/shared/*"],
       "@/core/*": ["./src/core/*"],
       "@/app/*": ["./src/app/*"],
-      "@/components/*": ["./src/components/*"],
+      "@/components/*": ["./src/shared/ui/components/*"],
       "@/lib/utils": ["./src/shared/ui/utils/utils.ts"],
       "@/lib/db": ["./src/shared/infrastructure/database/db.ts"],
       "@/lib/auth": ["./src/core/auth/auth.ts"],
@@ -40,9 +41,9 @@
       "@/actions/*": ["./src/core/auth/*"],
       "@/config/*": ["./src/core/config/*"],
       "@/hooks/*": ["./src/shared/ui/hooks/*"],
-      "@/inngest/*": ["./src/inngest/*"],
+      "@/inngest/*": ["src/core/inngest/*"],
       "@/modules/*": ["./src/features/*"],
-      "@/trpc/*": ["./src/trpc/*"],
+      "@/trpc/*": ["src/core/api/trpc/*"],
       "@/types/*": ["./src/core/types/*"],
       "@/prisma/*": ["./prisma/*"],
       "@/src/*": ["./src/*"],

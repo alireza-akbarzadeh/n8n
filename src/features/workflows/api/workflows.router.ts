@@ -1,5 +1,5 @@
-import { createTRPCRouter, premiumProcedure, protectedProcedure } from '@/trpc/init';
-import { baseQuerySchema, editorSchema } from '@/trpc/schemas';
+import { createTRPCRouter, premiumProcedure, protectedProcedure } from '@/src/core/api/trpc/init';
+import { baseQuerySchema, editorSchema } from '@/src/core/api/trpc/schemas';
 import { HTTP_STATUS } from '@/core/config/constants';
 import { ok } from '@/lib/utils';
 import { generateSlug } from 'random-word-slugs';

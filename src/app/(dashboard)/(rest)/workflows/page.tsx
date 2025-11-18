@@ -4,7 +4,7 @@ import {
   WorkflowLoading,
   WorkflowsModule,
 } from '@/modules/workflows';
-import { HydrateClient } from '@/trpc/server';
+import { HydrateClient } from '@/src/core/api/trpc/server';
 import { Suspense } from 'react';
 
 import { ErrorBoundary } from 'react-error-boundary';

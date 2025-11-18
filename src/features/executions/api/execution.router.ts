@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { protectedProcedure, createTRPCRouter } from '@/trpc/init';
+import { protectedProcedure, createTRPCRouter } from '@/src/core/api/trpc/init';
 import {
   StartExecutionUseCase,
   CompleteExecutionUseCase,

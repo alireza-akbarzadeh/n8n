@@ -23,27 +23,16 @@ import { nodeComponents } from '@/config/node-components';
 import { AddNodeButton } from '@/components/add-node-button';
 import { useSetAtom } from 'jotai';
 import { editorAtom } from '../store/atoms';
-import { NodeType } from '@/features/workflows';
+import { NodeType } from '@/features/workflows/domain/entities';
 import { ExecuteWorkflowButton } from '../ui/execute-workflow-button';
 
 export function Editor({ workflowId }: { workflowId: string }) {
   const { data } = useSuspenseWorkflow(workflowId);
 
-  // Helper to build a human-readable label from handles
-  const buildLabel = React.useCallback(
-    (sourceHandle?: string | null, targetHandle?: string | null) => {
-      const s = sourceHandle && sourceHandle.length > 0 ? sourceHandle : 'main';
-      const t = targetHandle && targetHandle.length > 0 ? targetHandle : 'main';
-      return `${s} -> ${t}`;
-    },
-    []
-  );
-
   const [nodes, setNodes] = React.useState<Node[]>(data.data.nodes);
   const [edges, setEdges] = React.useState<Edge[]>(
     data.data.edges.map((e) => ({
       ...e,
-      label: e.label ?? buildLabel(e.sourceHandle, e.targetHandle),
     }))
   );
   const setEditor = useSetAtom(editorAtom);
@@ -64,12 +53,11 @@ export function Editor({ workflowId }: { workflowId: string }) {
         addEdge(
           {
             ...params,
-            label: buildLabel(params.sourceHandle as string, params.targetHandle as string),
           },
           edgesSnapshot
         )
       ),
-    [buildLabel]
+    []
   );
   const hasManularTrigger = React.useMemo(
     () => nodes.some((node) => node.type === NodeType.MANUAL_TRIGGER),

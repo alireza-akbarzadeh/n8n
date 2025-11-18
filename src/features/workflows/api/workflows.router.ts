@@ -1,4 +1,4 @@
-import { createTRPCRouter, premiumProcedure, protectedProcedure } from '@/core/api/trpc/init';
+import { createTRPCRouter, premiumProcedure, protectedProcedure } from '@/core/api/trpc/procedures';
 import { baseQuerySchema, editorSchema } from '@/core/api/trpc/schemas';
 import { HTTP_STATUS } from '@/core/config/constants';
 import { ok } from '@/lib/utils';

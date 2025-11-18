@@ -1,14 +1,13 @@
-// Domain
+// Domain (safe for client)
 export * from './domain';
 
-// Application
-export * from './application';
+// Presentation (client-safe)
+export * from './presentation';
 
-// Infrastructure
-export * from './infrastructure';
-
-// API
+// API (client-safe tRPC router definitions)
 export * from './api';
 
-// Presentation
-export * from './presentation';
+// Server-side only exports - DO NOT re-export here
+// Import directly from these paths when needed server-side:
+// - './application' (use cases)
+// - './infrastructure' (repositories, mappers)

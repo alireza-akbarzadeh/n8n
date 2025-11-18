@@ -1,7 +1,7 @@
 import type { AuditAction, EntityType } from '@/prisma/generated/prisma/enums';
 
 import db from '../../infrastructure/database/db';
-import { logger } from '../../infrastructure/logger/logger';
+import { logger } from '../../infrastructure/logger/pino.logger';
 
 /**
  * Audit logging system

@@ -5,7 +5,7 @@ import {
 } from '../../domain/repositories/execution.repository.interface';
 import { ExecutionStatus, ExecutionMode } from '../../domain/entities/execution.entity';
 import { Result } from '@/core/types/common.types';
-import logger from '@/src/shared/infrastructure/logger/logger';
+import { logger } from '@/shared/infrastructure/logger/pino.logger';
 
 export interface GetExecutionsInput {
   workflowId?: string;

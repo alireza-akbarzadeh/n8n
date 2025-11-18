@@ -1,8 +1,8 @@
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 
-import { env } from '@/shared/infrastructure/env';
-import { logger } from '@/shared/infrastructure/logger/logger';
+import { env } from '@/core/config/env';
+import { logger } from '@/shared/infrastructure/logger/pino.logger';
 
 /**
  * Rate limiting utilities using Upstash Redis

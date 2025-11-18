@@ -2,14 +2,14 @@ import { NodeProps, Position, useReactFlow } from '@xyflow/react';
 import { LucideIcon } from 'lucide-react';
 import { ReactNode } from 'react';
 import * as React from 'react';
-import { WorkflowNode } from '@/src/shared/ui/components/workflow-node';
-import { BaseNode, BaseNodeContent } from '@/src/shared/ui/components/react-flow/base-node';
+import { WorkflowNode } from '@/components/workflow-node';
+import { BaseNode, BaseNodeContent } from '@/components/react-flow/base-node';
 import Image from 'next/image';
-import { BaseHandle } from '@/src/shared/ui/components/react-flow/base-handle';
+import { BaseHandle } from '@/components/react-flow/base-handle';
 import {
   NodeStatus,
   NodeStatusIndicator,
-} from '@/src/shared/ui/components/react-flow/node-status-Indicator';
+} from '@/components/react-flow/node-status-Indicator';
 
 interface BaseExecutionNodeProps extends NodeProps {
   icon: LucideIcon | string;

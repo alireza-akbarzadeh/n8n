@@ -1,6 +1,6 @@
 import { PAGINATION } from '@/core/config/constants';
 import { PaginatedResponse } from '@/core/types/common.types';
-import { prisma } from '@/shared/infrastructure/database/prisma.client';
+import prisma from '@/shared/infrastructure/database/db';
 import { Workflow } from '../../domain/entities/workflow.entity';
 import {
   IWorkflowRepository,

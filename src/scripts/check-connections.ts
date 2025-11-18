@@ -1,4 +1,4 @@
-import { prisma } from '../shared/infrastructure/database/prisma.client';
+import prisma from '../shared/infrastructure/database/db';
 
 async function checkConnections() {
   const connections = await prisma.connection.findMany({

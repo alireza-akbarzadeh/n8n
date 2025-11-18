@@ -1,6 +1,6 @@
 import { PrismaClient } from '@/prisma/generated/prisma/client';
-import { logger } from '../logger/logger';
-import { isDevelopment } from '../env';
+import { logger } from '../logger/pino.logger';
+import { isDevelopment } from '@/core/config/env';
 
 /**
  * Prisma Client Configuration

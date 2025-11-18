@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { ZodError } from 'zod';
 import { Prisma } from '@/prisma/generated/prisma/client';
-import { logger } from '@/shared/infrastructure/logger/logger';
+import { logger } from '@/shared/infrastructure/logger/pino.logger';
 
 /**
  * Custom API Error class for consistent error handling

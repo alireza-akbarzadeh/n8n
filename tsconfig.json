@@ -33,7 +33,6 @@
       "@/lib/audit": ["./src/shared/application/services/audit.ts"],
       "@/lib/logger": ["./src/shared/infrastructure/logger/pino.logger.ts"],
       "@/lib/encryption": ["./src/shared/infrastructure/encryption.ts"],
-      "@/lib/env": ["./src/shared/infrastructure/env.ts"],
       "@/lib/rate-limit": ["./src/core/api/rate-limit.ts"],
       "@/lib/polar": ["./src/shared/application/services/polar.ts"],
       "@/lib/credentials": ["./src/shared/application/services/credentials.ts"],
@@ -42,11 +41,9 @@
       "@/config/*": ["./src/core/config/*"],
       "@/hooks/*": ["./src/shared/ui/hooks/*"],
       "@/inngest/*": ["src/core/inngest/*"],
-      "@/modules/*": ["./src/features/*"],
       "@/trpc/*": ["src/core/api/trpc/*"],
       "@/types/*": ["./src/core/types/*"],
       "@/prisma/*": ["./prisma/*"],
-      "@/src/*": ["./src/*"],
       "@/tests/*": ["./tests/*"]
     }
   },

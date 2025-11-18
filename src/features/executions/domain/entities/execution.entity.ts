@@ -1,5 +1,5 @@
-import { BaseEntity } from '@/src/shared/domain/entities/base.entity';
-import { ID } from '@/src/shared/domain/value-objects/id.vo';
+import { BaseEntity } from '@/shared/domain/entities/base.entity';
+import { ID } from '@/shared/domain/value-objects/id.vo';
 import { Result } from '@/core/types/common.types';
 
 export enum ExecutionStatus {

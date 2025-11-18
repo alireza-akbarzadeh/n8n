@@ -1,5 +1,5 @@
 // Re-export editor UI components
-export { Editor } from './ui/editor';
+export { Editor } from './containers/editor';
 export { EditorHeader } from './ui/eidtor-header';
 export { EditorNameInput } from './ui/editor-input';
 export { EditorSaveButton } from './ui/editor-save-button';

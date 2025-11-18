@@ -5,7 +5,7 @@ import { Node, NodeProps, useReactFlow } from '@xyflow/react';
 import * as React from 'react';
 import { BaseExecutionNode } from '../base-execution-node';
 import { GlobeIcon } from 'lucide-react';
-import { NodeStatus } from '@/src/shared/ui/components/react-flow/node-status-Indicator';
+import { NodeStatus } from '@/components/react-flow/node-status-Indicator';
 import { HttpRequestDialog } from './http-request-dialog';
 
 interface HttpRequestNodeData {

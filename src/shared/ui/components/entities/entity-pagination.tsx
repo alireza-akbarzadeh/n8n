@@ -7,7 +7,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/src/shared/ui/components/ui/pagination';
+} from '@/components/ui/pagination';
 
 interface EntityPaginationProps {
   page: number;

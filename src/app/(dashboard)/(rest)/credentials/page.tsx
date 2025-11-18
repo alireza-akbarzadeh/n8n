@@ -1,4 +1,4 @@
-import { requireAuth } from '@/src/core/auth';
+import { requireAuth } from '@/core/auth';
 
 export default async function Credentials() {
   await requireAuth();

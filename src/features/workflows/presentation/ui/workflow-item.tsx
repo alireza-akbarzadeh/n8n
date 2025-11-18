@@ -1,4 +1,4 @@
-import { EnityItem } from '@/src/shared/ui/components/entities/entity-item';
+import { EnityItem } from '@/components/entities/entity-item';
 import { formatDistanceToNow } from 'date-fns';
 import { WorkflowIcon } from 'lucide-react';
 import { useRemoveWorkflow } from '../hooks/use-workflows';

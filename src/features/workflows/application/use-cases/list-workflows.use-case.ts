@@ -1,7 +1,7 @@
 import { IWorkflowRepository } from '../../domain/repositories/workflow.repository.interface';
 import { Result, PaginatedResponse } from '@/core/types/common.types';
 import { logger } from '@/shared/infrastructure/logger/pino.logger';
-import { PAGINAITION } from '@/src/core';
+import { PAGINATION } from '@/core/config/constants';
 
 export interface ListWorkflowsInput {
   userId: string;
@@ -31,8 +31,8 @@ export class ListWorkflowsUseCase {
   ): Promise<Result<PaginatedResponse<WorkflowListItem>, string>> {
     const {
       userId,
-      page = PAGINAITION.DEFAULT_PAGE,
-      pageSize = PAGINAITION.DEFAULT_PAGE_SIZE,
+      page = PAGINATION.DEFAULT_PAGE,
+      pageSize = PAGINATION.DEFAULT_PAGE_SIZE,
       search,
       requestId,
     } = input;

@@ -1,5 +1,5 @@
 import { Execution, ExecutionStatus, ExecutionMode } from '../../domain/entities/execution.entity';
-import { ID } from '@/src/shared/domain/value-objects/id.vo';
+import { ID } from '@/shared/domain/value-objects/id.vo';
 import type { Execution as PrismaExecution } from '@/prisma/generated/prisma/client';
 
 export class ExecutionMapper {

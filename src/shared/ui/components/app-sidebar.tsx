@@ -24,7 +24,7 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { authClient } from '@/core/auth/auth-client';
 import { SignOutButton } from '@/features/auth/presentation/ui/sign-out-button';
-import { useHasActiveSubscription } from '@/src/shared/ui/hooks/useSubscription';
+import { useHasActiveSubscription } from '@/hooks/useSubscription';
 
 const menuItems = [
   {

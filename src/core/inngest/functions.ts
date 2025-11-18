@@ -1,23 +1,9 @@
-import { createGoogleGenerativeAI } from '@ai-sdk/google';
-import { inngest } from './client';
-import { generateText } from 'ai';
+import { inngest } from '@/core/inngest/client';
 
-const google = createGoogleGenerativeAI();
-
-export const helloWorld = inngest.createFunction(
-  { id: 'execute-ai' },
-  { event: 'execute/ai' },
-  async ({ step }) => {
-    const { steps } = await step.ai.wrap('gemini-generate-text', generateText, {
-      prompt: 'what is the meaning of life?',
-      model: google('gemini-2.5-flash'),
-      system: 'You are a helpful assistant.',
-      experimental_telemetry: {
-        isEnabled: true,
-        recordInputs: true,
-        recordOutputs: true,
-      },
-    });
-    return steps;
+export const excecuteWorkflow = inngest.createFunction(
+  { id: 'execute-workflow' },
+  { event: 'workflow.execute' },
+  async ({ event, step }) => {
+    await step.sleep('test', '5s');
   }
 );

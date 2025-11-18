@@ -1,4 +1,4 @@
-import { requireAuth } from '@/src/core/auth';
+import { requireAuth } from '@/core/auth';
 
 interface PageProps {
   params: Promise<{ executionId: string }>;

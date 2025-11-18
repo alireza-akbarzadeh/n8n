@@ -4,7 +4,7 @@ import {
   DialogTrigger,
   DialogHeader,
   DialogDescription,
-} from '@/src/shared/ui/components/ui/dialog';
+} from '@/components/ui/dialog';
 import { DialogTitle } from '@radix-ui/react-dialog';
 
 interface ManualTriggerDialogProps {

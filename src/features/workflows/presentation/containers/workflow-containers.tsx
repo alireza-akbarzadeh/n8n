@@ -1,6 +1,6 @@
 'use client';
 
-import { EntityContainer } from '@/src/shared/ui/components/entities/entity-containers';
+import { EntityContainer } from '@/components/entities/entity-containers';
 import { useSuspenseWorkflows } from '../hooks/use-workflows';
 import { WorkflowHeader } from '../ui/workflow-header';
 import { WorkflowPagination } from '../ui/workflow-pagination';

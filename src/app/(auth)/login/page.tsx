@@ -1,6 +1,6 @@
 import React from 'react';
-import { LoginForm } from '@/modules/auth';
-import { requireUnAuth } from '@/src/core/auth';
+import { LoginForm } from '@/features/auth';
+import { requireUnAuth } from '@/core/auth';
 
 export default async function LoginPage() {
   await requireUnAuth();

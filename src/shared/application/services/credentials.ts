@@ -1,7 +1,7 @@
 import type { CredentialType } from '@/prisma/generated/prisma/enums';
 
 import { decryptObject, encryptObject } from '../../infrastructure/encryption';
-import { logger } from '../../infrastructure/logger/logger';
+import { logger } from '../../infrastructure/logger/pino.logger';
 
 /**
  * Credential type from Prisma (using generated types)

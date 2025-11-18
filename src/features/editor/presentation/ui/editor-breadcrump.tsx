@@ -4,7 +4,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from '@/src/shared/ui/components/ui/breadcrumb';
+} from '@/components/ui/breadcrumb';
 import Link from 'next/link';
 import { EditorNameInput } from './editor-input';
 

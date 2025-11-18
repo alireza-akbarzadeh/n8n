@@ -7,9 +7,9 @@ import {
 } from '../../domain/repositories/execution.repository.interface';
 import { Execution, ExecutionStatus } from '../../domain/entities/execution.entity';
 import { ExecutionMapper } from '../mappers/execution.mapper';
-import logger from '@/src/shared/infrastructure/logger/logger';
+import { logger } from '@/shared/infrastructure/logger/pino.logger';
 import { Prisma } from '@/prisma/generated/prisma/client';
-import { prisma } from '@/src/shared/infrastructure';
+import { prisma } from '@/shared/infrastructure';
 
 export class PrismaExecutionRepository implements IExecutionRepository {
   async findById(id: string): Promise<Execution | null> {

@@ -7,7 +7,7 @@ import { auth } from '@/core/auth/auth';
 import { headers } from 'next/headers';
 import { polarClient } from '@/shared/application/services/polar';
 import { getOrCreateRequestId } from '@/shared/infrastructure/request-id';
-import { logger } from '@/shared/infrastructure/logger/logger';
+import { logger } from '@/shared/infrastructure/logger/pino.logger';
 import { checkRateLimit } from '@/core/api/rate-limit';
 
 export type TRPCContext = {

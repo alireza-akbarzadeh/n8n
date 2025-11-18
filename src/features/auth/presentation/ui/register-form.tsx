@@ -2,7 +2,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Button } from '@/src/shared/ui/components/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -10,9 +10,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/src/shared/ui/components/ui/form';
+} from '@/components/ui/form';
 import React from 'react';
-import { Input } from '@/src/shared/ui/components/ui/input';
+import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import {
   Card,
@@ -20,7 +20,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/src/shared/ui/components/ui/card';
+} from '@/components/ui/card';
 import { signUp } from '@/core/auth/auth-client';
 import Link from 'next/link';
 import { toast } from 'sonner';

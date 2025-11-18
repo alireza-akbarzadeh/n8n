@@ -20,9 +20,11 @@ import {
 
 import '@xyflow/react/dist/style.css';
 import { nodeComponents } from '@/config/node-components';
-import { AddNodeButton } from '@/src/shared/ui/components/add-node-button';
+import { AddNodeButton } from '@/components/add-node-button';
 import { useSetAtom } from 'jotai';
 import { editorAtom } from '../store/atoms';
+import { NodeType } from '@/features/workflows';
+import { ExecuteWorkflowButton } from '../ui/execute-workflow-button';
 
 export function Editor({ workflowId }: { workflowId: string }) {
   const { data } = useSuspenseWorkflow(workflowId);
@@ -69,7 +71,10 @@ export function Editor({ workflowId }: { workflowId: string }) {
       ),
     [buildLabel]
   );
-
+  const hasManularTrigger = React.useMemo(
+    () => nodes.some((node) => node.type === NodeType.MANUAL_TRIGGER),
+    [nodes]
+  );
   return (
     <div className="size-full">
       <ReactFlow
@@ -99,6 +104,11 @@ export function Editor({ workflowId }: { workflowId: string }) {
         <Panel position="top-right">
           <AddNodeButton />
         </Panel>
+        {hasManularTrigger && (
+          <Panel position="bottom-center">
+            <ExecuteWorkflowButton workflowId={workflowId} />
+          </Panel>
+        )}
       </ReactFlow>
     </div>
   );

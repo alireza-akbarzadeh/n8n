@@ -1,6 +1,6 @@
 import { IUserRepository } from '../../domain/repositories/user.repository.interface';
 import { User } from '../../domain/entities/user.entity';
-import { prisma } from '@/shared/infrastructure/database/prisma.client';
+import prisma from '@/shared/infrastructure/database/db';
 import { UserMapper } from '../mappers/user.mapper';
 
 /**

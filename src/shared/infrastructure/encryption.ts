@@ -1,7 +1,7 @@
 import CryptoJS from 'crypto-js';
 
-import { env } from './env';
-import { logger } from './logger';
+import { env } from '@/core/config/env';
+import { logger } from './logger/pino.logger';
 
 /**
  * Encryption utility for sensitive data (credentials, secrets, etc.)

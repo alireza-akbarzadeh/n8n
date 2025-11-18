@@ -1,4 +1,4 @@
-import UpgradeModal from '@/src/shared/ui/components/upgrade-modal';
+import UpgradeModal from '@/components/upgrade-modal';
 import { TRPCClientError } from '@trpc/client';
 import * as React from 'react';
 

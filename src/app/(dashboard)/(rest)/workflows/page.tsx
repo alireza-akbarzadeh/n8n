@@ -3,16 +3,16 @@ import {
   WorkflowError,
   WorkflowLoading,
   WorkflowsModule,
-} from '@/modules/workflows';
-import { HydrateClient } from '@/src/core/api/trpc/server';
+} from '@/features/workflows';
+import { HydrateClient } from '@/core/api/trpc/server';
 import { Suspense } from 'react';
 
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { SearchParams } from 'nuqs/server';
-import { requireAuth } from '@/src/core/auth';
-import { baseLoaderParams } from '@/src/features/workflows/presentation/server/load-params';
-import { WorkflowContainer } from '@/src//features/workflows';
+import { requireAuth } from '@/core/auth';
+import { baseLoaderParams } from '@/features/workflows/presentation/server/load-params';
+import { WorkflowContainer } from '@/features/workflows';
 
 type PropsPage = {
   searchParams: Promise<SearchParams>;

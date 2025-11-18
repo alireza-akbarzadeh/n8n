@@ -1,4 +1,4 @@
-import { AppHeader } from '@/src/shared/ui/components/app-header';
+import { AppHeader } from '@/components/app-header';
 import React from 'react';
 
 interface WorkflowLayoutProps {

@@ -1,3 +1,4 @@
+// import { withSentryConfig } from '@sentry/nextjs';
 import { withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
 
@@ -9,6 +10,11 @@ const nextConfig: NextConfig = {
   experimental: {
     // Optimize package imports
     optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react'],
+  },
+
+  // Don't prerender error pages (causes issues with React 19 + Next.js 16)
+  generateBuildId: async () => {
+    return 'build-' + Date.now();
   },
 
   async redirects() {

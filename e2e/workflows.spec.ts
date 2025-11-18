@@ -11,10 +11,10 @@ test.describe('Workflows Page', () => {
     await expect(page.locator('main')).toBeVisible();
   });
 
-  test('should navigate to home and redirect to workflows', async ({ page }) => {
+  test('should redirect unauthenticated users to login', async ({ page }) => {
     await page.goto('/');
 
-    // Should redirect to workflows
-    await expect(page).toHaveURL(/.*workflows/);
+    // Should redirect to login for unauthenticated users
+    await expect(page).toHaveURL(/.*login/);
   });
 });

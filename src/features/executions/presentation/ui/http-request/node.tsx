@@ -52,9 +52,7 @@ export const HttpRequestNode = React.memo(function (props: NodeProps<HttpRequest
     <>
       <HttpRequestDialog
         onSubmit={handleSubmit}
-        defaultEndpoint={nodeData.endpoint}
-        defaultMethod={nodeData.method}
-        defaultBody={nodeData.body}
+        defaultValues={nodeData}
         open={isDialogOpen}
         onOpenChange={setIsDialogOpen}
       />

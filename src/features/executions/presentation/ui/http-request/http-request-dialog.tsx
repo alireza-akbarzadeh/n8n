@@ -1,3 +1,4 @@
+import { Button } from '@/src/shared/ui/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -7,10 +8,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/src/shared/ui/components/ui/dialog';
-import { Method } from '@/core/types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import z from 'zod';
 import {
   Form,
   FormControl,
@@ -20,6 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/src/shared/ui/components/ui/form';
+import { Input } from '@/src/shared/ui/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -27,42 +25,36 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/src/shared/ui/components/ui/select';
-import { Input } from '@/src/shared/ui/components/ui/input';
 import { Textarea } from '@/src/shared/ui/components/ui/textarea';
-import { Button } from '@/src/shared/ui/components/ui/button';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
+import z from 'zod';
 
 const formSchema = z.object({
   endpoint: z.url('Please enter a valid URL'),
   method: z.enum(['GET', 'POST', 'PUT', 'DELETE', 'PATCH']),
   body: z.string().optional(),
 });
+type HttpRequestFormValues = z.infer<typeof formSchema>;
 
 interface HttpRequestDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSubmit: (values: z.infer<typeof formSchema>) => void;
-  defaultEndpoint?: string;
-  defaultMethod?: Method;
-  defaultBody?: string;
+  onSubmit: (values: HttpRequestFormValues) => void;
+  defaultValues?: Partial<HttpRequestFormValues>;
 }
 
 export function HttpRequestDialog(props: HttpRequestDialogProps) {
-  const { open, onOpenChange, defaultEndpoint, defaultMethod, defaultBody, onSubmit } = props;
-
-  const form = useForm<z.infer<typeof formSchema>>({
+  const { open, onOpenChange, defaultValues = {}, onSubmit } = props;
+  const form = useForm<HttpRequestFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      endpoint: defaultEndpoint,
-      method: defaultMethod,
-      body: defaultBody,
-    },
+    defaultValues: defaultValues,
   });
-
-  const watchMethod = form.watch('method');
+  const watchMethod = useWatch({ control: form.control, name: 'method' });
   const showBodyField = ['POST', 'PUT', 'PATCH'].includes(watchMethod as string);
 
-  const handleSubmit = (values: z.infer<typeof formSchema>) => {
+  const handleSubmit = (values: HttpRequestFormValues) => {
     onSubmit(values);
     onOpenChange(false);
   };
@@ -70,12 +62,12 @@ export function HttpRequestDialog(props: HttpRequestDialogProps) {
   useEffect(() => {
     if (open) {
       form.reset({
-        endpoint: defaultEndpoint,
-        method: defaultMethod,
-        body: defaultBody,
+        endpoint: defaultValues.endpoint,
+        method: defaultValues.method,
+        body: defaultValues.body,
       });
     }
-  }, [open, defaultEndpoint, defaultMethod, defaultBody, form]);
+  }, [open, defaultValues, form]);
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger />

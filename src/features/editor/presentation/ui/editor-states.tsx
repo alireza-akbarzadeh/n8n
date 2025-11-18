@@ -1,9 +1,9 @@
 import { ErrorView, LoadingView } from '@/src/shared/ui/components/entities/entity-states';
 
 export function EditorLoading() {
-  return <LoadingView message="Error loading editor" />;
+  return <LoadingView message="loading editor" />;
 }
 
 export function EditorError() {
-  return <ErrorView message="loading editor...." />;
+  return <ErrorView message="Error while loading editor." />;
 }

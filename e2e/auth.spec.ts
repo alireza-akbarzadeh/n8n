@@ -5,14 +5,14 @@ test.describe('Authentication Flow', () => {
     await page.goto('/login');
 
     // Check if login form is visible
-    await expect(page.getByRole('heading', { name: /login/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /welcome back/i })).toBeVisible();
   });
 
   test('should display signup page', async ({ page }) => {
     await page.goto('/signup');
 
     // Check if signup form is visible
-    await expect(page.getByRole('heading', { name: /sign up/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /create an account/i })).toBeVisible();
   });
 
   test('should navigate between login and signup', async ({ page }) => {

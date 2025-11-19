@@ -53,12 +53,18 @@ const envSchema = z.object({
     .optional(),
 
   // Monitoring & Error Tracking
-  SENTRY_DSN: z.string().url().describe('Sentry DSN for error tracking').optional(),
+  SENTRY_DSN: z
+    .string()
+    .url()
+    .describe('Sentry DSN for error tracking')
+    .optional()
+    .or(z.literal('')),
   NEXT_PUBLIC_SENTRY_DSN: z
     .string()
     .url()
     .describe('Public Sentry DSN for client-side error tracking')
-    .optional(),
+    .optional()
+    .or(z.literal('')),
   SENTRY_AUTH_TOKEN: z.string().describe('Sentry auth token for releases').optional(),
 
   // Logging
@@ -68,7 +74,12 @@ const envSchema = z.object({
     .describe('Minimum log level'),
 
   // Rate Limiting
-  UPSTASH_REDIS_REST_URL: z.url().describe('Upstash Redis REST URL for rate limiting').optional(),
+  UPSTASH_REDIS_REST_URL: z
+    .string()
+    .url()
+    .describe('Upstash Redis REST URL for rate limiting')
+    .optional()
+    .or(z.literal('')),
   UPSTASH_REDIS_REST_TOKEN: z.string().describe('Upstash Redis REST token').optional(),
   RATE_LIMIT_ENABLED: z
     .string()

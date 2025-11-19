@@ -28,3 +28,8 @@ export {
   type DeleteWorkflowInput,
   type DeleteWorkflowOutput,
 } from './delete-workflow.use-case';
+export {
+  ExecuteWorkflowUseCase,
+  type ExecuteWorkflowInput,
+  type ExecuteWorkflowOutput,
+} from './execute-workflow.use-case';

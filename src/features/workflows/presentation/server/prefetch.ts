@@ -1,4 +1,4 @@
-import { trpc, prefetch } from '@/trpc/server';
+import { trpc, prefetch } from '@/src/core/api/trpc/server';
 import type { inferInput } from '@trpc/tanstack-react-query';
 
 type WorkflowsInput = inferInput<typeof trpc.workflows.getMany>;

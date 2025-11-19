@@ -1,9 +1,25 @@
 import { inngest } from '@/core/inngest/client';
+import { prisma } from '@/src/shared/infrastructure';
+import { NonRetriableError } from 'inngest';
 
 export const excecuteWorkflow = inngest.createFunction(
   { id: 'execute-workflow' },
-  { event: 'workflow.execute' },
-  async ({ event, step }: { event: any; step: any }) => {
-    await step.sleep('test', '5s');
+  { event: 'workflows/execute.workflow' },
+  async ({ event, step }) => {
+    const { workflowId } = event.data;
+    if (!workflowId) throw new NonRetriableError('workflowId is missing');
+    const nodes = await step.run('prepare-workflow', async () => {
+      const workflow = await prisma.workflow.findFirstOrThrow({
+        where: {
+          id: workflowId,
+        },
+        include: {
+          nodes: true,
+          connection: true,
+        },
+      });
+      return workflow.nodes;
+    });
+    return nodes;
   }
 );

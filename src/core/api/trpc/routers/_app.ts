@@ -1,8 +1,8 @@
 // New architecture routers
-import { workflowsRouter } from '@/features/workflows/api';
-import { executionRouter } from '@/features/executions/api';
+import { workflowsRouter } from '@/src/features/workflows/api';
+import { executionRouter } from '@/src/features/executions/api';
 import { createTRPCRouter } from '../init';
-import { exampleRouter } from '@/trpc/routers/example-router';
+import { exampleRouter } from '@/src/core/api/trpc/routers/example-router';
 
 export const appRouter = createTRPCRouter({
   workflows: workflowsRouter,

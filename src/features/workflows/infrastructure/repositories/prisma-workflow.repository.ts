@@ -20,19 +20,25 @@ export class PrismaWorkflowRepository implements IWorkflowRepository {
    * Find a workflow by ID
    */
   async findById(id: string, userId: string): Promise<Workflow | null> {
-    const prismaWorkflow = await this.db.workflow.findFirst({
-      where: { id, userId },
-      include: {
-        nodes: true,
-        connection: true,
-      },
-    });
+    try {
+      const prismaWorkflow = await this.db.workflow.findUniqueOrThrow({
+        where: { id },
+        include: {
+          nodes: true,
+          connection: true,
+        },
+      });
 
-    if (!prismaWorkflow) {
+      // Verify ownership
+      if (prismaWorkflow.userId !== userId) {
+        return null;
+      }
+
+      return WorkflowMapper.toDomain(prismaWorkflow);
+    } catch {
+      // Return null if workflow not found (matches interface contract)
       return null;
     }
-
-    return WorkflowMapper.toDomain(prismaWorkflow);
   }
 
   /**

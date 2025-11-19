@@ -13,6 +13,7 @@ import {
   UpdateWorkflowUseCase,
   UpdateWorkflowNameUseCase,
   DeleteWorkflowUseCase,
+  ExecuteWorkflowUseCase,
 } from '../application/use-cases';
 
 // Repository
@@ -91,6 +92,33 @@ export const workflowsRouter = createTRPCRouter({
     });
   }),
 
+  /**
+   * Execute workflow
+   */
+  execute: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const { id } = input;
+
+      const repository = new PrismaWorkflowRepository();
+      const useCase = new ExecuteWorkflowUseCase(repository);
+
+      const result = await useCase.execute({
+        id,
+        userId: ctx.userId!,
+        requestId: ctx.requestId,
+      });
+
+      if (!result.success) {
+        throw new Error(result.error);
+      }
+
+      return ok({
+        data: result.data,
+        message: `Workflow ${result.data.name} execution started`,
+        code: HTTP_STATUS.OK,
+      });
+    }),
   /**
    * Create new workflow
    */

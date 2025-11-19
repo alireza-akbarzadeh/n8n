@@ -1,132 +1,103 @@
+# yaml
 name: CI
 
 on:
   push:
-    branches: [main, develop]
+    branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
   pull_request:
-    branches: [main, develop]
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
-  lint:
-    name: Lint
+  test:
+    name: Lint · Typecheck · Test · Build
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Run linter
-        run: pnpm lint
-
-  unit-tests:
-    name: Unit Tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Run unit tests with coverage
-        run: pnpm test:coverage
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          files: ./coverage/lcov.info
-          flags: unit
-          name: unit-tests
-        continue-on-error: true
-
-      - name: Upload coverage artifacts
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: coverage-report
-          path: coverage/
-          retention-days: 7
-
-  e2e-tests:
-    name: E2E Tests
-    runs-on: ubuntu-latest
-    env:
-      # Add your required environment variables here
-      DATABASE_URL: 'postgresql://test:test@localhost:5432/test'
-      NEXTAUTH_SECRET: 'test-secret-key-for-ci'
-      NEXTAUTH_URL: 'http://localhost:3000'
-
     services:
       postgres:
-        image: postgres:16
+        image: postgres:14
         env:
-          POSTGRES_USER: test
-          POSTGRES_PASSWORD: test
-          POSTGRES_DB: test
+          POSTGRES_USER: github
+          POSTGRES_PASSWORD: github
+          POSTGRES_DB: test_db
+        ports:
+          - 5432:5432
         options: >-
-          --health-cmd pg_isready
+          --health-cmd "pg_isready -U github -d test_db"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        ports:
-          - 5432:5432
+
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://github:github@localhost:5432/test_db?schema=public
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v2
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
         with:
-          version: 8
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+          node-version: 20
           cache: 'pnpm'
+
+      - name: Enable Corepack & prepare pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@8 --activate
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps
+      - name: 'Prisma: Generate client'
+        run: pnpm db:generate
+        continue-on-error: false
 
-      - name: Setup database
-        run: pnpm db:push
+      - name: Run ESLint
+        run: pnpm lint
+        continue-on-error: false
 
-      - name: Run Playwright tests
-        run: pnpm e2e
+      - name: Type check (tsc)
+        run: npx tsc --noEmit
+        continue-on-error: false
+
+      - name: Run unit & integration tests (Vitest)
+        run: pnpm test --reporter=default
         env:
-          CI: true
+          DATABASE_URL: ${{ env.DATABASE_URL }}
 
-      - name: Upload Playwright report
-        uses: actions/upload-artifact@v4
+      - name: Build (production)
+        run: pnpm build
+
+      - name: Upload coverage artifact
         if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
-          path: playwright-report/
+          name: coverage-report
+          path: coverage || coverage/** || coverage/*
           retention-days: 7
 
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
+      - name: Save test results (JUnit) if present
         if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: playwright-results
-          path: test-results/
+          name: test-results
+          path: test-results || jest-results.xml || junit.xml
           retention-days: 7

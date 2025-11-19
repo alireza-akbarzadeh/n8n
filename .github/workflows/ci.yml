@@ -3,12 +3,12 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths-ignore:
       - 'README.md'
       - 'docs/**'
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -44,16 +44,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Setup Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
 
-      - name: Enable Corepack & prepare pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@8 --activate
+      - name: Install pnpm
+        run: corepack prepare pnpm@8.6.12 --activate
 
       - name: Cache pnpm store
         uses: actions/cache@v4

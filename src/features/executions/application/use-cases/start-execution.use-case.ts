@@ -2,6 +2,7 @@ import { IExecutionRepository } from '../../domain/repositories/execution.reposi
 import { Execution, ExecutionMode, ExecutionStatus } from '../../domain/entities/execution.entity';
 import { Result } from '@/core/types/common.types';
 import { logger } from '@/shared/infrastructure/logger/pino.logger';
+import { NodeType } from '@/prisma/generated/prisma/enums';
 
 export interface StartExecutionInput {
   workflowId: string;
